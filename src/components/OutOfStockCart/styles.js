@@ -7,10 +7,6 @@ export const Product = styled.div`
   background-color: #FFFFFF;
   opacity: 50%;
   margin-bottom: 100px;
-
-  p {
-    margin: 25px 16px 0 0;
-  }
 `;
 
 export const ProductImage = styled.div`
@@ -27,4 +23,8 @@ export const ProductImage = styled.div`
 
 export const Title = styled.h3`
   text-align: center;
+`;
+
+export const TextInfo = styled.div`
+  padding-top: 26px;
 `;

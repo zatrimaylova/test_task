@@ -10,25 +10,34 @@ import { Container, Navigation, NavItem, BrandIcon, NavOptions, Currencies, Curr
 
 import { ACTION_CHANGE_CURRENCY } from '../../ducks/currency';
 import { ACTION_CHANGE_CATEGORY } from '../../ducks/category';
+import { ACTION_CHANGE_OVERLAY_STATE } from '../../ducks/overlay';
 
-
+import CartOverlay from '../CartOverlay/CartOverlay.js';
 
 class HeaderEl extends React.Component {
   state = {
     isCurrencyClicked: false,
     currentCurrency: null,
+    //isOverlayOpen: false,
   };
 
   showCurrencyClick = () => {
-    this.setState(prevState => ({
-      ...prevState,
-      isCurrencyClicked: true,
-    }));
+    const { isCurrencyClicked } = this.state;
+    if (isCurrencyClicked) {
+      this.setState(prevState => ({
+        ...prevState,
+        isCurrencyClicked: false,
+      }));
+    } else {
+      this.setState(prevState => ({
+        ...prevState,
+        isCurrencyClicked: true,
+      }));
+    }
   };
 
   chooseCurrencyClick = (e) => {
     const { changeCurrency } = this.props;
-    
     this.setState(prevState => ({
       ...prevState,
       isCurrencyClicked: false,
@@ -54,9 +63,16 @@ class HeaderEl extends React.Component {
     }
   }
 
-  handleToCartClick = () => {
-    const { history } = this.props;
-    history.push(`/cart`);
+  handleCartClick = () => {
+    const { isOverlayOpen, changeOverlayState } = this.props;
+
+    isOverlayOpen ? changeOverlayState(false) : changeOverlayState(true);
+    document.body.style.overflow = isOverlayOpen ? 'visible' : 'hidden';
+
+    this.setState(prevState => ({
+      ...prevState,
+      isCurrencyClicked: false,
+    }));
   };
 
   componentDidMount() {
@@ -67,44 +83,53 @@ class HeaderEl extends React.Component {
   render() {
     const { isCurrencyClicked, currentCurrency } = this.state;
     const { showCurrencyClick, chooseCurrencyClick } = this;
-    const { cart } = this.props;
+    const { cart, isOverlayOpen, currencies } = this.props;
 
     return(
-      <Container>    
-        <Navigation onClick={this.handleCategoryClick}>
-          <NavItem id="all">All</NavItem>
-          <NavItem id="tech">Tech</NavItem>
-          <NavItem id="clothes">Clothes</NavItem>
-        </Navigation>
-        <BrandIcon src={brandIcon}></BrandIcon>
-        <NavOptions>
-          <Currencies onClick={showCurrencyClick} >
-            <span>{this.props.currencies && (currentCurrency ?  currentCurrency : this.props.currencies[0])}</span>
-            <CurrencyImg src={currencyIcon} alt="^" condition={isCurrencyClicked}/>
-          </Currencies>
-          <Cart onClick={this.handleToCartClick}>
-            <img src={cartIcon} alt="Cart" />
-            <CartCount cart={cart}><p>{cart.length}</p></CartCount>         
-          </Cart>
-          <CurrenciesList condition={isCurrencyClicked} > 
-            {this.props.currencies && this.props.currencies.map(item => {
-              return <li key={item} id={item} onClick={chooseCurrencyClick} >{item}</li>
-            })}
-          </CurrenciesList>
-        </NavOptions>
-      </Container>
+      <header>
+        <Container>
+          <nav>    
+            <Navigation onClick={this.handleCategoryClick} >
+              <NavItem id="all">All</NavItem>
+              <NavItem id="tech">Tech</NavItem>
+              <NavItem id="clothes">Clothes</NavItem>
+            </Navigation>
+          </nav>
+            <BrandIcon src={brandIcon}></BrandIcon>
+            <NavOptions>
+            <Currencies onClick={showCurrencyClick} >
+              <span>{this.props.currencies && (currentCurrency ?  currentCurrency : this.props.currencies[0])}</span>
+              <CurrencyImg src={currencyIcon} alt="^" condition={isCurrencyClicked}/>
+            </Currencies>
+            <Cart onClick={this.handleCartClick}>
+              <img src={cartIcon} alt="Cart" />
+              <CartCount cart={cart}><p>{cart.length}</p></CartCount>         
+            </Cart>
+            { isCurrencyClicked && <CurrenciesList onClick={this.chooseCurrencyClick}> 
+              {currencies && currencies.map(item => {
+                return <li key={item} id={item}>{item}</li> 
+              })}
+            </CurrenciesList>}
+          </NavOptions>
+        </Container>
+         { isOverlayOpen && <CartOverlay /> } 
+      </header>
     )
   };
 }
 
-const mapStateToProps = ({ currency, cart }) => ({
+const mapStateToProps = ({ currency, cart, 
+  isOverlayOpen 
+}) => ({
   currency: currency.currency,
   cart: cart.cart,
+  isOverlayOpen: isOverlayOpen.isOverlayOpen,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeCurrency: (value) => dispatch(ACTION_CHANGE_CURRENCY(value)),
   changeCategory: (value) => dispatch(ACTION_CHANGE_CATEGORY(value)),
+  changeOverlayState: (value) => dispatch(ACTION_CHANGE_OVERLAY_STATE(value)),
 });
 
 export const Header = withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderEl));

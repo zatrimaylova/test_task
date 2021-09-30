@@ -28,8 +28,8 @@ export const ListEl = styled.li`
   font-size: 16px;
   line-height: 40px;
   letter-spacing: 0.05em;
-  background-color: ${props => props.color};
-  color: ${props => props.color === '#000000' ? 'white' : 'black'};
+  background-color: ${props => props.isActive ? 'black' : props.color}; 
+  color: ${props => props.isActive || props.color === '#000000' ? 'white' : 'black'};
   margin-bottom: 10px;
 
   :hover {
@@ -37,6 +37,9 @@ export const ListEl = styled.li`
     color: white;
   }
 `;
+
+//background-color: ${props => props.isActive ? 'black' : props.color}; 
+//color: ${props => props.color === '#000000' ? 'white' : 'black'};
 
 export const OneSize = styled.li`
   height: 45px;
@@ -46,6 +49,8 @@ export const OneSize = styled.li`
   line-height: 40px;
   letter-spacing: 0.05em;
   padding: 0 15px;
+  background-color: ${props => props.isActive ? 'black' : 'white'};
+  color: ${props => props.isActive ? 'white' : 'black'};
 `;
 
 export const Button = styled.button`

@@ -6,6 +6,7 @@ import { graphql } from 'react-apollo';
 import { Minicart } from '../Minicart/minicart.js';
 import { OutOfStockCart } from '../OutOfStockCart/OutOfStockCart.js';
 import Loader from '../Loader/Loader.js';
+import CartOverlay from '../CartOverlay/CartOverlay.js';
 
 import { Container, Title, ProductList } from './styles';
 
@@ -32,13 +33,15 @@ const getListQuery = gql`
 class CategoryComponent extends React.Component {
   render() {
     const category = this.props;
+    const { isOverlayOpen } = this.props;
     const products = this.props?.data?.category?.products;
     const name = this.props?.data?.category?.name;
     const { loading } = this.props?.data;
-    console.log(this.props)
+    console.log(isOverlayOpen)
     
     return (
       <Container>
+        {/* { isOverlayOpen && <CartOverlay /> } */}
         { loading && <Loader /> }
         { !loading && !category.category && <Title>{name[0].toUpperCase() + name.slice(1).toLowerCase()}</Title> }
         { !loading && category.category && <Title>{category.category[0].toUpperCase() + category.category.slice(1).toLowerCase()}</Title> }
@@ -72,8 +75,9 @@ class CategoryComponent extends React.Component {
   }
 };
 
-const mapStateToProps = ({ category }) => ({
+const mapStateToProps = ({ category, isOverlayOpen }) => ({
   category: category.category,
+  isOverlayOpen: isOverlayOpen.isOverlayOpen,
 });
 
 const mapDispatchToProps = (dispatch) => ({

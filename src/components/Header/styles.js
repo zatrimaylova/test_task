@@ -60,6 +60,7 @@ export const Cart = styled.div`
   width: 20px;
   height: 18px;
   position: relative;
+  cursor: pointer;
 
   img {
     width: 20px;
@@ -94,7 +95,8 @@ export const CurrenciesList = styled.ul`
   position: absolute;
   top: 30px;
   font-size: 18px;
-  display: ${props => props.condition ? 'block' : 'none'};
+  z-index: 3000;
+  background-color: white;
 
   li {
     margin-bottom: 20px;

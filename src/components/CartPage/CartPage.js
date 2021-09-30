@@ -7,6 +7,8 @@ import plus_square from '../../img/CartPage/plus_square.png';
 import chevron_left from '../../img/CartPage/chevron_left.png';
 import chevron_right from '../../img/CartPage/chevron_right.png';
 
+import CartOverlay from '../CartOverlay/CartOverlay.js';
+
 import { ACTION_CHANGE_COUNT, ACTION_DELETE_PRODUCT } from '../../ducks/cart';
 
 import {
@@ -78,8 +80,9 @@ class CartPage extends React.Component {
   }
 
   render() {
-    const { cart, currency } = this.props;
-
+    const { cart, currency, isOverlayOpen } = this.props;
+    
+    console.log(cart)
     return (
       <Container>
         <CartTitle>CART</CartTitle>
@@ -97,15 +100,18 @@ class CartPage extends React.Component {
                       }
                     })
                   }</span>
+                  <div>
+                    
+                  </div>
                 </div>
                 <ChangingInfo>
                   <CountCont onClick={this.handleCountClick}>
                     <div>
-                      <img src={plus_square} alt="-" id="increase" info={item.name} />
+                      <img src={plus_square} alt="+" id="increase" info={item.name} />
                     </div>
                     <CountSpan>{item.count}</CountSpan>
                     <div>
-                      <img src={minus_square} alt="+" id="decrease" info={item.name} />
+                      <img src={minus_square} alt="-" id="decrease" info={item.name} />
                     </div>
                   </CountCont>
                   <GalleryItem url={item.productData.gallery[0]} id="0" onClick={this.changeGalleryImgClick} > 
@@ -123,9 +129,10 @@ class CartPage extends React.Component {
   }
 }
 
-const mapStateToProps = ({ cart, currency }) => ({
+const mapStateToProps = ({ cart, currency, isOverlayOpen }) => ({
   cart: cart.cart,
   currency: currency.currency,
+  isOverlayOpen: isOverlayOpen.isOverlayOpen,
 });
 
 const mapDispatchToProps = (dispatch) => ({

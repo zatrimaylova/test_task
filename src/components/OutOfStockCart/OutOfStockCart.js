@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Product, ProductImage, Title } from './styles';
+import { Product, ProductImage, Title, TextInfo } from './styles';
 import { connect } from 'react-redux';
 
 class OutOfStockEl extends React.Component { 
@@ -12,14 +12,17 @@ class OutOfStockEl extends React.Component {
         <ProductImage url={link} >
           <Title>OUT OF STOCK</Title>
         </ProductImage>
-        <p>{name}</p>
-        <p>{
-            prices.map((item) => {
-              if (String(item.currency).toUpperCase() === String(currency).toUpperCase()) {
-                return `${item.amount} ${currency}`
-              }
-            })
+        <TextInfo>
+          <p>{name}</p>
+          <p>{
+              prices.map((item) => {
+                if (String(item.currency).toUpperCase() === String(currency).toUpperCase()) {
+                  return `${item.amount} ${currency}`
+                }
+              })
           }</p>
+        </TextInfo>
+
       </Product>
     )
   }

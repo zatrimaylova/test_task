@@ -6,6 +6,7 @@ export const Product = styled.div`
   padding: 16px;
   background-color: #FFFFFF;
   margin-bottom: 100px;
+  cursor: pointer;
 
   :hover {
     box-shadow: 0 0 20px rgba(168, 172, 176, 0.19);

@@ -10,7 +10,7 @@ export const CartList = styled.ul`
 `;
 
 export const CartTitle = styled.h1`
-  margin-bottom: 60px;
+  margin: 80px 0 60px;
 `;
 
 export const CartEl = styled.li`
@@ -31,8 +31,7 @@ export const CountCont = styled.div`
   div {
     width: 45px;
     height: 45px;
-    outline: none;
-    border: none;
+    cursor: pointer;
   }
 `;
 
@@ -62,6 +61,7 @@ export const ChevronLeft = styled.img`
   height: 24px;
   position: absolute;
   top: 87px;
+  cursor: pointer;
 `;
 
 export const ChevronRight = styled.img`
@@ -70,4 +70,5 @@ export const ChevronRight = styled.img`
   position: absolute;
   top: 87px;
   right: 0;
+  cursor: pointer;
 `;
