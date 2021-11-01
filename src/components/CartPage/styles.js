@@ -9,6 +9,19 @@ export const CartList = styled.ul`
 
 `;
 
+export const CartTitleCont = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  gap: 40px;
+
+  button {
+    border: none;
+    background-color: transparent;
+    padding: 5px 30px 10px;
+    cursor: pointer;
+  }
+`;
+
 export const CartTitle = styled.h1`
   margin: 80px 0 60px;
 `;
@@ -71,4 +84,14 @@ export const ChevronRight = styled.img`
   top: 87px;
   right: 0;
   cursor: pointer;
+`;
+
+export const AttributesList = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+`;
+
+export const ChossedAttribute = styled.li`
+  margin-top: 25px;
 `;

@@ -15,7 +15,7 @@ class MinicartEl extends React.Component {
   };
 
   render() {
-    const { name, link, prices, currency } = this.props;
+    const { name, link, prices, currency } = this.props; 
     
     return(
       <Product onClick={this.handleCartClick}>

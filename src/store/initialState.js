@@ -3,6 +3,7 @@ import { initialCartState } from '../ducks/cart';
 import { initialProductState } from '../ducks/product';
 import { initialCategoryState } from '../ducks/category';
 import { initialOverlayState } from '../ducks/overlay';
+import { initialWarningState } from '../ducks/warning';
 
 export const initialState = {
   currency: initialCurrencyState,
@@ -10,4 +11,5 @@ export const initialState = {
   product: initialProductState,
   category: initialCategoryState,
   isOverlayOpen: initialOverlayState,
+  warning: initialWarningState,
 };

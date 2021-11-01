@@ -63,6 +63,17 @@ class CartOverlay extends React.Component {
     }
   }
 
+  totalPriceCount = () => {
+    const { cart, currency } = this.props;
+    let totalPrice = null;
+    cart.map((el) => { 
+      el.productData.prices.forEach((element) => {
+        if (element.currency === currency) totalPrice += element.amount;   
+      })
+    })
+    return `${currency} ${totalPrice}`;
+  }
+
   handleCountClick = (e) => {
     const currentTargetEl = e.target.tagName.toLowerCase();
     const { cart, changeCount, deleteProduct } = this.props;
@@ -119,7 +130,11 @@ class CartOverlay extends React.Component {
           { cart.length > 0 && <ul>{this.renderList()}</ul>
           }
           <div>
-            <span></span>
+            <span>
+              {
+                this.totalPriceCount()
+              }
+            </span>
             {/* total cost */}
           </div>
           <ButtonsContainer>

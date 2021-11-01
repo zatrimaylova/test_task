@@ -152,29 +152,19 @@ class AddingToCartForm extends React.Component {
         <OptionTitle>{data[0].id.toUpperCase()}:</OptionTitle>
         <VarietyList id={data[0].id} onClick={this.handleAttributeClick}>
           {data[0].items.map((item) => {
-            //const result = item.type === 'swatch'
             let result;
             if (item.type === 'swatch') {
               result = <ListEl type={item.type} 
-              isActive={attributes.filter((i) => i.value === item.value).length ? false : true}    
+              isActive={attributes.filter((i) => i.value === item.id).length ? false : true}    
               color={item.value} 
               value={item.value} id={item[0].id} key={item.id}>
                   {item.displayValue}
                 </ListEl> 
             } else {
-              result = <ListEl id={item.id} isActive={attributes.filter((i) => i.value !== item.value).length ? true : false} value={item.value} key={item.id}>
+              result = <ListEl id={item.id} isActive={attributes.filter((i) => i.value === item.value).length ? true : false} value={item.value} key={item.id}>
               {item.displayValue}
               </ListEl>
             }
-            // ? <ListEl type={item.type} 
-            // isActive={attributes.filter((i) => i.value === item.value).length ? false : true}    
-            // color={item.value} 
-            // value={item.value} id={item[0].id} key={item.id}>
-            //     {item.displayValue}
-            //   </ListEl> 
-            // : <ListEl id={item.id} isActive={attributes.filter((i) => i.value === item.value).length ? true : false} value={item.value} key={item.id}>
-            //   {item.displayValue}
-            //   </ListEl>
             return result;
           })}
         </VarietyList> 
@@ -187,7 +177,6 @@ class AddingToCartForm extends React.Component {
             <OptionTitle>{item.id}:</OptionTitle>
             <VarietyList id={item.id} onClick={this.handleAttributeClick}>
               {item.items.map((i) => {
-                //console.log(attributes.filter((item) => item.option !== i.id && item.value !== i.id).length === 0 ? false : true, attributes.filter((item) => item.option !== i.id && item.value !== i.id))
                 if (item.type === 'swatch') {
                   return (
                     <ListEl id={i.id} value={i.value} key={i.id} color={i.value}
@@ -218,7 +207,6 @@ class AddingToCartForm extends React.Component {
     const { currency, product } = this.props;
     const { currentProduct, isUnvalid } = this.state;
     const attributes = currentProduct?.attributes;
-    //console.log(this.state.toCart.attributes)
 
     return(
       <Container>

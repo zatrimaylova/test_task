@@ -32,7 +32,7 @@ class ProductGallery extends React.Component {
   render() {
     const { data, description } = this.props;
     const { activeImg } = this.state;
-
+    console.log(data)
     return(
       <Container>
         <ViewContainer>
