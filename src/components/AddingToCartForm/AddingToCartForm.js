@@ -1,8 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Container, Button, VarietyList, ListEl, ValidationTitle, OneSize, ProductName, OptionTitle, PriceContainer } from './style';
+import { Container, Button, VarietyList, ListEl, ValidationTitle, OneSize, ProductName, OptionTitle, PriceContainer, HeaderForm, Counter, CountSpan } from './style';
 import { ACTION_ADD_PRODUCT } from '../../ducks/cart';
+
+import minus_image from '../../img/AddingToCartForm/minus_image.png';
+import plus_image from '../../img/AddingToCartForm/plus_image.png';
 
 class AddingToCartForm extends React.Component {
   state = {
@@ -10,7 +13,7 @@ class AddingToCartForm extends React.Component {
     toCart: {
       name: null,
       attributes: [],
-      count: null,
+      count: 1,
       cartItemId: null,
       productData: null,
     },
@@ -78,7 +81,6 @@ class AddingToCartForm extends React.Component {
       toCart: {
         ...prevState.toCart,
         attributes: optionsData,
-        count: 1,
         cartItemId: this.getCartElementId(),
       },
       clickedAttributes: [...prevState.clickedAttributes, selectedValue],
@@ -89,6 +91,25 @@ class AddingToCartForm extends React.Component {
     const date = new Date;
     return date.getTime();
   };
+
+  changeCount = (e) => {
+    const currentClick = e.target.tagName;
+    if (currentClick.toLowerCase() !== 'img') return;
+    let currentCount = this.state.toCart.count;
+    if (e.target.id === 'increase') {
+      currentCount++;
+    } else {
+      if (currentCount === 1) return;
+      currentCount--;
+    }
+    this.setState(prevState => ({
+      ...prevState,
+      toCart: {
+        ...prevState.toCart,
+        count: currentCount,
+      },
+    }));
+  }
 
   handleAddToCartClick = () => {
     const { currentProduct, toCart } = this.state;
@@ -209,7 +230,18 @@ class AddingToCartForm extends React.Component {
     console.log(this.state)
     return(
       <Container>
-        <ProductName>{currentProduct && currentProduct.name}</ProductName>
+        <HeaderForm>
+          <ProductName>{currentProduct && currentProduct.name}</ProductName>
+          <Counter onClick={this.changeCount}>
+            <div>
+              <img src={plus_image} alt="+" id="increase" />
+            </div>
+            <CountSpan>{this.state.toCart.count}</CountSpan>
+            <div>
+              <img src={minus_image} alt="-" id="decrease" />
+            </div>
+          </Counter>
+        </HeaderForm>
         {isUnvalid && <ValidationTitle>Please select options below</ValidationTitle>}
         <div>
           {attributes && this.createAttributes(attributes)}

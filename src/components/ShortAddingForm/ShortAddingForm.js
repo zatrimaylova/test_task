@@ -145,12 +145,12 @@ class ShortAddingForm extends React.Component {
       currentCount--;
     }
     this.setState(prevState => ({
-        ...prevState,
-        toCart: {
-          ...prevState.toCart,
-          count: currentCount,
-        },
-      }));
+      ...prevState,
+      toCart: {
+        ...prevState.toCart,
+        count: currentCount,
+      },
+    }));
   }
 
   createAttributes = (data) => {

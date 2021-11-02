@@ -64,7 +64,7 @@ export const Button = styled.button`
 `;
 
 export const ProductName = styled.h1`
-  margin-bottom: 40px;
+  margin-bottom: 10px;
 `;
 
 export const PriceContainer = styled.div`
@@ -77,4 +77,36 @@ export const PriceContainer = styled.div`
 
 export const OptionTitle = styled.h3`
   margin-bottom: 8px;
+`;
+
+export const HeaderForm = styled.div`
+  //display: flex;
+  //flex-direction: row;
+  //justify-content: left;
+  //padding-top: 15px;
+  //gap: 50px;
+  //color: aliceblue;
+  margin-bottom: 10px;
+`;
+
+export const Counter = styled.div`
+  display: inline-block;
+  width: 180px;
+  display: flex;
+  justify-content: left;
+  height: 24px;
+  margin-right: 12px;
+  margin-top: 5px;
+  img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+`;
+
+export const CountSpan = styled.span`
+  height: 100%;
+  text-align: center;
+  font-size: 20px;
+  margin: 0 17px;
 `;
