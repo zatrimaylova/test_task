@@ -11,8 +11,7 @@ export const CartList = styled.ul`
 
 export const CartTitleCont = styled.div`
   display: flex;
-  justify-content: flex-start;
-  gap: 40px;
+  justify-content: space-between;
 
   button {
     border: none;
@@ -94,4 +93,33 @@ export const AttributesList = styled.ul`
 
 export const ChossedAttribute = styled.li`
   margin-top: 25px;
+`;
+
+export const ButtonsHolder = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+export const LiContent = styled.div`
+  width: 80%;
+`;
+
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(57, 55, 72, 0.12);
+
+
+`;
+export const OverlayBody = styled.div`
+  width: 600px;
+    //margin: 50%;
+    //margin-left: 300px;
+    //position: fixed;
+    //top: 50%;
+  margin: 10px auto 0;
+  max-height: 90%;
 `;

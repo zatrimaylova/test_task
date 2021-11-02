@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { Container, Button, VarietyList, ListEl, ValidationTitle, OneSize, ProductName, OptionTitle, PriceContainer } from './style';
-import './styles.css';
 import { ACTION_ADD_PRODUCT } from '../../ducks/cart';
 
 class AddingToCartForm extends React.Component {
@@ -207,7 +206,7 @@ class AddingToCartForm extends React.Component {
     const { currency, product } = this.props;
     const { currentProduct, isUnvalid } = this.state;
     const attributes = currentProduct?.attributes;
-
+    console.log(this.state)
     return(
       <Container>
         <ProductName>{currentProduct && currentProduct.name}</ProductName>

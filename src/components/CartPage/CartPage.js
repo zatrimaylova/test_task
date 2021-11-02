@@ -8,8 +8,10 @@ import chevron_right from '../../img/CartPage/chevron_right.png';
 
 import { ACTION_CHANGE_COUNT, ACTION_DELETE_PRODUCT } from '../../ducks/cart';
 import { ACTION_USE_WARNING } from '../../ducks/warning';
+import { ACTION_USE_ADDING } from '../../ducks/adding';
 
 import WarningOverlay from '../WarningOverlay/WarningOverlay.js';
+import ShortAddingForm from '../ShortAddingForm/ShortAddingForm.js'
 
 import {
   Container, 
@@ -25,11 +27,16 @@ import {
   ChevronRight,
   AttributesList,
   ChossedAttribute,
+  ButtonsHolder,
+  LiContent,
+  Overlay,
+  OverlayBody,
 } from './styles';
 
 class CartPage extends React.Component {
   state = {
     toDelete: null,
+    toAdd: null,
   }
 
   handleCountClick = (e) => {
@@ -49,8 +56,6 @@ class CartPage extends React.Component {
       editingProduct[0].count += 1;
       changeCount(editingProduct);
     } else if (e.target.id === 'decrease') {
-      //if (editingProduct[0].count === 0)
-      //editingProduct[0].count === 0 ? editingProduct[0].count = 0 : editingProduct[0].count -= 1;
       if (editingProduct[0].count > 1) {
         editingProduct[0].count -= 1;
         changeCount(editingProduct);
@@ -61,8 +66,6 @@ class CartPage extends React.Component {
         }))
         showWarning(true)
       }
-      //editingProduct[0].count !== 0 ? changeCount(editingProduct) : showWarning(true);
-      //deleteProduct(editingProduct[0].cartItemId);
     }
   }
 
@@ -104,17 +107,30 @@ class CartPage extends React.Component {
     const { showWarning } = this.props;
     this.setState(prevState => ({
       ...prevState,
-      toDelete: Number(e.target.id),
+      toDelete: Number(e.target.closest('div').id),
     }));
     showWarning(true);
     document.body.style.overflow = 'hidden';
-    console.log(e.target.getBoundingClientRect())
+    //console.log(e.target.getBoundingClientRect())
+  }
+
+  addProduct = (e) => {
+    const { cart, showAdding } = this.props;
+    //console.log(cart)
+    const currentAddingProduct = cart.filter((item) => item.cartItemId === Number(e.target.closest('div').id))
+    console.log(currentAddingProduct[0])
+    // this.setState(prevState => ({
+    //   ...prevState,
+    //   toAdd: currentAddingProduct[0],
+    // }))
+    //console.log(e.target.closest('div').id)
+    showAdding({isOpen: true, product: currentAddingProduct[0].productData})
   }
 
   render() {
-    const { cart, currency, warning } = this.props;
-    const { toDelete } = this.state;
-    console.log('warning', this.props.warning, this.state.toDelete, currency)
+    const { cart, currency, warning, adding } = this.props;
+    const { toDelete, toAdd } = this.state;
+    console.log(toAdd)
     return (
       <Container>
         <CartTitle>CART</CartTitle>
@@ -123,10 +139,17 @@ class CartPage extends React.Component {
           {cart && cart.map((item, index) => {
             const cartListEl =
               <CartEl key={item.name + index} id={item.name} data-tag={item.cartItemId}>
-                <div>
+                <LiContent>
                   <CartTitleCont>
                     <h3>{item.name}</h3>
-                    <button id={item.cartItemId} onClick={this.deleteCartElement} >Delete</button>
+                    <ButtonsHolder id={item.cartItemId}>
+                      <button 
+                      //id={item.cartItemId} 
+                      onClick={this.deleteCartElement} >Remove</button>
+                      <button 
+                      //id={item.cartItemId} 
+                      onClick={this.addProduct}>Add product</button>
+                    </ButtonsHolder>
                   </CartTitleCont>  
                   <span>{
                     item.productData.prices.map((i) => {
@@ -144,7 +167,7 @@ class CartPage extends React.Component {
                       )
                     })}
                   </div>
-                </div>
+                </LiContent>
                 <ChangingInfo>
                   <CountCont onClick={this.handleCountClick}>
                     <div>
@@ -164,23 +187,26 @@ class CartPage extends React.Component {
             return cartListEl;
           })}
         </CartList>
-        { Boolean(warning) && toDelete && <WarningOverlay toDelete={toDelete} />}
+        { Boolean(warning) && toDelete && <WarningOverlay toDelete={toDelete} /> }
+        { adding.isOpen && <Overlay><OverlayBody><ShortAddingForm /></OverlayBody></Overlay> }
       </Container>
     )
   }
 }
 
-const mapStateToProps = ({ cart, currency, isOverlayOpen, warning }) => ({
+const mapStateToProps = ({ cart, currency, isOverlayOpen, warning, adding }) => ({
   cart: cart.cart,
   currency: currency.currency,
   isOverlayOpen: isOverlayOpen.isOverlayOpen,
   warning: warning.warning,
+  adding: adding.adding,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeCount: (value) => dispatch(ACTION_CHANGE_COUNT(value)),
   deleteProduct: (value) => dispatch(ACTION_DELETE_PRODUCT(value)),
   showWarning: (value) => dispatch(ACTION_USE_WARNING(value)),
+  showAdding: (value) => dispatch(ACTION_USE_ADDING(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartPage);
