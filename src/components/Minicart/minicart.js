@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from "react-router";
 
 import icon from '../../img/Minicart/icon.png';
-import { Product, ProductImage, Text, RoundIcon, Icon } from './styles';
+import { Product, ProductImage, Text, Icon, TextDetails, AddSpan, RemoveSpan } from './styles';
 
 import { connect } from 'react-redux';
 import { ACTION_CHANGE_PRODUCT } from '../../ducks/product';
@@ -17,21 +17,26 @@ class MinicartEl extends React.Component {
   render() {
     const { name, link, prices, currency } = this.props; 
     
-    return(
+    return (
       <Product onClick={this.handleCartClick}>
         <ProductImage url={link} />
-        <RoundIcon>
-          <Icon src={icon} alt="icon" />
-        </RoundIcon>
+        <Icon src={icon} alt="icon" />
         <Text>
           <p>{name}</p>
-          <p>{
-            prices.map((item) => {
-              if (String(item.currency).toUpperCase() === String(currency).toUpperCase()) {
-                return `${item.amount} ${currency}`
-              }
-            })
-          }</p>
+          <TextDetails>
+            <p>{
+              prices.map((item) => {
+                if (String(item.currency).toUpperCase() === String(currency).toUpperCase()) {
+                  return `${item.amount} ${currency}`
+                }
+              })
+              
+            }</p>
+            <div>
+              <AddSpan>Add</AddSpan>
+              <RemoveSpan>Remove</RemoveSpan>
+            </div>
+          </TextDetails>
         </Text>
       </Product>
     )

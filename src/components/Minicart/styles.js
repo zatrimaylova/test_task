@@ -7,19 +7,20 @@ export const Product = styled.div`
   background-color: #FFFFFF;
   margin-bottom: 100px;
   cursor: pointer;
+  position: relative;
+  overflow-x: hidden;
+  padding: 16px;
 
   :hover {
     box-shadow: 0 0 20px rgba(168, 172, 176, 0.19);
   }
 
-  :hover div {
-    display: block;
-    padding: 0;
+  :hover img {
+    right: 30px;
   }
 `;
 
 export const ProductImage = styled.div`
-  width: 90%;
   height: 338px;
   background: url(${props => props.url});
   max-height: 338px;
@@ -33,18 +34,39 @@ export const Text = styled.div`
   padding-top: 26px;
 `;
 
-export const RoundIcon = styled.div`
-  background-color: #5ECE7B;
+export const Icon = styled.img`
   width: 52px;
   height: 52px;
-  border-radius: 50%;
-  margin-left: 75%;
-  margin-top: -26px;
-  display: none;
+  position: absolute;
+  display: block;
+  top: 330px;
+  right: -100px;
 `;
 
-export const Icon = styled.img`
-  weight: 24px;
-  height: 24px;
-  margin: 14px 12px;
+export const TextDetails = styled.div`
+  display: flex;
+  justify-content: space-between;
+  
+  div {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+  }
 `;
+
+export const AddSpan = styled.span`
+  padding: 5px;
+
+  &:hover {
+    color: #5ECE7B;
+  }
+`;
+
+export const RemoveSpan = styled.span`
+  padding: 5px;
+
+  &:hover {
+    color: #ef9b94;
+  }
+`;
+
