@@ -226,7 +226,6 @@ class ShortAddingForm extends React.Component {
 
   render() {
     const { currency, adding } = this.props;
-    console.log('state', this.state.toCart.count)
     const { isUnvalid } = this.state;
     const productToAdd = adding.product;
 

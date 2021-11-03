@@ -54,9 +54,7 @@ class AddingToCartForm extends React.Component {
   };
 
   handleAttributeClick = (e) => {
-    if (e.target.tagName.toLowerCase() !== 'li') {
-      return;
-    };
+    if (e.target.tagName.toLowerCase() !== 'li') return;
 
     const { toCart } = this.state;
     const targetEl = e.target;
@@ -67,14 +65,10 @@ class AddingToCartForm extends React.Component {
 
     if (optionsData.length) {
       optionsData.forEach((element) => {
-        if (element.option === selectedOption) {
-          optionsData = optionsData.filter((item) => item.option !== selectedOption);
-        };
+        if (element.option === selectedOption) optionsData = optionsData.filter((item) => item.option !== selectedOption);
       });
       optionsData.push(selected);
-    } else if (optionsData.length === 0) {
-      optionsData.push(selected);
-    };
+    } else if (optionsData.length === 0) optionsData.push(selected);
 
     this.setState(prevState => ({
       ...prevState,
@@ -115,9 +109,7 @@ class AddingToCartForm extends React.Component {
     const { currentProduct, toCart } = this.state;
     const { addToCart } = this.props;
 
-    if (currentProduct.attributes.length === 0 && toCart.cartItemId) {
-      addToCart(toCart);
-    };
+    if (currentProduct.attributes.length === 0 && toCart.cartItemId) addToCart(toCart);
 
     if (toCart.attributes.length === 0) {
       this.setState(prevState => ({
@@ -138,9 +130,7 @@ class AddingToCartForm extends React.Component {
     const attributesCount = currentProduct.attributes.length;
     const selectedAttributesCount = toCart.attributes.length;
 
-    if (attributesCount === selectedAttributesCount) {
-      addToCart(toCart);
-    };
+    if (attributesCount === selectedAttributesCount) addToCart(toCart);
 
     this.setState(prevState => ({
       ...prevState,
@@ -161,8 +151,9 @@ class AddingToCartForm extends React.Component {
           <OptionTitle>SIZE:</OptionTitle>
           <VarietyList id='One size' onClick={this.handleAttributeClick}>
             <OneSize id='One size' value='One size'
-            isActive={attributes.filter((item) => item.option === 'One size' && item.value === 'One size').length ? true : false}
-            >One size</OneSize>
+              isActive={attributes.filter((item) => item.option === 'One size' && item.value === 'One size').length ? true : false}>
+              One size
+            </OneSize>
           </VarietyList>
         </>
       )
@@ -172,20 +163,23 @@ class AddingToCartForm extends React.Component {
         <OptionTitle>{data[0].id.toUpperCase()}:</OptionTitle>
         <VarietyList id={data[0].id} onClick={this.handleAttributeClick}>
           {data[0].items.map((item) => {
-            let result;
             if (item.type === 'swatch') {
-              result = <ListEl type={item.type} 
-              isActive={attributes.filter((i) => i.value === item.id).length ? false : true}    
-              color={item.value} 
-              value={item.value} id={item[0].id} key={item.id}>
-                  {item.displayValue}
-                </ListEl> 
+              return (
+                <ListEl type={item.type} 
+                isActive={attributes.filter((i) => i.value === item.id).length ? false : true}    
+                color={item.value} 
+                value={item.value} id={item[0].id} key={item.id}>
+                    {item.displayValue}
+                  </ListEl> 
+              )
             } else {
-              result = <ListEl id={item.id} isActive={attributes.filter((i) => i.value === item.value).length ? true : false} value={item.value} key={item.id}>
-              {item.displayValue}
-              </ListEl>
+              return (
+                <ListEl id={item.id} 
+                  isActive={attributes.filter((i) => i.value === item.value).length ? true : false} value={item.value} key={item.id}>
+                  {item.displayValue}
+                </ListEl>
+              )
             }
-            return result;
           })}
         </VarietyList> 
       </div>
@@ -207,8 +201,7 @@ class AddingToCartForm extends React.Component {
                 } else {
                   return (
                   <ListEl id={i.id} value={i.value} key={i.id} 
-                  isActive={attributes.filter((el) => item.id == el.option && el.value == i.id).length === 0 ? false : true}
-                  >
+                    isActive={attributes.filter((el) => item.id == el.option && el.value == i.id).length === 0 ? false : true} >
                     {i.displayValue}
                   </ListEl>
                   )
@@ -224,10 +217,10 @@ class AddingToCartForm extends React.Component {
   }
 
   render() {
-    const { currency, product } = this.props;
+    const { currency } = this.props;
     const { currentProduct, isUnvalid } = this.state;
     const attributes = currentProduct?.attributes;
-    console.log(this.state)
+
     return(
       <Container>
         <HeaderForm>
@@ -255,7 +248,7 @@ class AddingToCartForm extends React.Component {
             }
           })}
         </PriceContainer>
-        <Button onClick={this.handleAddToCartClick} >ADD TO CART</Button>
+        <Button onClick={this.handleAddToCartClick}>ADD TO CART</Button>
       </Container>
     )
   };
