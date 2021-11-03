@@ -7,6 +7,7 @@ import { Minicart } from '../Minicart/minicart.js';
 import { OutOfStockCart } from '../OutOfStockCart/OutOfStockCart.js';
 import Loader from '../Loader/Loader.js';
 import ShortAddingForm from '../ShortAddingForm/ShortAddingForm.js';
+import OverlayBackground from '../OverlayBackground/OverlayBackground.js';
 
 import { Container, Title, ProductList } from './styles';
 
@@ -26,6 +27,11 @@ const getListQuery = gql`
           amount
         },
         category,
+        attributes {
+          id, name, type, items {
+            displayValue, value, id
+          }
+        }
       }
     }
   }
@@ -47,19 +53,19 @@ class CategoryComponent extends React.Component {
         <ProductList>
           { products && !category.category && products.map((item) => {
             const renderItem = item.inStock 
-              ? <Minicart prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} /> 
+              ? <Minicart data={item} prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} /> 
                 : <OutOfStockCart prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} />
             return renderItem;
           })}
           { products && category.category && products.map((item) => {
             if (item.category !== category.category) return;
             const renderItem = item.inStock 
-              ? <Minicart prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} /> 
+              ? <Minicart data={item} prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} /> 
                 : <OutOfStockCart prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} />
             return renderItem;
           })}
         </ProductList>
-        { adding.isOpen && <ShortAddingForm />}
+        { adding.isOpen && <OverlayBackground><ShortAddingForm /></OverlayBackground>}
       </Container>
     )
   }

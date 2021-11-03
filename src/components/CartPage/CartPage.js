@@ -11,7 +11,8 @@ import { ACTION_USE_WARNING } from '../../ducks/warning';
 import { ACTION_USE_ADDING } from '../../ducks/adding';
 
 import WarningOverlay from '../WarningOverlay/WarningOverlay.js';
-import ShortAddingForm from '../ShortAddingForm/ShortAddingForm.js'
+import ShortAddingForm from '../ShortAddingForm/ShortAddingForm.js';
+import OverlayBackground from '../OverlayBackground/OverlayBackground.js';
 
 import {
   Container, 
@@ -188,7 +189,7 @@ class CartPage extends React.Component {
           })}
         </CartList>
         { Boolean(warning) && toDelete && <WarningOverlay toDelete={toDelete} /> }
-        { adding.isOpen && <Overlay><OverlayBody><ShortAddingForm /></OverlayBody></Overlay> }
+        { adding.isOpen && <OverlayBackground><ShortAddingForm /></OverlayBackground> }
       </Container>
     )
   }

@@ -6,7 +6,7 @@ export const Product = styled.div`
   padding: 16px;
   background-color: #FFFFFF;
   margin-bottom: 100px;
-  cursor: pointer;
+  //cursor: pointer;
   position: relative;
   overflow-x: hidden;
   padding: 16px;
@@ -28,6 +28,7 @@ export const ProductImage = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   margin: 0 auto;
+  cursor: pointer;
 `;
 
 export const Text = styled.div`
@@ -41,6 +42,7 @@ export const Icon = styled.img`
   display: block;
   top: 330px;
   right: -100px;
+  cursor: pointer;
 `;
 
 export const TextDetails = styled.div`
@@ -56,6 +58,7 @@ export const TextDetails = styled.div`
 
 export const AddSpan = styled.span`
   padding: 5px;
+  cursor: pointer;
 
   &:hover {
     color: #5ECE7B;
@@ -64,6 +67,7 @@ export const AddSpan = styled.span`
 
 export const RemoveSpan = styled.span`
   padding: 5px;
+  cursor: pointer;
 
   &:hover {
     color: #ef9b94;
