@@ -23,12 +23,6 @@ import {
 } from './styles';
 
 class CartOverlay extends React.Component {
-  totalCostCounter = () => {
-    const { cart, currency } = this.props;
-    console.log(cart)
-    console.log(currency)
-  }
-
   renderList = () => {
     const { cart, currency } = this.props;
     console.log(cart)
@@ -68,10 +62,20 @@ class CartOverlay extends React.Component {
     let totalPrice = null;
     cart.map((el) => { 
       el.productData.prices.forEach((element) => {
-        if (element.currency === currency) totalPrice += element.amount;   
+        console.log(cart, element.amount, element.count)
+        if (element.currency === currency) totalPrice += element.amount * el.count;   
       })
     })
-    return `${currency} ${totalPrice}`;
+    return `${currency} ${totalPrice.toFixed(2)}`;
+  }
+
+  countStaff = () => {
+    const { cart } = this.props;
+    let itemsCount = 0;
+    cart.map((el) => {
+      itemsCount += el.count;
+    })
+    return `${cart.length} products, ${itemsCount} items`;
   }
 
   handleCountClick = (e) => {
@@ -125,20 +129,14 @@ class CartOverlay extends React.Component {
       <CartContainer id="overlay_container" onClick={this.closeOverlayClick}>
         <CartBody>
           <CartTitle>
-            <p><span>My Bag</span>, { cart.length === 1 ? '1 item' : `${cart.length} items` }</p>
+            <p><span>My Bag</span>, { this.countStaff() }</p>
           </CartTitle>
-          { cart.length > 0 && <ul>{this.renderList()}</ul>
-          }
+          { cart.length > 0 && <ul>{this.renderList()}</ul> }
           <div>
-            <span>
-              {
-                this.totalPriceCount()
-              }
-            </span>
-            {/* total cost */}
+            <span> { this.totalPriceCount() }</span>
           </div>
           <ButtonsContainer>
-            <ViewBagButton onClick={this.viewBagClick} >VIEW BAG</ViewBagButton>
+            <ViewBagButton onClick={this.viewBagClick}>VIEW BAG</ViewBagButton>
             <CheckOutButton onClick={this.checkOutClick}>CHECK OUT</CheckOutButton> 
           </ButtonsContainer>
         </CartBody>
