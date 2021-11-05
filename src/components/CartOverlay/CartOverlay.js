@@ -9,82 +9,95 @@ import { ACTION_CHANGE_OVERLAY_STATE } from '../../ducks/overlay';
 import { ACTION_CHANGE_COUNT, ACTION_DELETE_PRODUCT } from '../../ducks/cart';
 
 import {
+  CartContainer,
   CartBody,
-  ViewBagButton,
-  CheckOutButton,
   CartTitle,
+  OverlayListEl,
+  ListItem,
+  ProductInfoCont,
+  OptionsList,
   ChangingInfo,
   CountCont,
   CountSpan,
+  DecreaseImg,
   GalleryItem,
-  ListItem,
-  CartContainer,
   ButtonsContainer,
+  ViewBagButton,
+  CheckOutButton,
 } from './styles';
 
 class CartOverlay extends React.Component {
-  renderList = () => {
-    const { cart, currency } = this.props;
-    console.log(cart)
-    if (cart.length === 1) {
-      const product = cart[0];
-      console.log(product)
-      const listEl =  
-        <ListItem data-tag={product.cartItemId}>
-          <p>{product.name}</p>
-          <p>{
-            product.productData.prices.map((i) => {
-              if (String(i.currency).toUpperCase() === String(currency).toUpperCase()) {
-                return `${i.amount} ${currency}`
-              }
-            })
-          }</p>
+  renderListItem = product => { 
+    //gets product info and returns li with all information needed to render
+    const { currency } = this.props; 
+    return (
+      <ListItem data-tag={product.cartItemId}>
+        <ProductInfoCont>
+          <div>
+            <p>{product.name}</p>
+            <p>{
+              product.productData.prices.map((i) => {
+                if (String(i.currency).toUpperCase() === String(currency).toUpperCase()) {
+                  return `${i.amount} ${currency}`
+                }
+              })
+            }</p>
+          </div>
+          <OptionsList>{ product.attributes.map((el) => this.renderOptions(el)) }</OptionsList>
+        </ProductInfoCont>
+        <ChangingInfo>
+          <CountCont onClick={this.handleCountClick}>
+            <div>
+              <img src={plus_image} alt="+" id="increase" info={product.name} />
+            </div>
+            <CountSpan>{product.count}</CountSpan>
+            <div>
+              <DecreaseImg src={minus_image} alt="-" id="decrease" info={product.name} color={product.count > 1 ? false : true}/>
+            </div>
+          </CountCont>
+          <GalleryItem url={product.productData.gallery[0]} /> 
+        </ChangingInfo> 
+      </ListItem>
+    )
+  }
 
-          <ChangingInfo>
-            <CountCont onClick={this.handleCountClick}>
-              <div>
-                <img src={plus_image} alt="+" id="increase" info={product.name} onClick={this.handleCountClick} />
-              </div>
-              <CountSpan>{product.count}</CountSpan>
-              <div>
-                <img src={minus_image} alt="-" id="decrease" info={product.name} onClick={this.handleCountClick} />
-              </div>
-            </CountCont>
-            <GalleryItem url={product.productData.gallery[0]} /> 
-          </ChangingInfo> 
-        </ListItem>
-      return listEl;
-    }
+  renderOptions = data => { 
+    //returns string for every choosed option; is used in renderListItem
+    return data.option === 'One size' 
+      ? <li>One size</li> 
+      : <li>{data.option}: {data.value}</li>
   }
 
   totalPriceCount = () => {
+    /* counts total price for all products in cart; 
+    returns price or `0.00 ${currency}` in case of empty cart */
     const { cart, currency } = this.props;
+    if (cart.length === 0) return `0.00 ${currency}`;
     let totalPrice = null;
     cart.map((el) => { 
       el.productData.prices.forEach((element) => {
-        console.log(cart, element.amount, element.count)
         if (element.currency === currency) totalPrice += element.amount * el.count;   
       })
     })
-    return `${currency} ${totalPrice.toFixed(2)}`;
+    return `${totalPrice.toFixed(2)} ${currency}`;
   }
 
   countStaff = () => {
+    /* counts sum of all products in cart 
+    returns sum of all items in cart (products) and sum of products amount */
     const { cart } = this.props;
+    if (cart.length === 0) return `the cart is empty`;
     let itemsCount = 0;
-    cart.map((el) => {
-      itemsCount += el.count;
-    })
+    cart.map((el) => itemsCount += el.count)
     return `${cart.length} products, ${itemsCount} items`;
   }
 
   handleCountClick = (e) => {
+    // listens click event and changes amount of product in the cart
     const currentTargetEl = e.target.tagName.toLowerCase();
     const { cart, changeCount, deleteProduct } = this.props;
 
-    if (currentTargetEl !== 'img') {
-      return;
-    }
+    if (currentTargetEl !== 'img') return;
 
     const productName = e.target.closest('li').id;
     const cartArrIndex = e.target.closest('li').getAttribute('data-tag');
@@ -92,52 +105,49 @@ class CartOverlay extends React.Component {
     const editingProduct = cart.filter(item => item.id !== productName && Number(item.cartItemId) === Number(cartArrIndex));
     
     if (e.target.id === 'increase') {
-      editingProduct[0].count += 0.5;
+      editingProduct[0].count += 1;
       changeCount(editingProduct);
     } else if (e.target.id === 'decrease') {
-      editingProduct[0].count === 0 ? editingProduct[0].count = 0 : editingProduct[0].count -= 0.5;
+      if (editingProduct[0].count === 1) return;
+      editingProduct[0].count === 0 ? editingProduct[0].count = 0 : editingProduct[0].count -= 1;
       editingProduct[0].count !== 0 ? changeCount(editingProduct) : deleteProduct(editingProduct[0].cartItemId);
     }
   }
   
   viewBagClick = () => {
+    // listens click event and uses history to direct user to the cart page
     const { history, changeOverlayState } = this.props;
     history.push(`/cart`);
     changeOverlayState(false);
     document.body.style.overflow = 'visible';
   };
 
-  checkOutClick = () => {
-    const { changeOverlayState } = this.props;
-    changeOverlayState(false);
-    document.body.style.overflow = 'visible';
-  };
-
   closeOverlayClick = (e) => {
+    // listens click event and uses action CHANGE_OVERLAY_STATE to hide current component
     const { changeOverlayState } = this.props;
-    
-    if (e.target.id === 'overlay_container') {
+
+    if (e.target.id === 'overlay_container' || e.target.id === 'close_overlay') {
       changeOverlayState(false);
       document.body.style.overflow = 'visible';
-    }
+    };
   };
 
   render() {
-    const { cart, currency } = this.props;
-    console.log(cart)
+    const { cart } = this.props;
     return (
       <CartContainer id="overlay_container" onClick={this.closeOverlayClick}>
         <CartBody>
           <CartTitle>
             <p><span>My Bag</span>, { this.countStaff() }</p>
           </CartTitle>
-          { cart.length > 0 && <ul>{this.renderList()}</ul> }
+          { cart.length === 1 && <OverlayListEl>{this.renderListItem(cart[0])}</OverlayListEl> }
+          { cart.length >= 2 && <OverlayListEl>{this.renderListItem(cart[0])} {this.renderListItem(cart[1])}</OverlayListEl> }
           <div>
             <span> { this.totalPriceCount() }</span>
           </div>
           <ButtonsContainer>
             <ViewBagButton onClick={this.viewBagClick}>VIEW BAG</ViewBagButton>
-            <CheckOutButton onClick={this.checkOutClick}>CHECK OUT</CheckOutButton> 
+            <CheckOutButton id="close_overlay">CHECK OUT</CheckOutButton> 
           </ButtonsContainer>
         </CartBody>
       </CartContainer>

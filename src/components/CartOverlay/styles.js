@@ -22,17 +22,45 @@ export const CartBody = styled.div`
   background-color: #FFFFFF;
 `;
 
-export const ListItem = styled.li`
-  display: flex;
-  justify-content: space-between;
-`;
-
 export const CartTitle = styled.div`
   font-size: 16px;
   line-height: 26.5px;
+  margin-bottom: 23px;
 
   span {
     font-weight: bold;
+  }
+`;
+
+export const OverlayListEl = styled.ul`
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+export const ListItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    margin-top: 5px;
+  }
+`;
+
+export const ProductInfoCont = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+export const OptionsList = styled.ul`
+  list-style: none;
+  margin-top: 15px;
+  padding-left: 5px;
+
+  li {
+    margin-bottom: 5px;
   }
 `;
 
@@ -54,6 +82,7 @@ export const CountCont = styled.div`
   img {
     width: 100%;
     height: 100%;
+    cursor: pointer;
   }
 `;
 
@@ -63,6 +92,10 @@ export const CountSpan = styled.span`
   font-size: 16px;
   margin: 30px 0;
   height: 26px;
+`;
+
+export const DecreaseImg = styled.img`
+  opacity: ${props => props.color ? 0.33 : 1};
 `;
 
 export const GalleryItem = styled.div`
@@ -76,6 +109,12 @@ export const GalleryItem = styled.div`
 
 export const ButtonsContainer = styled.div`
   margin-top: 35px;
+  display: flex;
+  justify-content: space-between;
+  
+  button {
+    cursor: pointer;
+  }
 `;
 
 export const ViewBagButton = styled.button`
