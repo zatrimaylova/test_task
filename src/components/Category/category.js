@@ -8,11 +8,13 @@ import { OutOfStockCart } from '../OutOfStockCart/OutOfStockCart.js';
 import Loader from '../Loader/Loader.js';
 import ShortAddingForm from '../ShortAddingForm/ShortAddingForm.js';
 import OverlayBackground from '../OverlayBackground/OverlayBackground.js';
+import CartListComponent from '../CartList/CartList.js';
 
 import { Container, Title, ProductList } from './styles';
 
 import { ACTION_CHANGE_CATEGORY } from '../../ducks/category';
 import { ACTION_USE_ADDING } from '../../ducks/adding';
+import { removing } from '../../ducks/removing.js';
 
 const getListQuery = gql`
   query {
@@ -43,7 +45,7 @@ class CategoryComponent extends React.Component {
     const products = this.props?.data?.category?.products;
     const name = this.props?.data?.category?.name;
     const { loading } = this.props?.data;
-    const { adding } = this.props;
+    const { adding, removing } = this.props;
     
     return (
       <Container>
@@ -66,15 +68,17 @@ class CategoryComponent extends React.Component {
           })}
         </ProductList>
         { adding.isOpen && <OverlayBackground><ShortAddingForm /></OverlayBackground>}
+        { removing.isOpen && <OverlayBackground><CartListComponent /></OverlayBackground>}
       </Container>
     )
   }
 };
 
-const mapStateToProps = ({ category, isOverlayOpen, adding, }) => ({
+const mapStateToProps = ({ category, isOverlayOpen, adding, removing }) => ({
   category: category.category,
   isOverlayOpen: isOverlayOpen.isOverlayOpen,
   adding: adding.adding,
+  removing: removing.removing,
 });
 
 const mapDispatchToProps = (dispatch) => ({

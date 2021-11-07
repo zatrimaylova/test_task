@@ -7,6 +7,7 @@ import { category } from '../ducks/category';
 import { isOverlayOpen } from '../ducks/overlay';
 import { warning } from '../ducks/warning';
 import { adding } from '../ducks/adding';
+import { removing } from '../ducks/removing';
 
 export default combineReducers({
   currency,
@@ -16,4 +17,5 @@ export default combineReducers({
   isOverlayOpen,
   warning,
   adding,
+  removing,
 });

@@ -45,7 +45,7 @@ export const cart = (prevState = initialCartState, action) => {
     case DELETE_PRODUCT:
       return {
         ...prevState,
-        cart: prevState.cart.filter((item) => item.cartItemId !== action.payload)
+        cart: prevState.cart.filter((item) => Number(item.cartItemId) !== Number(action.payload))
       };
 
     default: 

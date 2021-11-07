@@ -7,6 +7,7 @@ import { Product, ProductImage, Text, Icon, TextDetails, AddSpan, RemoveSpan } f
 import { connect } from 'react-redux';
 import { ACTION_CHANGE_PRODUCT } from '../../ducks/product';
 import { ACTION_USE_ADDING } from '../../ducks/adding';
+import { ACTION_USE_REMOVING } from '../../ducks/removing';
 
 class MinicartEl extends React.Component { 
   handleCartClick = (e) => {
@@ -19,12 +20,15 @@ class MinicartEl extends React.Component {
   listenAddClick = () => {
     const { showAdding, name, data } = this.props;
     showAdding({ isOpen: true, product: data})
-    console.log(this.props)
+  }
+
+  listenRemoveClick = () => {
+    const { showRemoving, name, data } = this.props;
+    showRemoving({ isOpen: true, product: name});
   }
 
   render() {
     const { name, link, prices, currency } = this.props; 
-    console.log(this.props)
     return (
       <Product onClick={this.handleCartClick}>
         <ProductImage url={link} />
@@ -40,9 +44,9 @@ class MinicartEl extends React.Component {
               })
               
             }</p>
-            <div id={name} onClick={this.listenAddClick}>
-              <AddSpan >Add</AddSpan>
-              <RemoveSpan>Remove</RemoveSpan>
+            <div id={name} >
+              <AddSpan id="add" onClick={this.listenAddClick}>Add</AddSpan>
+              <RemoveSpan onClick={this.listenRemoveClick}>Remove</RemoveSpan>
             </div>
           </TextDetails>
         </Text>
@@ -58,6 +62,7 @@ const mapStateToProps = ({ currency }) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeProduct: (value) => dispatch(ACTION_CHANGE_PRODUCT(value)),
   showAdding: (value) => dispatch(ACTION_USE_ADDING(value)),
+  showRemoving: (value) => dispatch(ACTION_USE_REMOVING(value)),
 });
 
 export const Minicart = withRouter(connect(mapStateToProps, mapDispatchToProps)(MinicartEl));

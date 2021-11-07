@@ -5,6 +5,7 @@ import { initialCategoryState } from '../ducks/category';
 import { initialOverlayState } from '../ducks/overlay';
 import { initialWarningState } from '../ducks/warning';
 import { initialAddingState } from '../ducks/adding';
+import { initialRemovingState } from '../ducks/removing';
 
 export const initialState = {
   currency: initialCurrencyState,
@@ -14,4 +15,5 @@ export const initialState = {
   isOverlayOpen: initialOverlayState,
   warning: initialWarningState,
   adding: initialAddingState,
+  removing: initialRemovingState,
 };
