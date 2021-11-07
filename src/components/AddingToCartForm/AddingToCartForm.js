@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Container, Button, VarietyList, ListEl, ValidationTitle, OneSize, ProductName, OptionTitle, PriceContainer, HeaderForm, Counter, CountSpan } from './style';
+import { Container, Button, VarietyList, ListEl, ValidationTitle, OneSize, ProductName, OptionTitle, PriceContainer, HeaderForm, Counter, CountSpan, DecreaseImg } from './style';
 import { ACTION_ADD_PRODUCT } from '../../ducks/cart';
 
 import minus_image from '../../img/AddingToCartForm/minus_image.png';
@@ -138,6 +138,7 @@ class AddingToCartForm extends React.Component {
         ...prevState.toCart,
         attributes: [],
         cartItemId: null,
+        count: 1,
       },
       isUnvalid: false,
     }));
@@ -218,20 +219,22 @@ class AddingToCartForm extends React.Component {
 
   render() {
     const { currency } = this.props;
-    const { currentProduct, isUnvalid } = this.state;
+    const { currentProduct, isUnvalid, toCart } = this.state;
     const attributes = currentProduct?.attributes;
-
+    console.log(this.state)
     return(
       <Container>
         <HeaderForm>
           <ProductName>{currentProduct && currentProduct.name}</ProductName>
           <Counter onClick={this.changeCount}>
             <div>
-              <img src={plus_image} alt="+" id="increase" />
+              <DecreaseImg src={minus_image} alt="-" id="decrease" 
+              color={toCart.count > 1 ? true : false}
+              />
             </div>
             <CountSpan>{this.state.toCart.count}</CountSpan>
             <div>
-              <img src={minus_image} alt="-" id="decrease" />
+              <img src={plus_image} alt="+" id="increase" />
             </div>
           </Counter>
         </HeaderForm>

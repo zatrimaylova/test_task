@@ -109,4 +109,9 @@ export const CountSpan = styled.span`
   text-align: center;
   font-size: 20px;
   margin: 0 17px;
+  min-width: 20px;
+`;
+
+export const DecreaseImg = styled.img`
+  opacity: ${props => props.color ? 1 : 0.33};
 `;
