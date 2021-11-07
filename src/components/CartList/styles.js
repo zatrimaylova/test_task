@@ -4,15 +4,17 @@ export const Container = styled.div`
   width: 100%;
   height: 90vh;
   background-color: white;
-  padding: 20px;
+  padding: 20px 20px 80px;
   margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
+  position: relative;
+
+  h1, h3 {
+    text-align: center;
+  }
 `;
 
 export const CartList = styled.ul`
-  height: 70%;
+  max-height: 430px;
   overflow-y: scroll;
 `;
 
@@ -34,23 +36,24 @@ export const CartTitle = styled.h1`
 
 export const CartEl = styled.li`
   width: 100%;
-  min-height: 100px;
+  height: 150px;
   display: flex;
   justify-content: space-between;
   border-top: solid 1px #E5E5E5;
-  padding: 20px;
+  padding: 10px;
   background-color: ${props => props.bgColor};
 `;
 
 export const CountCont = styled.div`
-  height: 100px;
+  height: 130px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   margin-right: 12px;
 
   div {
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
   }
 
@@ -63,8 +66,6 @@ export const CountSpan = styled.span`
   width: 100%;
   text-align: center;
   font-size: 15px;
-  margin: 20px 0;
-  height: 46px;
 `;
 
 export const ChangingInfo = styled.div`
@@ -72,29 +73,12 @@ export const ChangingInfo = styled.div`
 `;
 
 export const GalleryItem = styled.div`
-  height: 100px;
+  height: 100%;
   width: 141px;
   background: url(${props => props.url});
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
-`;
-
-export const ChevronLeft = styled.img`
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  top: 87px;
-  cursor: pointer;
-`;
-
-export const ChevronRight = styled.img`
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  top: 87px;
-  right: 0;
-  cursor: pointer;
 `;
 
 export const AttributesList = styled.div`
@@ -120,8 +104,12 @@ export const LiContent = styled.div`
 `;
 
 export const ButtonContainer = styled.div`
-  display: flex;
+  display: inline-flex;
   justify-content: space-around;
+  position: absolute;
+  bottom: 0px;
+  left: 20px;
+  width: 560px;
 
   
   button {

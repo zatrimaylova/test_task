@@ -45,7 +45,7 @@ class CategoryComponent extends React.Component {
     const products = this.props?.data?.category?.products;
     const name = this.props?.data?.category?.name;
     const { loading } = this.props?.data;
-    const { adding, removing } = this.props;
+    const { adding, removing, amount } = this.props;
     
     return (
       <Container>
@@ -69,16 +69,18 @@ class CategoryComponent extends React.Component {
         </ProductList>
         { adding.isOpen && <OverlayBackground><ShortAddingForm /></OverlayBackground>}
         { removing.isOpen && <OverlayBackground><CartListComponent /></OverlayBackground>}
+        { amount.isOpen && <OverlayBackground><CartListComponent /></OverlayBackground>}
       </Container>
     )
   }
 };
 
-const mapStateToProps = ({ category, isOverlayOpen, adding, removing }) => ({
+const mapStateToProps = ({ category, isOverlayOpen, adding, removing, amount }) => ({
   category: category.category,
   isOverlayOpen: isOverlayOpen.isOverlayOpen,
   adding: adding.adding,
   removing: removing.removing,
+  amount: amount.amount,
 });
 
 const mapDispatchToProps = (dispatch) => ({

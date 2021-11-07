@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Product = styled.div`
   flex-basis: 30%;
-  height: 444px;
+  height: 460px;
   padding: 16px;
   background-color: #FFFFFF;
   margin-bottom: 100px;
@@ -49,6 +49,14 @@ export const TextDetails = styled.div`
   display: flex;
   justify-content: space-between;
   
+  
+`;
+
+export const ChangeCart = styled.div`
+  span {
+    cursor: pointer;
+  }
+
   div {
     display: flex;
     justify-content: space-between;
@@ -58,7 +66,6 @@ export const TextDetails = styled.div`
 
 export const AddSpan = styled.span`
   padding: 5px;
-  cursor: pointer;
 
   &:hover {
     color: #5ECE7B;
@@ -67,10 +74,14 @@ export const AddSpan = styled.span`
 
 export const RemoveSpan = styled.span`
   padding: 5px;
-  cursor: pointer;
 
   &:hover {
     color: #ef9b94;
   }
 `;
 
+export const AmountSpan = styled.span`
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+`;

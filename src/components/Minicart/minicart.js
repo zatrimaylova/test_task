@@ -2,12 +2,13 @@ import React from 'react';
 import { withRouter } from "react-router";
 
 import icon from '../../img/Minicart/icon.png';
-import { Product, ProductImage, Text, Icon, TextDetails, AddSpan, RemoveSpan } from './styles';
+import { Product, ProductImage, Text, Icon, TextDetails, AddSpan, RemoveSpan, AmountSpan, ChangeCart } from './styles';
 
 import { connect } from 'react-redux';
 import { ACTION_CHANGE_PRODUCT } from '../../ducks/product';
 import { ACTION_USE_ADDING } from '../../ducks/adding';
 import { ACTION_USE_REMOVING } from '../../ducks/removing';
+import { ACTION_USE_AMOUNT } from '../../ducks/amount';
 
 class MinicartEl extends React.Component { 
   handleCartClick = (e) => {
@@ -27,6 +28,11 @@ class MinicartEl extends React.Component {
     showRemoving({ isOpen: true, product: name});
   }
 
+  listenAmountClick = () => {
+    const { showAmount, name } = this.props;
+    showAmount({isOpen: true, product: name});
+  }
+
   render() {
     const { name, link, prices, currency } = this.props; 
     return (
@@ -44,10 +50,13 @@ class MinicartEl extends React.Component {
               })
               
             }</p>
-            <div id={name} >
-              <AddSpan id="add" onClick={this.listenAddClick}>Add</AddSpan>
-              <RemoveSpan onClick={this.listenRemoveClick}>Remove</RemoveSpan>
-            </div>
+            <ChangeCart>
+              <div id={name} >
+                <AddSpan id="add" onClick={this.listenAddClick}>Add</AddSpan>
+                <RemoveSpan onClick={this.listenRemoveClick}>Remove</RemoveSpan>
+              </div>
+              <AmountSpan onClick={this.listenAmountClick}>Change amount</AmountSpan>
+            </ChangeCart>
           </TextDetails>
         </Text>
       </Product>
@@ -63,6 +72,7 @@ const mapDispatchToProps = (dispatch) => ({
   changeProduct: (value) => dispatch(ACTION_CHANGE_PRODUCT(value)),
   showAdding: (value) => dispatch(ACTION_USE_ADDING(value)),
   showRemoving: (value) => dispatch(ACTION_USE_REMOVING(value)),
+  showAmount: (value) => dispatch(ACTION_USE_AMOUNT(value)),
 });
 
 export const Minicart = withRouter(connect(mapStateToProps, mapDispatchToProps)(MinicartEl));
