@@ -93,7 +93,7 @@ class CartOverlay extends React.Component {
   }
 
   handleCountClick = (e) => {
-    // listens click event and changes amount of product in the cart
+    // listens for click event and changes amount of product in the cart
     const currentTargetEl = e.target.tagName.toLowerCase();
     const { cart, changeCount, deleteProduct } = this.props;
 
@@ -115,7 +115,7 @@ class CartOverlay extends React.Component {
   }
   
   viewBagClick = () => {
-    // listens click event and uses history to direct user to the cart page
+    //listens for click event and uses history to direct user to the cart page
     const { history, changeOverlayState } = this.props;
     history.push(`/cart`);
     changeOverlayState(false);
@@ -123,7 +123,7 @@ class CartOverlay extends React.Component {
   };
 
   closeOverlayClick = (e) => {
-    // listens click event and uses action CHANGE_OVERLAY_STATE to hide current component
+    //listens for click event and uses action CHANGE_OVERLAY_STATE to hide current component
     const { changeOverlayState } = this.props;
 
     if (e.target.id === 'overlay_container' || e.target.id === 'close_overlay') {

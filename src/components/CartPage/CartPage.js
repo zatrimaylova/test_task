@@ -38,6 +38,8 @@ class CartPage extends React.Component {
   }
 
   handleCountClick = (e) => {
+    /* listens for click event and changes amount of product in the cart,
+    uses action ACTION_USE_WARNING to show WarningOverlay if the customer tries to decrease 1*/
     const currentTargetEl = e.target.tagName.toLowerCase();
     const { cart, changeCount, showWarning } = this.props;
 
@@ -66,12 +68,14 @@ class CartPage extends React.Component {
   }
 
   renderOptions = (data) => {
+    //gets the selected options and returns string for rendering in li
     return data.option === 'One size' 
       ? <ChoosedAttribute>One size</ChoosedAttribute> 
       : <ChoosedAttribute>{data.option}: {data.value}</ChoosedAttribute>
   } 
 
   changeGalleryImgClick = (e) => {
+    //listens for click event and changes active gallery image
     const { cart } = this.props;
     const clickedImg = e.target;
     const productId = e.target.closest('li').getAttribute('data-tag');
@@ -98,6 +102,8 @@ class CartPage extends React.Component {
   }
 
   deleteCartElement = (e) => {
+    /* listens for click event and uses action ACTION_USE_WARNING
+    to show WarningOverlay if the customer tries to delete a product */
     const { showWarning } = this.props;
     this.setState(prevState => ({
       ...prevState,
@@ -108,6 +114,8 @@ class CartPage extends React.Component {
   }
 
   addProduct = (e) => {
+    /* listens for click event and uses action ACTION_USE_WARNING
+    to show WarningOverlay if the customer tries to delete a product */
     const { cart, showAdding } = this.props;
     const currentAddingProduct = cart.filter((item) => item.cartItemId === Number(e.target.closest('div').id));
 
