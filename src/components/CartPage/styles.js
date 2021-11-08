@@ -5,8 +5,24 @@ export const Container = styled.div`
   padding: 0 100px;
 `;
 
-export const CartList = styled.ul`
+export const CartTitle = styled.h1`
+  margin: 80px 0 60px;
+`;
 
+export const CartEl = styled.li`
+  width: 100%;
+  min-height: 225px;
+  display: flex;
+  justify-content: space-between;
+  border-top: solid 1px #E5E5E5;
+  padding: 20px 0;
+`;
+
+export const LiContent = styled.div`
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 `;
 
 export const CartTitleCont = styled.div`
@@ -21,17 +37,23 @@ export const CartTitleCont = styled.div`
   }
 `;
 
-export const CartTitle = styled.h1`
-  margin: 80px 0 60px;
+export const ButtonsHolder = styled.div`
+  display: flex;
+  gap: 10px;
 `;
 
-export const CartEl = styled.li`
-  width: 100%;
-  min-height: 225px;
+export const AttributesList = styled.ul`
+  list-style: none;
   display: flex;
-  justify-content: space-between;
-  border-top: solid 1px #E5E5E5;
-  padding: 20px 0;
+  flex-direction: row;
+`;
+
+export const ChoosedAttribute = styled.li`
+  margin-top: 25px;
+`;
+
+export const ChangingInfo = styled.div`
+  display: flex;
 `;
 
 export const CountCont = styled.div`
@@ -55,10 +77,6 @@ export const CountSpan = styled.span`
   height: 46px;
 `;
 
-export const ChangingInfo = styled.div`
-  display: flex;
-`;
-
 export const GalleryItem = styled.div`
   height: 185px;
   width: 141px;
@@ -66,6 +84,10 @@ export const GalleryItem = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
+`;
+
+export const DecreaseImg = styled.img`
+  opacity: ${props => props.color > 1 ? 1 : 0.33};
 `;
 
 export const ChevronLeft = styled.img`
@@ -84,42 +106,3 @@ export const ChevronRight = styled.img`
   right: 0;
   cursor: pointer;
 `;
-
-export const AttributesList = styled.ul`
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-`;
-
-export const ChossedAttribute = styled.li`
-  margin-top: 25px;
-`;
-
-export const ButtonsHolder = styled.div`
-  display: flex;
-  gap: 10px;
-`;
-
-export const LiContent = styled.div`
-  width: 80%;
-`;
-
-// export const Overlay = styled.div`
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   width: 100vw;
-//   height: 100vh;
-//   background-color: rgba(57, 55, 72, 0.12);
-
-
-// `;
-// export const OverlayBody = styled.div`
-//   width: 600px;
-//     //margin: 50%;
-//     //margin-left: 300px;
-//     //position: fixed;
-//     //top: 50%;
-//   margin: 10px auto 0;
-//   max-height: 90%;
-// `;
