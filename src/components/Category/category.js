@@ -9,12 +9,12 @@ import Loader from '../Loader/Loader.js';
 import ShortAddingForm from '../ShortAddingForm/ShortAddingForm.js';
 import OverlayBackground from '../OverlayBackground/OverlayBackground.js';
 import CartListComponent from '../CartList/CartList.js';
+import CartManaging from '../CartManaging/CartManaging.js';
 
 import { Container, Title, ProductList } from './styles';
 
 import { ACTION_CHANGE_CATEGORY } from '../../ducks/category';
 import { ACTION_USE_ADDING } from '../../ducks/adding';
-import { removing } from '../../ducks/removing.js';
 
 const getListQuery = gql`
   query {
@@ -52,6 +52,7 @@ class CategoryComponent extends React.Component {
         { loading && <Loader /> }
         { !loading && !category.category && <Title>{name[0].toUpperCase() + name.slice(1).toLowerCase()}</Title> }
         { !loading && category.category && <Title>{category.category[0].toUpperCase() + category.category.slice(1).toLowerCase()}</Title> }
+        { !loading && <CartManaging /> }
         <ProductList>
           { products && !category.category && products.map((item) => {
             const renderItem = item.inStock 

@@ -7,7 +7,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h1`
-  margin-bottom: 90px;
+  margin-bottom: 50px;
 `;
 
 export const ProductList = styled.div`

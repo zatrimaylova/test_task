@@ -7,7 +7,6 @@ import plus_square from '../../img/CartItemComp/plus_square.png';
 import { ACTION_CHANGE_OVERLAY_STATE } from '../../ducks/overlay';
 import { ACTION_CHANGE_COUNT, ACTION_DELETE_PRODUCT } from '../../ducks/cart';
 import { ACTION_USE_REMOVING } from '../../ducks/removing';
-//import { ACTION_DELETE_PRODUCT } from '../../ducks/cart';
 
 import {
   Container, 
@@ -37,11 +36,26 @@ class CartListComponent extends React.Component {
   componentDidMount() {
     const { removing, cart, amount } = this.props;
     const itemsToRender = [];
+
     if (removing.isOpen) {
+      if (removing.product === 'all') {
+        this.setState(prevState => ({
+          ...prevState,
+          toRender: cart,
+        }));
+        return;
+      }
       cart.map((item) => {
         if (item.name === removing.product) itemsToRender.push(item);
       });
     } else if (amount.isOpen) {
+      if (amount.product === 'all') {
+        this.setState(prevState => ({
+          ...prevState,
+          toRender: cart,
+        }));
+        return;
+      }
       cart.map((item) => {
         if (item.name === amount.product) itemsToRender.push(item);
       });
@@ -53,17 +67,22 @@ class CartListComponent extends React.Component {
 
     document.body.style.overflow = 'hidden';
   }
+
+  // createRenderArr = (data) => {
+  //   cart.map((item) => {
+  //     if (item.name === amount.product) itemsToRender.push(item);
+  //   });
+  // }
   
   handleCountClick = (e) => {
     const currentTargetEl = e.target.tagName.toLowerCase();
-    const { cart, changeCount, deleteProduct, showWarning } = this.props;
+    const { cart, changeCount, } = this.props;
 
     if (currentTargetEl !== 'img') return;
 
     const productCartId = e.target.closest('li').id;
-
     const editingProduct = cart.filter(item => item.cartItemId == Number(productCartId));
-    //console.log(productCartId, editingProduct)
+
     if (e.target.id === 'increase') {
       editingProduct[0].count += 1;
       changeCount(editingProduct);
