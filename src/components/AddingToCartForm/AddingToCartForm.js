@@ -23,6 +23,7 @@ class AddingToCartForm extends React.Component {
   };
 
   componentDidMount() {
+    /* adds default product options to state */
     const products = this.props?.data?.category?.products;
     const loading = this.props?.data?.loading;
     const { product } = this.props;
@@ -54,6 +55,7 @@ class AddingToCartForm extends React.Component {
   };
 
   handleAttributeClick = (e) => {
+    /* listens for click event and adds selected options to state */
     if (e.target.tagName.toLowerCase() !== 'li') return;
 
     const { toCart } = this.state;
@@ -81,11 +83,13 @@ class AddingToCartForm extends React.Component {
   };
 
   getCartElementId = () => {
+    //creates and returns a unique ID
     const date = new Date;
     return date.getTime();
   };
 
   changeCount = (e) => {
+    /* listens for click event and changes amount in state */
     const currentClick = e.target.tagName;
     if (currentClick.toLowerCase() !== 'img') return;
     let currentCount = this.state.toCart.count;
@@ -105,6 +109,9 @@ class AddingToCartForm extends React.Component {
   }
 
   handleAddToCartClick = () => {
+    /* listens for click event and uses action ACTION_ADD_PRODUCT to sent the product to the cart;
+      checks form validation and and changes the validation status if options are not selected;
+      sends the product to the cart and chandes a product info in state to default state*/
     const { currentProduct, toCart } = this.state;
     const { addToCart } = this.props;
 
@@ -144,6 +151,8 @@ class AddingToCartForm extends React.Component {
   };
 
   createAttributes = (data) => {
+    /* gets product data and returns items with the option name and
+     a list of available options to add to the cart*/
     const { attributes } = this.state.toCart;
     if (data.length === 0) {
       return (
