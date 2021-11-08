@@ -6,8 +6,7 @@ import { connect } from 'react-redux';
 import ProductGallery from '../ProductGallery/ProductGallery';
 import AddingToCartForm from '../AddingToCartForm/AddingToCartForm';
 import Loader from '../Loader/Loader.js';
-
-import { Container } from './style';
+import CartManaging from '../CartManaging/CartManaging.js';
 
 const getProductQuery = gql`
   query {
@@ -38,20 +37,23 @@ class PDPEl extends React.Component {
     const { loading } = this.props?.data;
 
     return(
-      <Container>
-        { loading && <Loader /> }
-        { products && 
-          products.map((item, index) => {
-            if (String(item.name).toUpperCase() === String(product).toUpperCase()) {
-              return (
-                <ProductGallery key={index} data={item.gallery} name={item.name} description={item.description}>
-                  <AddingToCartForm {...this.props} />
-                </ProductGallery>
-              )
-            }
-          })
-        }
-      </Container>
+      <>
+        { !loading && <CartManaging /> }
+        <div> 
+          { loading && <Loader /> }
+          { products && 
+            products.map((item, index) => {
+              if (String(item.name).toUpperCase() === String(product).toUpperCase()) {
+                return (
+                  <ProductGallery key={index} data={item.gallery} name={item.name} description={item.description}>
+                    <AddingToCartForm {...this.props} />
+                  </ProductGallery>
+                )
+              }
+            })
+          }
+        </div>
+      </>
     )
   }
 }
