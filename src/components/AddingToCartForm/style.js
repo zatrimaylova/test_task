@@ -4,11 +4,50 @@ export const Container = styled.div`
   width: 300px;
 `;
 
+export const HeaderForm = styled.div`
+  margin-bottom: 10px;
+`;
+
+export const ProductName = styled.h1`
+  margin-bottom: 10px;
+`;
+
+export const Counter = styled.div`
+  display: inline-block;
+  width: 180px;
+  display: flex;
+  justify-content: left;
+  height: 24px;
+  margin-right: 12px;
+  margin-top: 5px;
+  img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+`;
+
+export const DecreaseImg = styled.img`
+  opacity: ${props => props.color ? 1 : 0.33};
+`;
+
+export const CountSpan = styled.span`
+  height: 100%;
+  text-align: center;
+  font-size: 20px;
+  margin: 0 17px;
+  min-width: 20px;
+`;
+
 export const ValidationTitle = styled.p`
   background-color: pink;
   padding: 10px;
   text-align: center;
   margin-bottom: 10px;
+`;
+
+export const OptionTitle = styled.h3`
+  margin-bottom: 8px;
 `;
 
 export const VarietyList = styled.ul`
@@ -38,9 +77,6 @@ export const ListEl = styled.li`
   }
 `;
 
-//background-color: ${props => props.isActive ? 'black' : props.color}; 
-//color: ${props => props.color === '#000000' ? 'white' : 'black'};
-
 export const OneSize = styled.li`
   height: 45px;
   border: black solid 1px;
@@ -53,20 +89,6 @@ export const OneSize = styled.li`
   color: ${props => props.isActive ? 'white' : 'black'};
 `;
 
-export const Button = styled.button`
-  height: 52px;
-  width: 292px;
-  display: block;
-  border: none;
-  padding: 16px 32px;
-  background-color: #5ECE7B;
-  color: #FFFFFF;
-`;
-
-export const ProductName = styled.h1`
-  margin-bottom: 10px;
-`;
-
 export const PriceContainer = styled.div`
   margin-bottom: 20px;
 
@@ -75,43 +97,12 @@ export const PriceContainer = styled.div`
   }
 `;
 
-export const OptionTitle = styled.h3`
-  margin-bottom: 8px;
-`;
-
-export const HeaderForm = styled.div`
-  //display: flex;
-  //flex-direction: row;
-  //justify-content: left;
-  //padding-top: 15px;
-  //gap: 50px;
-  //color: aliceblue;
-  margin-bottom: 10px;
-`;
-
-export const Counter = styled.div`
-  display: inline-block;
-  width: 180px;
-  display: flex;
-  justify-content: left;
-  height: 24px;
-  margin-right: 12px;
-  margin-top: 5px;
-  img {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-  }
-`;
-
-export const CountSpan = styled.span`
-  height: 100%;
-  text-align: center;
-  font-size: 20px;
-  margin: 0 17px;
-  min-width: 20px;
-`;
-
-export const DecreaseImg = styled.img`
-  opacity: ${props => props.color ? 1 : 0.33};
+export const Button = styled.button`
+  height: 52px;
+  width: 292px;
+  display: block;
+  border: none;
+  padding: 16px 32px;
+  background-color: #5ECE7B;
+  color: #FFFFFF;
 `;

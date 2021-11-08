@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Container, Button, VarietyList, ListEl, ValidationTitle, OneSize, ProductName, OptionTitle, PriceContainer, HeaderForm, Counter, CountSpan, DecreaseImg } from './style';
+import { Container, HeaderForm, ProductName, Counter, DecreaseImg, CountSpan, ValidationTitle, OptionTitle, VarietyList, ListEl, OneSize, PriceContainer, Button, } from './style';
 import { ACTION_ADD_PRODUCT } from '../../ducks/cart';
 
 import minus_image from '../../img/AddingToCartForm/minus_image.png';
@@ -57,7 +57,6 @@ class AddingToCartForm extends React.Component {
     if (e.target.tagName.toLowerCase() !== 'li') return;
 
     const { toCart } = this.state;
-    const targetEl = e.target;
     const selectedValue = e.target.id;
     const selectedOption = e.target.closest('ul').id;
     let optionsData = toCart.attributes ? toCart.attributes.slice() : [];
@@ -159,61 +158,61 @@ class AddingToCartForm extends React.Component {
         </>
       )
     } else if (data.length === 1) {
-      const sizeEl = 
-      <div> 
-        <OptionTitle>{data[0].id.toUpperCase()}:</OptionTitle>
-        <VarietyList id={data[0].id} onClick={this.handleAttributeClick}>
-          {data[0].items.map((item) => {
-            if (item.type === 'swatch') {
-              return (
-                <ListEl type={item.type} 
-                isActive={attributes.filter((i) => i.value === item.id).length ? false : true}    
-                color={item.value} 
-                value={item.value} id={item[0].id} key={item.id}>
+      return (
+        <div> 
+          <OptionTitle>{data[0].id.toUpperCase()}:</OptionTitle>
+          <VarietyList id={data[0].id} onClick={this.handleAttributeClick}>
+            {data[0].items.map((item) => {
+              if (item.type === 'swatch') {
+                return (
+                  <ListEl type={item.type} color={item.value} value={item.value} id={item[0].id} key={item.id}
+                  isActive={attributes.filter((i) => i.value === item.id).length ? false : true} >
                     {item.displayValue}
                   </ListEl> 
-              )
-            } else {
-              return (
-                <ListEl id={item.id} 
-                  isActive={attributes.filter((i) => i.value === item.value).length ? true : false} value={item.value} key={item.id}>
-                  {item.displayValue}
-                </ListEl>
-              )
-            }
-          })}
-        </VarietyList> 
-      </div>
-      return sizeEl;
-    } else {
-      const variety = <div>
-        {data.map((item, index) => {
-          const list = <div key={index}> 
-            <OptionTitle>{item.id}:</OptionTitle>
-            <VarietyList id={item.id} onClick={this.handleAttributeClick}>
-              {item.items.map((i) => {
-                if (item.type === 'swatch') {
-                  return (
-                    <ListEl id={i.id} value={i.value} key={i.id} color={i.value}
-                    isActive={attributes.filter((item) => item.option !== i.id && item.value == i.id).length === 0 ? false : true} >
-                      {i.displayValue}
-                    </ListEl>
-                  )
-                } else {
-                  return (
-                  <ListEl id={i.id} value={i.value} key={i.id} 
-                    isActive={attributes.filter((el) => item.id == el.option && el.value == i.id).length === 0 ? false : true} >
-                    {i.displayValue}
+                )
+              } else {
+                return (
+                  <ListEl id={item.id} value={item.value} key={item.id}
+                  isActive={attributes.filter((i) => i.value === item.value).length ? true : false} >
+                    {item.displayValue}
                   </ListEl>
-                  )
-                };
-              })}
-            </VarietyList>
-          </div>
-          return list;
-        })}
-      </div>
-      return variety;
+                )
+              }
+            })}
+          </VarietyList> 
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          {data.map((item, index) => {
+            return (
+              <div key={index}> 
+                <OptionTitle>{item.id}:</OptionTitle>
+                <VarietyList id={item.id} onClick={this.handleAttributeClick}>
+                  {item.items.map((i) => {
+                    if (item.type === 'swatch') {
+                      return (
+                        <ListEl id={i.id} value={i.value} key={i.id} color={i.value}
+                        isActive={attributes.filter((item) => item.option !== i.id && item.value == i.id).length === 0 ? false : true} >
+                          {i.displayValue}
+                        </ListEl>
+                      )
+                    } else {
+                      return (
+                      <ListEl id={i.id} value={i.value} key={i.id} 
+                        isActive={attributes.filter((el) => item.id == el.option && el.value == i.id).length === 0 ? false : true} >
+                        {i.displayValue}
+                      </ListEl>
+                      )
+                    };
+                  })}
+                </VarietyList>
+              </div>
+            )
+          })}
+        </div>
+      )
     }
   }
 
@@ -221,16 +220,14 @@ class AddingToCartForm extends React.Component {
     const { currency } = this.props;
     const { currentProduct, isUnvalid, toCart } = this.state;
     const attributes = currentProduct?.attributes;
-    console.log(this.state)
+
     return(
       <Container>
         <HeaderForm>
           <ProductName>{currentProduct && currentProduct.name}</ProductName>
           <Counter onClick={this.changeCount}>
             <div>
-              <DecreaseImg src={minus_image} alt="-" id="decrease" 
-              color={toCart.count > 1 ? true : false}
-              />
+              <DecreaseImg src={minus_image} alt="-" id="decrease" color={toCart.count > 1 ? true : false} />
             </div>
             <CountSpan>{this.state.toCart.count}</CountSpan>
             <div>
@@ -239,10 +236,7 @@ class AddingToCartForm extends React.Component {
           </Counter>
         </HeaderForm>
         {isUnvalid && <ValidationTitle>Please select options below</ValidationTitle>}
-        <div>
-          {attributes && this.createAttributes(attributes)}
-        </div>
-
+        <div> {attributes && this.createAttributes(attributes)} </div>
         <PriceContainer>
           <h3>PRICE:</h3>
           {currentProduct && currentProduct.prices.map((item, index) => {
