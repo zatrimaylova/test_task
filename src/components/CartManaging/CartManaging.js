@@ -8,6 +8,8 @@ import { CartManagingCont, ContentHolder } from './styles';
         
 class CartManaging extends React.Component {
   openOverlay = (e) => {
+    /*listens for click event and uses actions ACTION_USE_REMOVING or ACTION_USE_AMOUNT
+    to change visibility of OverlayBackground and render a list of all products in CartList component*/
     const { showRemoving, showAmount, cart } = this.props;
     if (cart.length === 0) return;
     if (e.target.id === 'remove') {
@@ -15,7 +17,6 @@ class CartManaging extends React.Component {
     } else if (e.target.id === 'amount') {
       showAmount({ isOpen: true, product: 'all' });
     }
-
   }
 
   render() {

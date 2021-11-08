@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export const CartManagingCont = styled.div`
  height: 77px;
   margin-bottom: 25px;
