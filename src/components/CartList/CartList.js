@@ -7,6 +7,7 @@ import plus_square from '../../img/CartItemComp/plus_square.png';
 import { ACTION_CHANGE_OVERLAY_STATE } from '../../ducks/overlay';
 import { ACTION_CHANGE_COUNT, ACTION_DELETE_PRODUCT } from '../../ducks/cart';
 import { ACTION_USE_REMOVING } from '../../ducks/removing';
+import { ACTION_USE_AMOUNT } from '../../ducks/amount';
 
 import {
   Container, 
@@ -24,7 +25,7 @@ import {
   ButtonContainer,
   ButtonConfirm
 } from './styles';
-import { ACTION_USE_AMOUNT } from '../../ducks/amount';
+
 
 class CartListComponent extends React.Component {
   state = {
@@ -34,6 +35,9 @@ class CartListComponent extends React.Component {
   }
 
   componentDidMount() {
+    /*gets an array of products in the cart and the name of the active product from removing/amount,
+    iterates through the array and adds active products to the state to render the list;
+    if there is no active product, the function adds each product from the cart*/
     const { removing, cart, amount } = this.props;
     const itemsToRender = [];
 
@@ -67,16 +71,12 @@ class CartListComponent extends React.Component {
 
     document.body.style.overflow = 'hidden';
   }
-
-  // createRenderArr = (data) => {
-  //   cart.map((item) => {
-  //     if (item.name === amount.product) itemsToRender.push(item);
-  //   });
-  // }
   
   handleCountClick = (e) => {
+    /* listens for click event and uses action ACTION_CHANGE_COUNT
+    to change amount of product in the cart */
     const currentTargetEl = e.target.tagName.toLowerCase();
-    const { cart, changeCount, } = this.props;
+    const { cart, changeCount } = this.props;
 
     if (currentTargetEl !== 'img') return;
 
@@ -95,32 +95,39 @@ class CartListComponent extends React.Component {
   }
 
   renderOptions = (data) => {
+    //gets the selected options and returns string for rendering in li
     return data.option === 'One size' 
       ? <ChossedAttribute>One size</ChossedAttribute> 
       : <ChossedAttribute>{data.option}: {data.value}</ChossedAttribute>
   } 
 
-  handleClick = (e) => {
+  handleButtonsClick = (e) => {
+    /* listens for click event and uses action ACTION_DELETE_PRODUCT
+    to remove every selected product */
     if (e.target.tagName.toLowerCase() !== 'button') return;
 
-    const { showRemoving, showAmount } = this.props;
+    const { showRemoving, showAmount, amount } = this.props;
 
     if (e.target.id === 'confirm') { 
-      this.deleteProduct();
+      this.deletingProduct();
       showRemoving({ isOpen: false, product: '' });
     } else if (e.target.id === 'cancel') {
-      showAmount({ isOpen: false, product: '' });
+      amount.isOpen 
+        ? showAmount({ isOpen: false, product: '' }) 
+        : showRemoving({ isOpen: false, product: '' });
     }
 
     document.body.style.overflow = 'auto'; 
   }
 
   selectProduct = (e) => {
+    /* listens for click event and pushes id of the selected products to toDelete array;
+    if user clicked product that has already been selected, the function removes its id from toDelete;
+    changes style of each selected product */
     const { removing } = this.props;
     const { toDelete } = this.state;
 
     if (!removing.isOpen) return;
-    console.log('e.target.id')
 
     const selectedProduct = e.target.closest('li').id;
     if (toDelete.indexOf(selectedProduct) === -1) {
@@ -138,77 +145,78 @@ class CartListComponent extends React.Component {
     }
   }
 
-  deleteProduct = () => {
+  deletingProduct = () => {
+    // uses action ACTION_DELETE_PRODUCT to remove every selected product; is used in handleButtonsClick;
     const { deleteProduct } = this.props;
     const { toDelete } = this.state;
-    toDelete.map((item) => {
-      deleteProduct(item);
-    })
+
+    toDelete.map((item) => deleteProduct(item));
   }
 
   render() {
-    const { cart, currency, warning, adding, removing, amount } = this.props;
-    const { toDelete, toAdd } = this.state;
+    const { currency, removing, amount } = this.props;
     const { toRender } = this.state;
    
     return (
       <Container>
         <div>
           <CartTitle> 
-            {removing.isOpen && 'Choose products to remove from the cart' }
-            {amount.isOpen && 'Сhange the amount of products below' }
+            { removing.isOpen && 'Choose products to remove from the cart' }
+            { amount.isOpen && 'Сhange the amount of products below' }
           </CartTitle>
-          {toRender.length === 0 && <h3>There is no selected product in the cart</h3>}
-          {toRender.length > 0 && <CartList>
-            {toRender.map((item, index) => {
-              const cartListEl =
-                <CartEl onClick={this.selectProduct} key={item.cartItemId} id={item.cartItemId}>
-                  <LiContent>
-                    <div>
-                      <CartTitleCont>
-                        <h3>{item.name}</h3>
-                      </CartTitleCont>  
-                      <span>{
-                        item.productData.prices.map((i) => {
-                          if (String(i.currency).toUpperCase() === String(currency).toUpperCase()) {
-                            return `${i.amount} ${currency}`
-                          }
-                        })
-                      }</span>
-                    </div>
-                    <div>
-                      <AttributesList>
-                        {item.attributes.map((element) => {
-                          return (
-                          <ChossedAttribute>
-                            {this.renderOptions(element)}
-                          </ChossedAttribute> 
-                          )
-                        })}
-                        <ChossedAttribute>Amount: {item.count}</ChossedAttribute>
-                      </AttributesList>
-                    </div>
-                  </LiContent>
-                  <ChangingInfo>
-                    {amount.isOpen && <CountCont onClick={this.handleCountClick}>
+          { toRender.length === 0 && <h3>There is no selected product in the cart</h3>}
+          { toRender.length > 0 && 
+            <CartList>
+              {toRender.map((item) => {
+                return (
+                  <CartEl onClick={this.selectProduct} key={item.cartItemId} id={item.cartItemId}>
+                    <LiContent>
                       <div>
-                        <img src={plus_square} alt="+" id="increase" info={item.name} />
+                        <CartTitleCont>
+                          <h3>{item.name}</h3>
+                        </CartTitleCont>  
+                        <span>{
+                          item.productData.prices.map((i) => {
+                            if (String(i.currency).toUpperCase() === String(currency).toUpperCase()) {
+                              return `${i.amount} ${currency}`
+                            }
+                          })
+                        }</span>
                       </div>
-                      <CountSpan>{item.count}</CountSpan>
                       <div>
-                        <img src={minus_square} alt="-" id="decrease" info={item.name} />
+                        <AttributesList>
+                          {item.attributes.map((element) => {
+                            return (
+                            <ChossedAttribute>
+                              {this.renderOptions(element)}
+                            </ChossedAttribute> 
+                            )
+                          })}
+                          <ChossedAttribute>Amount: {item.count}</ChossedAttribute>
+                        </AttributesList>
                       </div>
-                    </CountCont>}
-                    <GalleryItem url={item.productData.gallery[0]} /> 
-                  </ChangingInfo>
-                </CartEl>
-              return cartListEl;
-            })}
-          </CartList>}
+                    </LiContent>
+                    <ChangingInfo>
+                      {amount.isOpen && <CountCont onClick={this.handleCountClick}>
+                        <div>
+                          <img src={plus_square} alt="+" id="increase" info={item.name} />
+                        </div>
+                        <CountSpan>{item.count}</CountSpan>
+                        <div>
+                          <img src={minus_square} alt="-" id="decrease" info={item.name} />
+                        </div>
+                      </CountCont>}
+                      <GalleryItem url={item.productData.gallery[0]} /> 
+                    </ChangingInfo>
+                  </CartEl>
+                )
+              })}
+            </CartList>
+          }
         </div>
-        <ButtonContainer onClick={this.handleClick}>
-          {removing.isOpen && <ButtonConfirm id="confirm">Confirm</ButtonConfirm>}
-          <button id="cancel">{removing.isOpen ? 'Cancel' : 'Close'}</button>         
+        <ButtonContainer onClick={this.handleButtonsClick}>
+          { removing.isOpen && toRender.length > 0 && <ButtonConfirm id="confirm">Confirm</ButtonConfirm> }
+          <button id="cancel">{ removing.isOpen ? 'Cancel' : 'Close' }</button>         
         </ButtonContainer>
       </Container>
     )
