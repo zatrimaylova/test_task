@@ -7,6 +7,9 @@ import ProductGallery from '../ProductGallery/ProductGallery';
 import AddingToCartForm from '../AddingToCartForm/AddingToCartForm';
 import Loader from '../Loader/Loader.js';
 import CartManaging from '../CartManaging/CartManaging.js';
+import OverlayBackground from '../OverlayBackground/OverlayBackground.js';
+import CartListComponent from '../CartList/CartList.js';
+
 
 import { Container } from './styles';
 
@@ -35,7 +38,7 @@ class PDPEl extends React.Component {
 
   render() {
     const products = this.props?.data?.category?.products;
-    const { product } = this.props;
+    const { product, removing, amount } = this.props;
     const { loading } = this.props?.data;
 
     return(
@@ -55,13 +58,17 @@ class PDPEl extends React.Component {
             })
           }
         </div>
+        { removing.isOpen && <OverlayBackground><CartListComponent /></OverlayBackground>}
+        { amount.isOpen && <OverlayBackground><CartListComponent /></OverlayBackground>}
       </Container>
     )
   }
 }
 
-const mapStateToProps = ({ product }) => ({
+const mapStateToProps = ({ product, removing, amount }) => ({
   product: product.product,
+  removing: removing.removing,
+  amount: amount.amount,
 });
 
 const PDP = graphql(getProductQuery)(PDPEl);
