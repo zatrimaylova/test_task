@@ -117,7 +117,7 @@ class AddingToCartForm extends React.Component {
 
     if (currentProduct.attributes.length === 0 && toCart.cartItemId) addToCart(toCart);
 
-    if (toCart.attributes.length === 0) {
+    if (toCart.attributes.length === 0 || toCart.attributes.length < currentProduct.attributes.length) {
       this.setState(prevState => ({
         ...prevState,
         isUnvalid: true,
