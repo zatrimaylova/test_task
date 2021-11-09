@@ -73,7 +73,7 @@ class CartOverlay extends React.Component {
     returns price or `0.00 ${currency}` in case of empty cart */
     const { cart, currency } = this.props;
     if (cart.length === 0) return `0.00 ${currency}`;
-    let totalPrice = null;
+    let totalPrice = 0;
     cart.map((el) => { 
       el.productData.prices.forEach((element) => {
         if (element.currency === currency) totalPrice += element.amount * el.count;   

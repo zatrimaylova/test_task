@@ -34,6 +34,12 @@ class HeaderComponent extends React.Component {
     currentCurrency: null,
   };
 
+  componentDidMount() {
+    const { currencies, changeCurrency } = this.props;
+
+    changeCurrency(currencies[0]);
+  };
+
   createCategories = () => {
     const { createCategoryList } = this.props;
     const category = this.props?.data?.category;
