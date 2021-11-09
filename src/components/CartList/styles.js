@@ -52,14 +52,19 @@ export const CountCont = styled.div`
   margin-right: 12px;
 
   div {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     cursor: pointer;
   }
 
   img {
     height: 100%;
+    width: 100%;
   }
+`;
+
+export const DecreaseImg = styled.img`
+  opacity: ${props => props.visibility > 1 ? 1 : 0.33};
 `;
 
 export const CountSpan = styled.span`

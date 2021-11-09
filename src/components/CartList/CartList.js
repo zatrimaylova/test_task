@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import minus_square from '../../img/CartItemComp/minus_square.png';
-import plus_square from '../../img/CartItemComp/plus_square.png'; 
+import minus_square from '../../img/CartList/minus_image.png';
+import plus_square from '../../img/CartList/plus_image.png'; 
 
 import { ACTION_CHANGE_OVERLAY_STATE } from '../../ducks/overlay';
 import { ACTION_CHANGE_COUNT, ACTION_DELETE_PRODUCT } from '../../ducks/cart';
@@ -15,7 +15,8 @@ import {
   CartList, 
   CartEl, 
   CartTitleCont,
-  CartTitle, 
+  CartTitle,
+  DecreaseImg,
   CountSpan, 
   ChangingInfo, 
   GalleryItem, 
@@ -199,11 +200,11 @@ class CartListComponent extends React.Component {
                     <ChangingInfo>
                       {amount.isOpen && <CountCont onClick={this.handleCountClick}>
                         <div>
-                          <img src={plus_square} alt="+" id="increase" info={item.name} />
+                          <img visibility={item.count} src={plus_square} alt="+" id="increase" info={item.name} />
                         </div>
                         <CountSpan>{item.count}</CountSpan>
                         <div>
-                          <img src={minus_square} alt="-" id="decrease" info={item.name} />
+                          <DecreaseImg src={minus_square} alt="-" id="decrease" info={item.name} />
                         </div>
                       </CountCont>}
                       <GalleryItem url={item.productData.gallery[0]} /> 
