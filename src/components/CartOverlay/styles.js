@@ -5,7 +5,7 @@ export const CartContainer = styled.div`
   z-index: 1000;
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: fixed;
   top: 80px;
   left: 0;
   transition: all 0.8s ease 0s;
