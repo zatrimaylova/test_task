@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100%;
-  padding: 0 100px;
+  max-width: 1240px;
+  margin: 0 auto;
 `;
 
 export const CartTitle = styled.h1`
@@ -10,7 +10,7 @@ export const CartTitle = styled.h1`
 `;
 
 export const CartEl = styled.li`
-  width: 100%;
+  width: 1094px;
   min-height: 225px;
   display: flex;
   justify-content: space-between;

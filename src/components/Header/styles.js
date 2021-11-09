@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100%;
-  padding: 0 100px;
+  width: 1240px;
   height: 80px;
   display: flex;
   justify-content: space-between;
   padding-top: 30px;
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
+  margin-left: -620px;
   z-index: 1000;
   opacity: 1;
   background-color: white;

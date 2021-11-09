@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  padding: 30px 100px;
+  padding: 30px 0;
   display: flex;
+  gap: 100px;
 `;
 
 export const ViewContainer = styled.div`
   display: flex;
-  margin-right: 100px;
 `;
 
 export const PreviewContainer = styled.ul`

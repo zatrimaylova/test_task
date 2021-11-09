@@ -43,9 +43,9 @@ class PDPEl extends React.Component {
 
     return(
       <Container>
+        { loading && <Loader /> }
         { !loading && <CartManaging /> }
         <div> 
-          { loading && <Loader /> }
           { products && 
             products.map((item, index) => {
               if (String(item.name).toUpperCase() === String(product).toUpperCase()) {

@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100%;
-  padding: 150px 100px 0;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 150px 0 0;
   position: relative;
 `;
 
