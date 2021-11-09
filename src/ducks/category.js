@@ -15,7 +15,7 @@ export const ACTION_CREATE_CATEGORY_LIST = value => ({
 
 //REDUCERS
 export const initialCategoryState = {
-  category: null,
+  category: 'all',
   categories: null,
 };
 

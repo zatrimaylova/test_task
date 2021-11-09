@@ -83,6 +83,7 @@ const mapStateToProps = ({ category, isOverlayOpen, adding, removing, amount }) 
   adding: adding.adding,
   removing: removing.removing,
   amount: amount.amount,
+  categories: category.categories,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -34,24 +34,17 @@ class HeaderComponent extends React.Component {
     currentCurrency: null,
   };
 
-  componentDidMount() {
-    const { currencies, changeCurrency } = this.props;
-
-    changeCurrency(currencies[0]);
-  };
-
   createCategories = () => {
-    const { createCategoryList, changeCategory } = this.props;
+    const { createCategoryList } = this.props;
     const category = this.props?.data?.category;
     const categoriesArr = [];
 
-    categoriesArr.push(category.name);
+    categoriesArr.push(category?.name);
     category?.products.map((item) => {
       if (categoriesArr.indexOf(item.category) === -1) categoriesArr.push(item.category);
     });
 
     createCategoryList(categoriesArr);
-    changeCategory(categoriesArr[0]);
   }
 
   showCurrencyClick = () => {
@@ -94,14 +87,14 @@ class HeaderComponent extends React.Component {
 
   render() {
     const { isCurrencyClicked, currentCurrency } = this.state;
-    const { cart, isOverlayOpen, currencies } = this.props;
+    const { cart, isOverlayOpen, currencies, categories } = this.props;
     const category = this.props?.data?.category;
     const { loading } = this.props.data;
 
     return(
       <header>
         <Container>
-            {!loading && category.name && this.createCategories()}
+            { !loading && category.name && !categories && this.createCategories() }
             <Navigation />
             <BrandIcon src={brandIcon}></BrandIcon>
             <NavOptions>
@@ -126,9 +119,10 @@ class HeaderComponent extends React.Component {
   };
 }
 
-const mapStateToProps = ({ cart, isOverlayOpen }) => ({
+const mapStateToProps = ({ cart, isOverlayOpen, category }) => ({
   cart: cart.cart,
   isOverlayOpen: isOverlayOpen.isOverlayOpen,
+  categories: category.categories,
 });
 
 const mapDispatchToProps = (dispatch) => ({
