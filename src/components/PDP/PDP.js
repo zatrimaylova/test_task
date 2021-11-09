@@ -8,6 +8,8 @@ import AddingToCartForm from '../AddingToCartForm/AddingToCartForm';
 import Loader from '../Loader/Loader.js';
 import CartManaging from '../CartManaging/CartManaging.js';
 
+import { Container } from './styles';
+
 const getProductQuery = gql`
   query {
     category {
@@ -37,7 +39,7 @@ class PDPEl extends React.Component {
     const { loading } = this.props?.data;
 
     return(
-      <>
+      <Container>
         { !loading && <CartManaging /> }
         <div> 
           { loading && <Loader /> }
@@ -53,7 +55,7 @@ class PDPEl extends React.Component {
             })
           }
         </div>
-      </>
+      </Container>
     )
   }
 }
