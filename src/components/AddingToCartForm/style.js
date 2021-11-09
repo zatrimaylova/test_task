@@ -69,6 +69,7 @@ export const ListEl = styled.li`
   letter-spacing: 0.05em;
   background-color: ${props => props.isActive ? 'black' : props.color}; 
   color: ${props => props.isActive || props.color === '#000000' ? 'white' : 'black'};
+  opacity: ${props => props.isActive ? 1 : 0.8};
   margin-bottom: 10px;
 
   :hover {

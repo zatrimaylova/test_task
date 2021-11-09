@@ -7,27 +7,12 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   padding-top: 30px;
-`;
-
-export const Navigation = styled.ul`
-  width: 202px;
-  height: 100%;
-  list-style: none;
-  display: flex;
-`;
-
-export const NavItem = styled.li`
-  height: 100%;
-  font-size: 16px;
-  padding: 0 16px 30px;
-  text-align: center;
-  vertical-align: center;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-
-  :hover {
-    border-bottom: 2px solid #5ECE7B;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  opacity: 1;
+  background-color: white;
 `;
 
 export const BrandIcon = styled.img`
@@ -95,7 +80,7 @@ export const CurrenciesList = styled.ul`
   position: absolute;
   top: 30px;
   font-size: 18px;
-  z-index: 3000;
+  z-index: 2999;
   background-color: white;
 
   li {

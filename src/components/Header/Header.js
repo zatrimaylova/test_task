@@ -1,25 +1,58 @@
 import React from 'react';
-import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+
+import Navigation from '../Navigation/Navigation.js';
 
 import brandIcon from '../../img/Header/brand_icon.png';
 import cartIcon from '../../img/Header/cart_icon.png';
 import currencyIcon from '../../img/Header/currency_icon.png';
 
-import { Container, Navigation, NavItem, BrandIcon, NavOptions, Currencies, CurrencyImg, CurrenciesList, Cart, CartCount } from './styles';
+import { Container, BrandIcon, NavOptions, Currencies, CurrencyImg, CurrenciesList, Cart, CartCount } from './styles';
 
 import { ACTION_CHANGE_CURRENCY } from '../../ducks/currency';
-import { ACTION_CHANGE_CATEGORY } from '../../ducks/category';
+import { ACTION_CHANGE_CATEGORY, ACTION_CREATE_CATEGORY_LIST } from '../../ducks/category';
 import { ACTION_CHANGE_OVERLAY_STATE } from '../../ducks/overlay';
 
 import CartOverlay from '../CartOverlay/CartOverlay.js';
 
-class HeaderEl extends React.Component {
+const getProductQuery = gql`
+  query {
+    category {
+      name,
+      products {
+        category,
+      }
+    }
+  }
+`;
+
+class HeaderComponent extends React.Component {
   state = {
     isCurrencyClicked: false,
     currentCurrency: null,
-    //isOverlayOpen: false,
   };
+
+  componentDidMount() {
+    const { currencies, changeCurrency } = this.props;
+
+    changeCurrency(currencies[0]);
+  };
+
+  createCategories = () => {
+    const { createCategoryList, changeCategory } = this.props;
+    const category = this.props?.data?.category;
+    const categoriesArr = [];
+
+    categoriesArr.push(category.name);
+    category?.products.map((item) => {
+      if (categoriesArr.indexOf(item.category) === -1) categoriesArr.push(item.category);
+    });
+
+    createCategoryList(categoriesArr);
+    changeCategory(categoriesArr[0]);
+  }
 
   showCurrencyClick = () => {
     const { isCurrencyClicked } = this.state;
@@ -47,22 +80,6 @@ class HeaderEl extends React.Component {
     changeCurrency(e.target.id);
   };
 
-  handleCategoryClick = (e) => {
-    const { history, changeCategory } = this.props;
-    const targetName = e.target.tagName.toLowerCase();
-    if (targetName !== 'li') {
-      return;
-    }
-    const newCategory = e.target.id;
-    if (newCategory === 'all') {
-      history.push(`/`);
-      changeCategory(null);
-    } else {
-      history.push(`/${newCategory}`);
-      changeCategory(newCategory);
-    }
-  }
-
   handleCartClick = () => {
     const { isOverlayOpen, changeOverlayState } = this.props;
 
@@ -75,29 +92,20 @@ class HeaderEl extends React.Component {
     }));
   };
 
-  componentDidMount() {
-    const { currencies, changeCurrency } = this.props;
-    changeCurrency(currencies[0]);
-  };
-
   render() {
     const { isCurrencyClicked, currentCurrency } = this.state;
-    const { showCurrencyClick, chooseCurrencyClick } = this;
     const { cart, isOverlayOpen, currencies } = this.props;
+    const category = this.props?.data?.category;
+    const { loading } = this.props.data;
 
     return(
       <header>
         <Container>
-          <nav>    
-            <Navigation onClick={this.handleCategoryClick} >
-              <NavItem id="all">All</NavItem>
-              <NavItem id="tech">Tech</NavItem>
-              <NavItem id="clothes">Clothes</NavItem>
-            </Navigation>
-          </nav>
+            {!loading && category.name && this.createCategories()}
+            <Navigation />
             <BrandIcon src={brandIcon}></BrandIcon>
             <NavOptions>
-            <Currencies onClick={showCurrencyClick} >
+            <Currencies onClick={this.showCurrencyClick} >
               <span>{this.props.currencies && (currentCurrency ?  currentCurrency : this.props.currencies[0])}</span>
               <CurrencyImg src={currencyIcon} alt="^" condition={isCurrencyClicked}/>
             </Currencies>
@@ -118,10 +126,7 @@ class HeaderEl extends React.Component {
   };
 }
 
-const mapStateToProps = ({ currency, cart, 
-  isOverlayOpen 
-}) => ({
-  currency: currency.currency,
+const mapStateToProps = ({ cart, isOverlayOpen }) => ({
   cart: cart.cart,
   isOverlayOpen: isOverlayOpen.isOverlayOpen,
 });
@@ -130,6 +135,9 @@ const mapDispatchToProps = (dispatch) => ({
   changeCurrency: (value) => dispatch(ACTION_CHANGE_CURRENCY(value)),
   changeCategory: (value) => dispatch(ACTION_CHANGE_CATEGORY(value)),
   changeOverlayState: (value) => dispatch(ACTION_CHANGE_OVERLAY_STATE(value)),
+  createCategoryList: (value) => dispatch(ACTION_CREATE_CATEGORY_LIST(value)),
 });
 
-export const Header = withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderEl));
+const HeaderEl = graphql(getProductQuery)(HeaderComponent);
+
+export const Header = connect(mapStateToProps, mapDispatchToProps)(HeaderEl);

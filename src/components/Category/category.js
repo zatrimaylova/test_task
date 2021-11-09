@@ -46,6 +46,7 @@ class CategoryComponent extends React.Component {
     const name = this.props?.data?.category?.name;
     const { loading } = this.props?.data;
     const { adding, removing, amount } = this.props;
+    console.log(category.category)
     
     return (
       <Container>
@@ -54,13 +55,13 @@ class CategoryComponent extends React.Component {
         { !loading && category.category && <Title>{category.category[0].toUpperCase() + category.category.slice(1).toLowerCase()}</Title> }
         { !loading && <CartManaging /> }
         <ProductList>
-          { products && !category.category && products.map((item) => {
+          { products && category.category === 'all' && products.map((item) => {
             const renderItem = item.inStock 
               ? <Minicart data={item} prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} /> 
                 : <OutOfStockCart prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} />
             return renderItem;
           })}
-          { products && category.category && products.map((item) => {
+          { products && category.category !== 'all' && products.map((item) => {
             if (item.category !== category.category) return;
             const renderItem = item.inStock 
               ? <Minicart data={item} prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} /> 
