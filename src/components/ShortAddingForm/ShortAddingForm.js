@@ -95,7 +95,7 @@ class ShortAddingForm extends React.Component {
       addToCart(toCart);
     };
 
-    if (toCart.attributes.length === 0) {
+    if (toCart.attributes.length === 0 || toCart.attributes.length < currentProduct.attributes.length) {
       this.setState(prevState => ({
         ...prevState,
         isUnvalid: true,
