@@ -111,6 +111,10 @@ export const Counter = styled.div`
   }
 `;
 
+export const DecreaseImg = styled.img`
+  opacity: ${props => props.visibility > 1 ? 1 : 0.33};
+`;
+
 export const CountSpan = styled.span`
   height: 100%;
   text-align: center;

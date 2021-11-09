@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Container, HeaderForm, Button, VarietyList, ListEl, ValidationTitle, OneSize, ProductName, OptionTitle, PriceContainer, CloseImg, Counter, CountSpan } from './styles.js';
+import { Container, HeaderForm, Button, VarietyList, ListEl, ValidationTitle, OneSize, ProductName, OptionTitle, PriceContainer, CloseImg, Counter, DecreaseImg, CountSpan } from './styles.js';
 import { ACTION_ADD_PRODUCT } from '../../ducks/cart';
 import { ACTION_USE_ADDING } from '../../ducks/adding';
 
@@ -226,7 +226,7 @@ class ShortAddingForm extends React.Component {
 
   render() {
     const { currency, adding } = this.props;
-    const { isUnvalid } = this.state;
+    const { isUnvalid, toCart } = this.state;
     const productToAdd = adding.product;
 
     return(
@@ -236,11 +236,11 @@ class ShortAddingForm extends React.Component {
             <ProductName>{productToAdd && productToAdd.name}</ProductName>
             <Counter onClick={this.changeCount}>
               <div>
-                <img src={plus_image} alt="+" id="increase" />
+                <DecreaseImg src={minus_image} alt="-" id="decrease" />
               </div>
               <CountSpan>{this.state.toCart.count}</CountSpan>
               <div>
-                <img src={minus_image} alt="-" id="decrease" />
+                <img visibility={toCart.count} src={plus_image} alt="+" id="increase" />
               </div>
             </Counter>
           </HeaderForm>
