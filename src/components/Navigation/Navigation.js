@@ -9,12 +9,11 @@ import { ACTION_CHANGE_CATEGORY } from '../../ducks/category';
 class Navigation extends React.Component { 
   handleCategoryClick = (e) => {
     const { history, changeCategory } = this.props;
-    console.log(e.tagName)
     const targetName = e.target.tagName.toLowerCase();
-    if (targetName !== 'li') {
-      return;
-    }
     const newCategory = e.target.id;
+    
+    if (targetName !== 'li') return;
+    
     if (newCategory === 'all') {
       history.push(`/`);
       changeCategory('all');
@@ -23,6 +22,7 @@ class Navigation extends React.Component {
       changeCategory(newCategory);
     }
   }
+
   render() {
     const { categories, category } = this.props;
 
