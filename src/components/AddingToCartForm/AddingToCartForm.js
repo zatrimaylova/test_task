@@ -29,7 +29,7 @@ class AddingToCartForm extends React.Component {
     const { product } = this.props;
 
     if (!loading) {
-      products.map((item) => {
+      products.forEach((item) => {
         if (String(item.name).toUpperCase() === String(product).toUpperCase()) {
           this.setState(prevState => ({
             ...prevState,
@@ -41,7 +41,7 @@ class AddingToCartForm extends React.Component {
             }
           }));
           
-          item.attributes.map((i) => {
+          item.attributes.forEach((i) => {
             if (i.type === 'swatch') {
               this.setState(prevState => ({
                 ...prevState,
@@ -84,7 +84,7 @@ class AddingToCartForm extends React.Component {
 
   getCartElementId = () => {
     //creates and returns a unique ID
-    const date = new Date;
+    const date = new Date();
     return date.getTime();
   };
 
@@ -203,14 +203,14 @@ class AddingToCartForm extends React.Component {
                     if (item.type === 'swatch') {
                       return (
                         <ListEl id={i.id} value={i.value} key={i.id} color={i.value}
-                        isActive={attributes.filter((item) => item.option !== i.id && item.value == i.id).length === 0 ? false : true} >
+                        isActive={attributes.filter((item) => item.option !== i.id && item.value === i.id).length === 0 ? false : true} >
                           {i.displayValue}
                         </ListEl>
                       )
                     } else {
                       return (
                       <ListEl id={i.id} value={i.value} key={i.id} 
-                        isActive={attributes.filter((el) => item.id == el.option && el.value == i.id).length === 0 ? false : true} >
+                        isActive={attributes.filter((el) => item.id === el.option && el.value === i.id).length === 0 ? false : true} >
                         {i.displayValue}
                       </ListEl>
                       )
@@ -248,10 +248,8 @@ class AddingToCartForm extends React.Component {
         <div> {attributes && this.createAttributes(attributes)} </div>
         <PriceContainer>
           <h3>PRICE:</h3>
-          {currentProduct && currentProduct.prices.map((item, index) => {
-            if (String(item.currency).toUpperCase() === String(currency).toUpperCase()) {
-              return <h2 key={index}>{item.amount} {currency}</h2>
-            }
+          {currentProduct && currentProduct.prices.for((item, index) => {
+            if (String(item.currency).toUpperCase() === String(currency).toUpperCase()) return <h2 key={index}>{item.amount} {currency}</h2>
           })}
         </PriceContainer>
         <Button onClick={this.handleAddToCartClick}>ADD TO CART</Button>
