@@ -18,7 +18,8 @@ export const NavItem = styled.li`
   text-align: center;
   vertical-align: center;
   cursor: pointer;
-  border-bottom: 2px solid transparent;
+  border-bottom: 2px solid ${props => props.color === 'green' ? '#5ECE7B' : 'transparent'};
+  color: ${props => props.color};
 
   &:hover {
     border-bottom: 2px solid #5ECE7B;

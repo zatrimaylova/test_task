@@ -24,13 +24,17 @@ class Navigation extends React.Component {
     }
   }
   render() {
-    const { categories } = this.props;
+    const { categories, category } = this.props;
 
     return (
       <Nav>
         <NavList onClick={this.handleCategoryClick}>
           {categories && categories.map((item) => {
-            return <NavItem key={item} id={item}>{item[0].toUpperCase() + item.slice(1)}</NavItem>
+            return (
+              <NavItem key={item} color={category && category === item ? 'green' : 'black' } id={item}>
+                {item[0].toUpperCase() + item.slice(1)}
+              </NavItem>
+              )
           })}
         </NavList>
       </Nav>
@@ -40,6 +44,7 @@ class Navigation extends React.Component {
 
 const mapStateToProps = ({ category }) => ({
   categories: category.categories,
+  category: category.category,
 });
 
 const mapDispatchToProps = (dispatch) => ({
