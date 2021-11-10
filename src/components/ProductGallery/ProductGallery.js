@@ -36,23 +36,23 @@ class ProductGallery extends React.Component {
     return(
       <Container>
         <ViewContainer>
-          <PreviewContainer>
+          <div>
             {
               data.map((item, index) => {
                 if (data.length === 1) {
                   return (
-                    <>
+                    <PreviewContainer>
                       <Preview key={0} id={index} url={item} onClick={this.handleGalleryClick}/>
                       <Preview key={1} id={index} url={item} onClick={this.handleGalleryClick}/>
                       <Preview key={2} id={index} url={item} onClick={this.handleGalleryClick}/>
-                    </>
+                    </PreviewContainer>
                   )
                 } else {
                   return <Preview key={index} id={index} url={item} onClick={this.handleGalleryClick}/>;
                 }
               })
-            }
-          </PreviewContainer>
+            } 
+          </div>
           <View url={data[activeImg]} />
         </ViewContainer>
         <div>

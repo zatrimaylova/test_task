@@ -19,6 +19,7 @@ export const PreviewContainer = styled.ul`
 `;
 
 export const Preview = styled.li`
+  list-style: none;
   height: 80px;
   width: 80px;
   background: url(${props => props.url});
