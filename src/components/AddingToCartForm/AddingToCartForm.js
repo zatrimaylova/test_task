@@ -248,7 +248,7 @@ class AddingToCartForm extends React.Component {
         <div> {attributes && this.createAttributes(attributes)} </div>
         <PriceContainer>
           <h3>PRICE:</h3>
-          {currentProduct && currentProduct.prices.for((item, index) => {
+          {currentProduct && currentProduct.prices.forEach((item, index) => {
             if (String(item.currency).toUpperCase() === String(currency).toUpperCase()) return <h2 key={index}>{item.amount} {currency}</h2>
           })}
         </PriceContainer>

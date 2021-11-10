@@ -46,7 +46,7 @@ class HeaderComponent extends React.Component {
     const categoriesArr = [];
 
     categoriesArr.push(category?.name);
-    category?.products.map((item) => {
+    category?.products.forEach((item) => {
       if (categoriesArr.indexOf(item.category) === -1) categoriesArr.push(item.category);
     });
 

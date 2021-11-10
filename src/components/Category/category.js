@@ -60,7 +60,7 @@ class CategoryComponent extends React.Component {
                 : <OutOfStockCart prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} />
             return renderItem;
           })}
-          { products && category.category !== 'all' && products.forEach((item) => {
+          { products && category.category !== 'all' && products.map((item) => {
             if (item.category !== category.category) return;
             const renderItem = item.inStock 
               ? <Minicart data={item} prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} /> 
