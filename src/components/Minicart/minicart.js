@@ -19,12 +19,12 @@ class MinicartEl extends React.Component {
   };
 
   listenAddClick = () => {
-    const { showAdding, name, data } = this.props;
+    const { showAdding, data } = this.props;
     showAdding({ isOpen: true, product: data})
   }
 
   listenRemoveClick = () => {
-    const { showRemoving, name, data } = this.props;
+    const { showRemoving, name } = this.props;
     showRemoving({ isOpen: true, product: name});
   }
 
@@ -47,23 +47,22 @@ class MinicartEl extends React.Component {
             <div>
               <p>{
                 prices.map((item) => {
+                  let strAmount = '';
                   if (String(item.currency).toUpperCase() === String(currency).toUpperCase()) {
-                    return `${item.amount} ${currency}`
+                    strAmount = `${item.amount} ${currency}`;
                   }
+                  return strAmount;
                 })
               }</p>
               { attributes.length > 0 && attributes.map((i) => {
                 if (i.type === 'swatch') {
-                  console.log(i)
                   return (
                     <SwatchList key={i.type}> 
-                      {i.items.map((item, index) => {
-                        console.log(item.value)
-                        return (<SwatchEl color={item.value} key={index}></SwatchEl>)})} 
+                      {i.items.map((item, index) => <SwatchEl color={item.value} key={index}></SwatchEl>)} 
                     </SwatchList>
                   )
                 }
-              }) }
+              })}
             </div>
             <ChangeCart>
               <div id={name} >

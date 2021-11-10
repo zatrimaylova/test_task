@@ -16,9 +16,11 @@ class OutOfStockEl extends React.Component {
           <p>{name}</p>
           <p>{
               prices.map((item) => {
+                let currencyStr = '';
                 if (String(item.currency).toUpperCase() === String(currency).toUpperCase()) {
-                  return `${item.amount} ${currency}`
+                  currencyStr = `${item.amount} ${currency}`;
                 }
+                return currencyStr;
               })
           }</p>
         </TextInfo>
