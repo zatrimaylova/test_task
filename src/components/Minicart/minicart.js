@@ -55,13 +55,11 @@ class MinicartEl extends React.Component {
                 })
               }</p>
               { attributes.length > 0 && attributes.map((i) => {
+                let SwatchUl;
                 if (i.type === 'swatch') {
-                  return (
-                    <SwatchList key={i.type}> 
-                      {i.items.map((item, index) => <SwatchEl color={item.value} key={index}></SwatchEl>)} 
-                    </SwatchList>
-                  )
+                SwatchUl = <SwatchList key={i.type}> {i.items.map((item, index) => <SwatchEl color={item.value} key={index}></SwatchEl>)} </SwatchList>
                 }
+                return SwatchUl;
               })}
             </div>
             <ChangeCart>

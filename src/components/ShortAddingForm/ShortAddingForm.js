@@ -37,7 +37,7 @@ class ShortAddingForm extends React.Component {
         }
     }));
           
-    productToAdd.attributes.map((i) => {
+    productToAdd.attributes.forEach((i) => {
       if (i.type === 'swatch') {
         this.setState(prevState => ({
           ...prevState,
@@ -54,7 +54,6 @@ class ShortAddingForm extends React.Component {
 
     const { toCart } = this.state;
     const attributes = this.props.adding.product.attributes;
-    const targetEl = e.target;
     const selectedValue = e.target.id;
     const selectedOption = e.target.closest('ul').id;
     let optionsData = toCart.attributes ? toCart.attributes.slice() : [];
@@ -83,7 +82,7 @@ class ShortAddingForm extends React.Component {
   };
 
   getCartElementId = () => {
-    const date = new Date;
+    const date = new Date();
     return date.getTime();
   };
 
@@ -202,14 +201,14 @@ class ShortAddingForm extends React.Component {
                 if (item.type === 'swatch') {
                   return (
                     <ListEl id={i.id} value={i.value} key={i.id} color={i.value}
-                      isActive={this.state.toCart.attributes.filter((item) => item.option !== i.id && item.value == i.id).length === 0 ? false : true}>
+                      isActive={this.state.toCart.attributes.filter((item) => item.option !== i.id && item.value === i.id).length === 0 ? false : true}>
                       {i.displayValue}
                     </ListEl>
                   )
                 } else {
                   return (
                     <ListEl id={i.id} value={i.value} key={i.id} 
-                      isActive={this.state.toCart.attributes.filter((el) => item.id == el.option && el.value == i.id).length === 0 ? false : true}>
+                      isActive={this.state.toCart.attributes.filter((el) => item.id === el.option && el.value === i.id).length === 0 ? false : true}>
                       {i.displayValue}
                     </ListEl>
                   )
@@ -252,9 +251,11 @@ class ShortAddingForm extends React.Component {
           <PriceContainer>
             <h3>PRICE:</h3>
             {productToAdd && productToAdd.prices.map((item, index) => {
+              let countTitle;
               if (String(item.currency).toUpperCase() === String(currency).toUpperCase()) {
-                return <h2 key={index}>{item.amount} {currency}</h2>
+                countTitle = <h2 key={index}>{item.amount} {currency}</h2>;
               }
+              return countTitle;
             })}
           </PriceContainer>
           <Button onClick={this.handleAddToCartClick} >ADD TO CART</Button>

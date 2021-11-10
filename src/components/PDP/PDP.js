@@ -48,13 +48,14 @@ class PDPEl extends React.Component {
         <div> 
           { products && 
             products.map((item, index) => {
+              let galleryEl;
               if (String(item.name).toUpperCase() === String(product).toUpperCase()) {
-                return (
+                galleryEl = 
                   <ProductGallery key={index} data={item.gallery} name={item.name} description={item.description}>
                     <AddingToCartForm {...this.props} />
                   </ProductGallery>
-                )
               }
+              return galleryEl;
             })
           }
         </div>
