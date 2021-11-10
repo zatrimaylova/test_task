@@ -50,7 +50,7 @@ class CartListComponent extends React.Component {
         }));
         return;
       }
-      cart.map((item) => {
+      cart.forEach((item) => {
         if (item.name === removing.product) itemsToRender.push(item);
       });
     } else if (amount.isOpen) {
@@ -61,7 +61,7 @@ class CartListComponent extends React.Component {
         }));
         return;
       }
-      cart.map((item) => {
+      cart.forEach((item) => {
         if (item.name === amount.product) itemsToRender.push(item);
       });
     }
@@ -82,7 +82,7 @@ class CartListComponent extends React.Component {
     if (currentTargetEl !== 'img') return;
 
     const productCartId = e.target.closest('li').id;
-    const editingProduct = cart.filter(item => item.cartItemId == Number(productCartId));
+    const editingProduct = cart.filter(item => Number(item.cartItemId) === Number(productCartId));
 
     if (e.target.id === 'increase') {
       editingProduct[0].count += 1;
@@ -177,7 +177,7 @@ class CartListComponent extends React.Component {
                           <h3>{item.name}</h3>
                         </CartTitleCont>  
                         <span>{
-                          item.productData.prices.map((i) => {
+                          item.productData.prices.forEach((i) => {
                             if (String(i.currency).toUpperCase() === String(currency).toUpperCase()) {
                               return `${i.amount} ${currency}`
                             }
