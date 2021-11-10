@@ -36,7 +36,7 @@ class CartOverlay extends React.Component {
           <div>
             <p>{product.name}</p>
             <p>{
-              product.productData.prices.map((i) => {
+              product.productData.prices.forEach((i) => {
                 if (String(i.currency).toUpperCase() === String(currency).toUpperCase()) {
                   return `${i.amount} ${currency}`
                 }
@@ -74,7 +74,7 @@ class CartOverlay extends React.Component {
     const { cart, currency } = this.props;
     if (cart.length === 0) return `0.00 ${currency}`;
     let totalPrice = 0;
-    cart.map((el) => { 
+    cart.forEach((el) => { 
       el.productData.prices.forEach((element) => {
         if (element.currency === currency) totalPrice += element.amount * el.count;   
       })
