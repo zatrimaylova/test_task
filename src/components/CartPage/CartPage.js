@@ -84,10 +84,8 @@ class CartPage extends React.Component {
 
     if (currentTargetName !== 'img') return;
 
-    const imgData = cart.map((item) => {
-      if (Number(item.cartItemId) === Number(productId)) {
-        return item.productData.gallery;
-      };
+    const imgData = cart.forEach((item) => {
+      if (Number(item.cartItemId) === Number(productId)) return item.productData.gallery;
     }).filter((item) => item)[0];
 
     if (clickedImg.id === 'right') {
@@ -97,7 +95,7 @@ class CartPage extends React.Component {
     } else if (clickedImg.id === 'left') {
       const imgInd = Number(backgroundImg.id) === 0 ? imgData.length - 1 : Number(backgroundImg.id) - 1;
       backgroundImg.id = imgInd;
-      backgroundImg.style.backgroundImage = `url(${imgData.filter((item, index) => item && Number(index) == imgInd)[0]})`;
+      backgroundImg.style.backgroundImage = `url(${imgData.filter((item, index) => item && Number(index) === Number(imgInd))[0]})`;
     }
   }
 
@@ -144,7 +142,7 @@ class CartPage extends React.Component {
                       </ButtonsHolder>
                     </CartTitleCont>  
                     <span>{
-                      item.productData.prices.map((i) => {
+                      item.productData.prices.forEach((i) => {
                         if (String(i.currency).toUpperCase() === String(currency).toUpperCase()) {
                           return `${i.amount} ${currency}`
                         }
