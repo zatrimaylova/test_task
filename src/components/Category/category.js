@@ -46,7 +46,6 @@ class CategoryComponent extends React.Component {
     const name = this.props?.data?.category?.name;
     const { loading } = this.props?.data;
     const { adding, removing, amount } = this.props;
-    console.log(category.category)
     
     return (
       <Container>

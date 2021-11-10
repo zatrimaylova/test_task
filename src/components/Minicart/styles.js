@@ -2,11 +2,10 @@ import styled from 'styled-components';
 
 export const Product = styled.div`
   flex-basis: 30%;
-  height: 460px;
+  min-height: 460px;
   padding: 16px;
   background-color: #FFFFFF;
   margin-bottom: 100px;
-  //cursor: pointer;
   position: relative;
   overflow-x: hidden;
   padding: 16px;
@@ -48,8 +47,21 @@ export const Icon = styled.img`
 export const TextDetails = styled.div`
   display: flex;
   justify-content: space-between;
-  
-  
+`;
+
+export const SwatchList = styled.ul`
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+`;
+
+export const SwatchEl = styled.li`
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: ${props => props.color};
+  border: 1px solid ${props => props.color.toUpperCase() === '#FFFFFF' ? 'black' : 'transparent'};
 `;
 
 export const ChangeCart = styled.div`

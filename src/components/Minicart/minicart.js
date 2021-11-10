@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from "react-router";
 
 import icon from '../../img/Minicart/icon.png';
-import { Product, ProductImage, Text, Icon, TextDetails, AddSpan, RemoveSpan, AmountSpan, ChangeCart } from './styles';
+import { Product, ProductImage, Text, Icon, TextDetails, AddSpan, RemoveSpan, AmountSpan, SwatchList, SwatchEl, ChangeCart } from './styles';
 
 import { connect } from 'react-redux';
 import { ACTION_CHANGE_PRODUCT } from '../../ducks/product';
@@ -35,6 +35,8 @@ class MinicartEl extends React.Component {
 
   render() {
     const { name, link, prices, currency } = this.props; 
+    const { attributes } = this.props.data;
+
     return (
       <Product onClick={this.handleCartClick}>
         <ProductImage url={link} />
@@ -42,14 +44,27 @@ class MinicartEl extends React.Component {
         <Text>
           <p>{name}</p>
           <TextDetails>
-            <p>{
-              prices.map((item) => {
-                if (String(item.currency).toUpperCase() === String(currency).toUpperCase()) {
-                  return `${item.amount} ${currency}`
+            <div>
+              <p>{
+                prices.map((item) => {
+                  if (String(item.currency).toUpperCase() === String(currency).toUpperCase()) {
+                    return `${item.amount} ${currency}`
+                  }
+                })
+              }</p>
+              { attributes.length > 0 && attributes.map((i) => {
+                if (i.type === 'swatch') {
+                  console.log(i)
+                  return (
+                    <SwatchList key={i.type}> 
+                      {i.items.map((item, index) => {
+                        console.log(item.value)
+                        return (<SwatchEl color={item.value} key={index}></SwatchEl>)})} 
+                    </SwatchList>
+                  )
                 }
-              })
-              
-            }</p>
+              }) }
+            </div>
             <ChangeCart>
               <div id={name} >
                 <AddSpan id="add" onClick={this.listenAddClick}>Add</AddSpan>
