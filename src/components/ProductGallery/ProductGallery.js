@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Container, ViewContainer, ImageSlider, PreviewContainer, Preview, View, TextContainer } from './style';
 
+import AddingToCartForm from '../AddingToCartForm/AddingToCartForm.js';
+
 class ProductGallery extends React.Component {
   state = {
     activeImg: 0,
@@ -13,9 +15,9 @@ class ProductGallery extends React.Component {
   };
 
   getImageFetch = () => {
-    const { data } = this.props;
+    const { gallery } = this.props;
 
-    data.map((item) => {
+    gallery.map((item) => {
       try {
         fetch(item)
         .then((data) => {
@@ -38,8 +40,8 @@ class ProductGallery extends React.Component {
       activeImg: e.target.id,
     }));
 
-    const { data } = this.props;
-    const maxTop = data.length - 3 * -112 + 'px';
+    const { gallery } = this.props;
+    const maxTop = gallery.length - 3 * -112 + 'px';
     const sliderEl = e.target.closest('ul');
     const coordToSlide = `-${e.target.closest('li').id * 112}px`;
 
@@ -66,17 +68,17 @@ class ProductGallery extends React.Component {
 
   render() {
     const { description } = this.props;
-    const { activeImg } = this.state;
+    const { activeImg, imgArr } = this.state;
 
     return(
       <Container>
         <ViewContainer>
           <ImageSlider>
             <PreviewContainer  onClick={this.handleGalleryClick}>
-              { this.state.imgArr.length > 1 && this.state.imgArr.map((item, index) =>{
+              { imgArr.length > 1 && imgArr.map((item, index) =>{
                 return <Preview key={index} id={index} url={item} />
               })}
-              { this.state.imgArr.length === 1 && this.state.imgArr.map((item, index) => {
+              { imgArr.length === 1 && imgArr.map((item, index) => {
                 return (
                   <>
                     <Preview key={0} id={index} url={item} />
@@ -87,10 +89,11 @@ class ProductGallery extends React.Component {
               })}
             </PreviewContainer>
           </ImageSlider>
-          <View url={this.state.imgArr[activeImg]} />
+          <View url={imgArr[activeImg]} />
         </ViewContainer>
         <div>
-          {this.props.children}
+          <AddingToCartForm toRender={imgArr} {...this.props} />
+          { this.props.children }
           <TextContainer>
             {this.getDescription(description)}
           </TextContainer>

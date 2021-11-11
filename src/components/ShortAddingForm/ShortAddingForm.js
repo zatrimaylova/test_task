@@ -18,6 +18,7 @@ class ShortAddingForm extends React.Component {
       count: 1,
       cartItemId: null,
       productData: null,
+      toRender: [],
     },
     isSwatch: false,
     isUnvalid: false,
@@ -45,7 +46,30 @@ class ShortAddingForm extends React.Component {
         }));
       };
     })
+    this.getImageFetch();
   };
+
+  getImageFetch = () => {
+    const { gallery } = this.props.adding.product;
+    gallery.map((item) => {
+      try {
+        fetch(item)
+        .then((data) => {
+          if (data.ok) {
+            this.setState(prevState => ({
+              ...prevState,
+              toCart: {
+                ...prevState.toCart,
+                toRender: [...prevState.toCart.toRender, item],
+              },  
+            }));
+          }
+        })
+      } catch (error) {
+        console.log("Error Reading data " + error);
+      }
+    })  
+  }
 
   handleAttributeClick = (e) => {
     if (e.target.tagName.toLowerCase() !== 'li') {

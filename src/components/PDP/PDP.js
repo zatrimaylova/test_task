@@ -51,8 +51,10 @@ class PDPEl extends React.Component {
               let galleryEl;
               if (String(item.name).toUpperCase() === String(product).toUpperCase()) {
                 galleryEl = 
-                  <ProductGallery key={index} data={item.gallery} name={item.name} description={item.description}>
-                    <AddingToCartForm {...this.props} />
+                  <ProductGallery key={index} 
+                  //data={item.gallery} name={item.name} description={item.description} 
+                  {...item } products={products}>
+                    {/* <AddingToCartForm {...this.props} /> */}
                   </ProductGallery>
               }
               return galleryEl;

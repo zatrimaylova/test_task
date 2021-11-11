@@ -16,6 +16,7 @@ class AddingToCartForm extends React.Component {
       count: 1,
       cartItemId: null,
       productData: null,
+      toRender: null,
     },
     isSwatch: false,
     isUnvalid: false,
@@ -24,34 +25,33 @@ class AddingToCartForm extends React.Component {
 
   componentDidMount() {
     /* adds default product options to state */
-    const products = this.props?.data?.category?.products;
     const loading = this.props?.data?.loading;
-    const { product } = this.props;
+    const { product, products } = this.props;
 
-    if (!loading) {
-      products.forEach((item) => {
-        if (String(item.name).toUpperCase() === String(product).toUpperCase()) {
-          this.setState(prevState => ({
-            ...prevState,
-            currentProduct: item,
-            toCart: {
-              ...prevState.toCart,
-              name: item.name,
-              productData: item,
-            }
-          }));
+    if (loading) return; 
+    products.forEach((item) => {
+      if (String(item.name).toUpperCase() === String(product).toUpperCase()) {
+        this.setState(prevState => ({
+          ...prevState,
+          currentProduct: item,
+          toCart: {
+            ...prevState.toCart,
+            name: item.name,
+            productData: item,
+            toRender: this.props.toRender,
+          }
+        }));
           
-          item.attributes.forEach((i) => {
-            if (i.type === 'swatch') {
-              this.setState(prevState => ({
-                ...prevState,
-                isSwatch: true,
-              }));
-            };
-          });
-        };
-      });
-    };
+        item.attributes.forEach((i) => {
+          if (i.type === 'swatch') {
+            this.setState(prevState => ({
+              ...prevState,
+              isSwatch: true,
+            }));
+          };
+        });  
+      };
+    });
   };
 
   handleAttributeClick = (e) => {
@@ -77,6 +77,7 @@ class AddingToCartForm extends React.Component {
         ...prevState.toCart,
         attributes: optionsData,
         cartItemId: this.getCartElementId(),
+        toRender: this.props.toRender,
       },
       clickedAttributes: [...prevState.clickedAttributes, selectedValue],
     }));
@@ -229,6 +230,7 @@ class AddingToCartForm extends React.Component {
     const { currency } = this.props;
     const { currentProduct, isUnvalid, toCart } = this.state;
     const attributes = currentProduct?.attributes;
+    console.log(this.props.products)
 
     return(
       <Container>
