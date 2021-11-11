@@ -40,16 +40,12 @@ class ProductGallery extends React.Component {
       activeImg: e.target.id,
     }));
 
-    const { gallery } = this.props;
-    const maxTop = gallery.length - 3 * -112 + 'px';
+    const { imgArr } = this.state;
+    const maxTop = `${(imgArr.length - 3) * -112}px`;
     const sliderEl = e.target.closest('ul');
-    const coordToSlide = `-${e.target.closest('li').id * 112}px`;
+    const coordToSlide = `${Number(e.target.closest('li').id) * -112}px`;
 
-    if (maxTop < coordToSlide) {
-      sliderEl.style.top = 0;
-    } else {
-      sliderEl.style.top = coordToSlide;
-    }
+    sliderEl.style.top = (maxTop < coordToSlide) ? 0 : coordToSlide;
   }
 
   createMarkup(data) {
