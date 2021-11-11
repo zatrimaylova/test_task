@@ -9,6 +9,7 @@ export const Container = styled.div`
 
 export const ViewContainer = styled.div`
   display: flex;
+  gap: 40px;
 `;
 
 export const ImageSlider = styled.div`
