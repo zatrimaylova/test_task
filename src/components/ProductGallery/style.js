@@ -11,11 +11,23 @@ export const ViewContainer = styled.div`
   display: flex;
 `;
 
+export const ImageSlider = styled.div`
+  width: 80px;
+  height: 336px;
+  overflow-y: hidden;
+  position: relative;
+`;
+
 export const PreviewContainer = styled.ul`
   display: flex;
   flex-direction: column;
   list-style: none;
   margin-right: 30px;
+  width: 80px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: top 0.5s ease-in-out;
 `;
 
 export const Preview = styled.li`
