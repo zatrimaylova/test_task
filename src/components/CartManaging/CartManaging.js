@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { ACTION_USE_REMOVING } from '../../ducks/removing';
 import { ACTION_USE_AMOUNT } from '../../ducks/amount';
 
-import { CartManagingCont, ContentHolder } from './styles';        
+import { CartManagingCont, ContentHolder, CartButton } from './styles';        
         
 class CartManaging extends React.Component {
   openOverlay = (e) => {
@@ -24,10 +24,10 @@ class CartManaging extends React.Component {
     return (
       <CartManagingCont >
         <ContentHolder visibility={cart.length}>
-          <h3>Change cart</h3>
+          <h3>Change the cart</h3>
           <div onClick={this.openOverlay}>
-            <button id="remove">Remove products</button>
-            <button id="amount">Change amount</button>
+            <CartButton  visibility={cart.length} id="remove">Remove products</CartButton>
+            <CartButton visibility={cart.length} id="amount">Change amount</CartButton>
           </div>
         </ContentHolder>
       </CartManagingCont>
