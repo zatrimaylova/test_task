@@ -76,7 +76,7 @@ class CartPage extends React.Component {
 
   changeGalleryImgClick = (e) => {
     //listens for click event and changes active gallery image
-    const { cart, toRender } = this.props;
+    const { cart } = this.props;
     const clickedImg = e.target;
     const productId = e.target.closest('li').getAttribute('data-tag');
     const currentTargetName = e.target.tagName.toLowerCase();
@@ -85,7 +85,6 @@ class CartPage extends React.Component {
     if (currentTargetName !== 'img') return;
 
     const imgData = cart.map((item) => {
-      console.log(item.cartItemId, productId)
       if (Number(item.cartItemId) === Number(productId)) return item.toRender;
     }).filter((item) => item)[0];
 
@@ -122,31 +121,32 @@ class CartPage extends React.Component {
   }
 
   render() {
-    const { cart, currency, warning, adding, toRender } = this.props;
+    const { cart, currency, warning, adding } = this.props;
     const { toDelete } = this.state;
-    
+
     return (
       <Container>
         <CartTitle>CART</CartTitle>
         <ul>
-          {cart.length === 0 && <h3>Cart is empty</h3>}
+          {cart.length === 0 && <h3>The cart is empty</h3>}
           {cart && cart.map((item, index) => {
             return (
               <CartEl key={item.name + index} id={item.name} data-tag={item.cartItemId}>
                 <LiContent>
                   <div>
                     <CartTitleCont>
-                      <h3>{item.name}</h3>
+                      <div>
+                        <h3>{item.name}</h3>
+                        <span></span>
+                      </div>
                       <ButtonsHolder id={item.cartItemId}>
                         <button onClick={this.deleteCartElement} >Remove</button>
                         <button onClick={this.addProduct}>Add product</button>
                       </ButtonsHolder>
                     </CartTitleCont>  
                     <span>{
-                      item.productData.prices.forEach((i) => {
-                        if (String(i.currency).toUpperCase() === String(currency).toUpperCase()) {
-                          return `${i.amount} ${currency}`
-                        }
+                      item.productData.prices.map((i) => {
+                        if (String(i.currency).toUpperCase() === String(currency).toUpperCase()) return `${i.amount} ${currency}`;
                       })
                     }</span>
                   </div>
@@ -170,10 +170,15 @@ class CartPage extends React.Component {
                       <DecreaseImg src={minus_square} alt="-" id="decrease" info={item.name} color={item.count}/>
                     </div>
                   </CountCont>
-                  <GalleryItem url={item.toRender[0]} id="0" onClick={this.changeGalleryImgClick} > 
-                    <ChevronLeft src={chevron_left} id="left"/>
-                    <ChevronRight src={chevron_right} id="right"/>
-                  </GalleryItem>
+                    <GalleryItem url={item.toRender[0]} id="0" onClick={this.changeGalleryImgClick} > 
+                      {
+                        item.toRender.length > 1 && 
+                        <>
+                          <ChevronLeft src={chevron_left} id="left"/>
+                          <ChevronRight src={chevron_right} id="right"/>
+                        </>
+                      }
+                    </GalleryItem>
                 </ChangingInfo>
               </CartEl>
             )

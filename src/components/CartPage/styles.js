@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  padding-top: 150px;
   max-width: 1240px;
   margin: 0 auto;
 `;
 
 export const CartTitle = styled.h1`
-  margin: 80px 0 60px;
+  margin-bottom: 60px;
 `;
 
 export const CartEl = styled.li`
