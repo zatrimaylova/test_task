@@ -230,7 +230,6 @@ class AddingToCartForm extends React.Component {
     const { currency } = this.props;
     const { currentProduct, isUnvalid, toCart } = this.state;
     const attributes = currentProduct?.attributes;
-    console.log(this.props.products)
 
     return(
       <Container>
