@@ -56,9 +56,17 @@ export const TextContainer = styled.div`
   width: 290px;
   margin-top: 40px;
 
-  p {
+  h1, h2, h3 {
+    font-style: normal;
+    font-weight: bold;
     font-size: 16px;
-    line-height: 25.59px;
-    text-align: left;
+    line-height: 159.96%;
+  }
+
+  p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 159.96%;
   }
 `;
