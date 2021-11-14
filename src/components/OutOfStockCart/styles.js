@@ -23,8 +23,27 @@ export const ProductImage = styled.div`
 
 export const Title = styled.h3`
   text-align: center;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 160%;
+  color: #8D8F9A;
 `;
 
 export const TextInfo = styled.div`
   padding-top: 26px;
+  font-size: 18px;
+  line-height: 160%;
+
+  h3 {
+    font-style: normal;
+    font-weight: 300;
+    color: #8D8F9A;
+  }
+
+  p {
+    font-style: normal;
+    font-weight: 500;
+    color: #8D8F9A;
+  }
 `;

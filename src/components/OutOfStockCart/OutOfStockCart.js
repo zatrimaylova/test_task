@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import { Product, ProductImage, Title, TextInfo } from './styles';
-import { connect } from 'react-redux';
+
 
 class OutOfStockEl extends React.Component { 
   render() {
@@ -13,7 +14,7 @@ class OutOfStockEl extends React.Component {
           <Title>OUT OF STOCK</Title>
         </ProductImage>
         <TextInfo>
-          <p>{name}</p>
+          <h3>{name}</h3>
           <p>{
               prices.map((item) => {
                 let currencyStr = '';
@@ -24,7 +25,6 @@ class OutOfStockEl extends React.Component {
               })
           }</p>
         </TextInfo>
-
       </Product>
     )
   }
