@@ -25,6 +25,7 @@ export const NavItem = styled.li`
   font-size: 16px;
   line-height: 120%;
   text-transform: uppercase;
+  transition: border 0.5s ease-in;
 
   &:hover {
     border-bottom: 2px solid #5ECE7B;

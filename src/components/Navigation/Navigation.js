@@ -8,9 +8,11 @@ import { ACTION_CHANGE_CATEGORY } from '../../ducks/category';
 
 class Navigation extends React.Component { 
   handleCategoryClick = (e) => {
-    const { history, changeCategory } = this.props;
+    const { history, changeCategory, isOverlayOpen } = this.props;
     const targetName = e.target.tagName.toLowerCase();
     const newCategory = e.target.id;
+
+    if (isOverlayOpen) return;
     
     if (targetName !== 'li') return;
     
@@ -42,9 +44,10 @@ class Navigation extends React.Component {
   }
 }
 
-const mapStateToProps = ({ category }) => ({
+const mapStateToProps = ({ category, isOverlayOpen }) => ({
   categories: category.categories,
   category: category.category,
+  isOverlayOpen: isOverlayOpen.isOverlayOpen,
 });
 
 const mapDispatchToProps = (dispatch) => ({

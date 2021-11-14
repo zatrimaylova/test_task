@@ -50,6 +50,7 @@ export const Cart = styled.div`
   height: 18px;
   position: relative;
   cursor: pointer;
+  color: white
 
   img {
     width: 20px;
@@ -92,13 +93,11 @@ export const CurrenciesList = styled.ul`
   font-weight: 500;
   font-size: 18px;
   line-height: 160%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 
   li {
-    margin-bottom: 20px;
     cursor: pointer;
-  }
-
-  li:last-child {
-    margin-bottom: 0;
   }
 `;

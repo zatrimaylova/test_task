@@ -22,6 +22,7 @@ import {
   DecreaseImg,
   GalleryItem,
   TotalPriceCont,
+  TextSpan,
   ButtonsContainer,
   ViewBagButton,
   CheckOutButton,
@@ -89,8 +90,8 @@ class CartOverlay extends React.Component {
     const { cart } = this.props;
     if (cart.length === 0) return `the cart is empty`;
     let itemsCount = 0;
-    cart.map((el) => itemsCount += el.count)
-    return `${cart.length} products, ${itemsCount} items`;
+    cart.map((el) => itemsCount += el.count);
+    return `${cart.length} product${cart.length > 1 ? 's' : ''}, ${itemsCount} item${cart.length > 1 ? 's' : ''}`;
   }
 
   handleCountClick = (e) => {
@@ -144,6 +145,7 @@ class CartOverlay extends React.Component {
           { cart.length === 1 && <OverlayListEl>{this.renderListItem(cart[0])}</OverlayListEl> }
           { cart.length >= 2 && <OverlayListEl>{this.renderListItem(cart[0])} {this.renderListItem(cart[1])}</OverlayListEl> }
           <TotalPriceCont>
+            <TextSpan>Total</TextSpan>
             <span> { this.totalPriceCount() }</span>
           </TotalPriceCont>
           <ButtonsContainer>

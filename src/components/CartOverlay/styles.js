@@ -73,17 +73,11 @@ export const ProductInfoCont = styled.div`
 
 export const OptionsList = styled.ul`
   list-style: none;
-  margin-top: 15px;
-  padding-left: 5px;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 160%;
   font-family: 'Source Sans Pro', sans-serif;
-
-  li {
-    margin-bottom: 5px;
-  }
 `;
 
 export const ChangingInfo = styled.div`
@@ -133,11 +127,17 @@ export const GalleryItem = styled.div`
 `;
 
 export const TotalPriceCont = styled.div`
+  display: flex;
+  justify-content: space-between;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
   line-height: 160%;
 `;
+
+export const TextSpan = styled.span`
+  line-height: 18px;
+`; 
 
 export const ButtonsContainer = styled.div`
   margin-top: 35px;

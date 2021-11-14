@@ -55,6 +55,10 @@ class HeaderComponent extends React.Component {
 
   showCurrencyClick = () => {
     const { isCurrencyClicked } = this.state;
+    const { isOverlayOpen } = this.props;
+    
+    if (isOverlayOpen) return;
+
     if (isCurrencyClicked) {
       this.setState(prevState => ({
         ...prevState,
@@ -70,6 +74,7 @@ class HeaderComponent extends React.Component {
 
   chooseCurrencyClick = (e) => {
     const { changeCurrency } = this.props;
+
     this.setState(prevState => ({
       ...prevState,
       isCurrencyClicked: false,
@@ -110,7 +115,7 @@ class HeaderComponent extends React.Component {
             </Currencies>
             <Cart onClick={this.handleCartClick}>
               <img src={cartIcon} alt="Cart" />
-              <CartCount cart={cart}><p>{cart.length}</p></CartCount>         
+              {cart.length > 0 && <CartCount cart={cart}><p>{cart.length >= 1 ? cart.length : ''}</p></CartCount>}
             </Cart>
             { isCurrencyClicked && <CurrenciesList onClick={this.chooseCurrencyClick}> 
               {currencies && currencies.map(item => {
