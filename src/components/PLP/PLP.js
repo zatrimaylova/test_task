@@ -39,7 +39,7 @@ const getListQuery = gql`
   }
 `;
 
-class CategoryComponent extends React.Component {
+class PLPEl extends React.Component {
   render() {
     const category = this.props;
     const products = this.props?.data?.category?.products;
@@ -92,6 +92,6 @@ const mapDispatchToProps = (dispatch) => ({
   showAdding: (value) => dispatch(ACTION_USE_ADDING(value)),
 });
 
-const Category = graphql(getListQuery)(CategoryComponent);
+const PLP = graphql(getListQuery)(PLPEl);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Category);
+export default connect(mapStateToProps, mapDispatchToProps)(PLP);

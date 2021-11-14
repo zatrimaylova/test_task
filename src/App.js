@@ -3,8 +3,8 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Category from './components/Category/category.js';
-import {Header} from './components/Header/Header.js';
+import PLP from './components/PLP/PLP.js';
+import { Header } from './components/Header/Header.js';
 import { PDPComponent } from './components/PDP/PDP.js';
 import CartPage from './components/CartPage/CartPage';
 
@@ -15,7 +15,6 @@ const getCurrensyListQuery = gql`
     currencies
   }
 `;
-
 
 class App extends React.Component {
   
@@ -30,7 +29,7 @@ class App extends React.Component {
               <Switch>
                 <Route exact path="/">
                   {currencies && <Header currencies={currencies} />}
-                  <Category />
+                  <PLP />
                 </Route>
                 <Route exact path="/product/:id">
                   {currencies && <Header currencies={currencies} />}
@@ -42,7 +41,7 @@ class App extends React.Component {
                 </Route>
                 <Route exact path="/:id">
                   {currencies && <Header currencies={currencies} />}
-                  <Category />
+                  <PLP />
                 </Route>
               </Switch>
           </Router>
