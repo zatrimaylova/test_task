@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Product = styled.div`
+export const Product = styled.section`
   flex-basis: 30%;
   height: 444px;
   padding: 10px;
@@ -32,18 +32,20 @@ export const Title = styled.h3`
 
 export const TextInfo = styled.div`
   padding-top: 26px;
-  font-size: 18px;
-  line-height: 160%;
 
-  h3 {
+  h2 {
     font-style: normal;
     font-weight: 300;
+    font-size: 18px;
+    line-height: 160%;
     color: #8D8F9A;
   }
 
   p {
     font-style: normal;
     font-weight: 500;
+    font-size: 18px;
+    line-height: 160%;
     color: #8D8F9A;
   }
 `;

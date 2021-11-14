@@ -14,7 +14,7 @@ class OutOfStockEl extends React.Component {
           <Title>OUT OF STOCK</Title>
         </ProductImage>
         <TextInfo>
-          <h3>{name}</h3>
+          <h2>{name}</h2>
           <p>{
               prices.map((item) => {
                 let currencyStr = '';
