@@ -34,7 +34,7 @@ class MinicartEl extends React.Component {
   /*functions below listen for click event and send new data to store*/
   listenAddClick = () => {
     const { showAdding, data } = this.props;
-    showAdding({ isOpen: true, product: data})
+    showAdding({ isOpen: true, product: data});
   }
 
   listenRemoveClick = () => {

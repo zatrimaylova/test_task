@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, ViewContainer, ImageSlider, PreviewContainer, Preview, View, TextContainer } from './style';
+import { Container, ViewContainer, ImageSlider, PreviewContainer, Preview, View, TextContainer } from './styles.js';
 
 import AddingToCartForm from '../AddingToCartForm/AddingToCartForm.js';
 
@@ -63,7 +63,7 @@ class ProductGallery extends React.Component {
   };
 
   render() {
-    const { description } = this.props;
+    const { description, children } = this.props;
     const { activeImg, imgArr } = this.state;
 
     return(
@@ -89,7 +89,7 @@ class ProductGallery extends React.Component {
         </ViewContainer>
         <div>
           <AddingToCartForm toRender={imgArr} {...this.props} />
-          { this.props.children }
+            { children }
           <TextContainer>
             {this.getDescription(description)}
           </TextContainer>

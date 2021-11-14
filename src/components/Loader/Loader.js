@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LoaderEl } from './style';
+import { LoaderEl } from './styles.js';
 
 class Loader extends React.Component {
   render() {

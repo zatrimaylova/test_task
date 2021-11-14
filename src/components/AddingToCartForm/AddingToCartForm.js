@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Container, HeaderForm, ProductName, Counter, DecreaseImg, CountSpan, ValidationTitle, OptionTitle, VarietyList, ListEl, OneSize, PriceContainer, Button, } from './style';
+import { Container, HeaderForm, ProductName, Counter, DecreaseImg, CountSpan, ValidationTitle, OptionTitle, VarietyList, ListEl, OneSize, PriceContainer, Button, } from './styles.js';
 import { ACTION_ADD_PRODUCT } from '../../ducks/cart';
 
 import minus_image from '../../img/AddingToCartForm/minus_image.png';
@@ -26,7 +26,7 @@ class AddingToCartForm extends React.Component {
   componentDidMount() {
     /* adds default product options to state */
     const loading = this.props?.data?.loading;
-    const { product, products } = this.props;
+    const { product, products, toRender } = this.props;
 
     if (loading) return; 
     products.forEach((item) => {
@@ -38,7 +38,7 @@ class AddingToCartForm extends React.Component {
             ...prevState.toCart,
             name: item.name,
             productData: item,
-            toRender: this.props.toRender,
+            toRender: toRender,
           }
         }));
           
@@ -59,6 +59,7 @@ class AddingToCartForm extends React.Component {
     if (e.target.tagName.toLowerCase() !== 'li') return;
 
     const { toCart } = this.state;
+    const { toRender } = this.props;
     const selectedValue = e.target.id;
     const selectedOption = e.target.closest('ul').id;
     let optionsData = toCart.attributes ? toCart.attributes.slice() : [];
@@ -77,7 +78,7 @@ class AddingToCartForm extends React.Component {
         ...prevState.toCart,
         attributes: optionsData,
         cartItemId: this.getCartElementId(),
-        toRender: this.props.toRender,
+        toRender: toRender,
       },
       clickedAttributes: [...prevState.clickedAttributes, selectedValue],
     }));

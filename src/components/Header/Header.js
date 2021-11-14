@@ -110,7 +110,7 @@ class HeaderComponent extends React.Component {
             <BrandIcon src={brandIcon}></BrandIcon>
             <NavOptions>
             <Currencies onClick={this.showCurrencyClick} >
-              <span>{this.props.currencies && (currentCurrency ?  currentCurrency : this.props.currencies[0])}</span>
+              <span>{currencies && (currentCurrency ?  currentCurrency : currencies[0])}</span>
               <CurrencyImg src={currencyIcon} alt="^" condition={isCurrencyClicked}/>
             </Currencies>
             <Cart onClick={this.handleCartClick}>

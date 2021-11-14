@@ -92,10 +92,6 @@ export const AttributesList = styled.div`
   flex-direction: column;
 `;
 
-export const ChossedAttribute = styled.div`
-  //margin-top: 25px;
-`;
-
 export const ButtonsHolder = styled.div`
   display: flex;
   gap: 10px;

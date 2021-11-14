@@ -12,6 +12,10 @@ import {
 } from './styles';
 
 class OverlayBackground extends React.Component {
+  componentDidMount() {
+    document.body.style.overflow = 'hidden'; 
+  }
+
   confirmDeleting = (e) => {
     /*listens for click event, checks status of different windows and renders active one*/
     const { adding, removing, amount, showAdding, showRemoving, showAmount } = this.props;
@@ -25,10 +29,11 @@ class OverlayBackground extends React.Component {
   }
 
   render() {
+    const { children } = this.props;
     return (
       <Overlay id="overlay_background" onClick={this.confirmDeleting}>
         <OverlayBody>
-          {this.props.children}
+          { children }
         </OverlayBody>
       </Overlay>
     )

@@ -21,7 +21,7 @@ export const NavItem = styled.li`
   border-bottom: 2px solid ${props => props.color === '#5ECE7B' ? props.color : 'transparent'};
   color: ${props => props.color};
   font-style: normal;
-  font-weight: 600;
+  font-weight: normal;
   font-size: 16px;
   line-height: 120%;
   text-transform: uppercase;

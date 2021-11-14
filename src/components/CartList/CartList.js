@@ -21,7 +21,6 @@ import {
   ChangingInfo, 
   GalleryItem, 
   AttributesList,
-  ChossedAttribute,
   LiContent,
   ButtonContainer,
   ButtonConfirm
@@ -98,8 +97,8 @@ class CartListComponent extends React.Component {
   renderOptions = (data) => {
     //gets the selected options and returns string for rendering in li
     return data.option === 'One size' 
-      ? <ChossedAttribute>One size</ChossedAttribute> 
-      : <ChossedAttribute>{data.option}: {data.value}</ChossedAttribute>
+      ? <div>One size</div> 
+      : <div>{data.option}: {data.value}</div>
   } 
 
   handleButtonsClick = (e) => {
@@ -188,12 +187,12 @@ class CartListComponent extends React.Component {
                         <AttributesList>
                           {item.attributes.map((element) => {
                             return (
-                            <ChossedAttribute>
+                            <div>
                               {this.renderOptions(element)}
-                            </ChossedAttribute> 
+                            </div> 
                             )
                           })}
-                          <ChossedAttribute>Amount: {item.count}</ChossedAttribute>
+                          <div>Amount: {item.count}</div>
                         </AttributesList>
                       </div>
                     </LiContent>
