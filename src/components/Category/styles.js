@@ -9,6 +9,10 @@ export const Container = styled.div`
 
 export const Title = styled.h1`
   margin-bottom: 50px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 42px;
+  line-height: 160%;
 `;
 
 export const ProductList = styled.div`
@@ -18,8 +22,8 @@ export const ProductList = styled.div`
   justify-content: start;
   gap: 50px;
 
-    &::after {
-      content: "";
-      justify-content: space-around;
-    }
+  &::after {
+    content: "";
+    justify-content: space-around;
+  }
 `;

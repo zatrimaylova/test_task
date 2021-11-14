@@ -4,7 +4,6 @@ import { graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 
 import ProductGallery from '../ProductGallery/ProductGallery';
-import AddingToCartForm from '../AddingToCartForm/AddingToCartForm';
 import Loader from '../Loader/Loader.js';
 import CartManaging from '../CartManaging/CartManaging.js';
 import OverlayBackground from '../OverlayBackground/OverlayBackground.js';
@@ -35,7 +34,6 @@ const getProductQuery = gql`
 `;
 
 class PDPEl extends React.Component { 
-
   render() {
     const products = this.props?.data?.category?.products;
     const { product, removing, amount } = this.props;
@@ -50,12 +48,7 @@ class PDPEl extends React.Component {
             products.map((item, index) => {
               let galleryEl;
               if (String(item.name).toUpperCase() === String(product).toUpperCase()) {
-                galleryEl = 
-                  <ProductGallery key={index} 
-                  //data={item.gallery} name={item.name} description={item.description} 
-                  {...item } products={products}>
-                    {/* <AddingToCartForm {...this.props} /> */}
-                  </ProductGallery>
+                galleryEl = <ProductGallery key={index} {...item } products={products}></ProductGallery>
               }
               return galleryEl;
             })

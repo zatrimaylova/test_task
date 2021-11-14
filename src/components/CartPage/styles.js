@@ -8,6 +8,10 @@ export const Container = styled.div`
 
 export const CartTitle = styled.h1`
   margin-bottom: 60px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 40px;
 `;
 
 export const CartEl = styled.li`
@@ -24,11 +28,26 @@ export const LiContent = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+
+  span {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 18px;
+  }
 `;
 
 export const CartTitleCont = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 15px;
+
+  h3 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 27px;
+  }
 
   button {
     border: none;
@@ -50,7 +69,12 @@ export const AttributesList = styled.ul`
 `;
 
 export const ChoosedAttribute = styled.li`
+  font-family: 'Source Sans Pro', sans-serif;
   margin-top: 25px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 18px;
 `;
 
 export const ChangingInfo = styled.div`
@@ -76,6 +100,10 @@ export const CountSpan = styled.span`
   font-size: 24px;
   margin: 30px 0;
   height: 46px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 160%;
 `;
 
 export const GalleryItem = styled.div`

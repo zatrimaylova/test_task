@@ -38,9 +38,12 @@ export const ListEl = styled.li`
   height: 45px;
   width: 63px;
   border: black solid 1px;
+  font-family: 'Source Sans Pro', sans-serif;
   text-align: center;
+  font-style: normal;
+  font-weight: normal;
   font-size: 16px;
-  line-height: 40px;
+  line-height: 42px;
   letter-spacing: 0.05em;
   background-color: ${props => props.isActive ? 'black' : props.color}; 
   color: ${props => props.isActive || props.color === '#000000' ? 'white' : 'black'};
@@ -57,9 +60,12 @@ export const ListEl = styled.li`
 export const OneSize = styled.li`
   height: 45px;
   border: black solid 1px;
+  font-family: 'Source Sans Pro', sans-serif;
   text-align: center;
+  font-style: normal;
+  font-weight: normal;
   font-size: 16px;
-  line-height: 40px;
+  line-height: 42px;
   letter-spacing: 0.05em;
   padding: 0 15px;
   background-color: ${props => props.isActive ? 'black' : 'white'};
@@ -77,16 +83,28 @@ export const Button = styled.button`
   margin: 0 auto;
   cursor: pointer;
   margin-top: 20px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
 `;
 
 export const ProductName = styled.h1`
   margin-bottom: 40px;
   display: inline-block;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
 `;
 
 export const PriceContainer = styled.div`
   display: flex;
   gap: 10px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 18px;
 
   h3 {
     padding-top: 4px;
@@ -119,8 +137,9 @@ export const DecreaseImg = styled.img`
 export const CountSpan = styled.span`
   height: 100%;
   text-align: center;
-  font-size: 20px;
+  font-size: 16px;
   margin: 0 17px;
+  line-height: 25px;
 `;
 
 export const HeaderForm = styled.div`
