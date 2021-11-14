@@ -13,6 +13,7 @@ import {
 
 class OverlayBackground extends React.Component {
   confirmDeleting = (e) => {
+    /*listens for click event, checks status of different windows and renders active one*/
     const { adding, removing, amount, showAdding, showRemoving, showAmount } = this.props;
     if (e.target.id !== 'overlay_background') return;
 

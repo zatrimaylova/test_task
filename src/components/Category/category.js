@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
  
-import { Minicart } from '../Minicart/minicart.js';
+import { Minicart } from '../Minicart/Minicart.js';
 import { OutOfStockCart } from '../OutOfStockCart/OutOfStockCart.js';
 import Loader from '../Loader/Loader.js';
 import ShortAddingForm from '../ShortAddingForm/ShortAddingForm.js';

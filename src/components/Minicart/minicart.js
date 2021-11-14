@@ -2,7 +2,20 @@ import React from 'react';
 import { withRouter } from "react-router";
 
 import icon from '../../img/Minicart/icon.png';
-import { Product, ProductImage, Text, Icon, TextDetails, AddSpan, RemoveSpan, AmountSpan, SwatchList, SwatchEl, ChangeCart } from './styles';
+import { 
+  Product, 
+  ProductImage, 
+  Icon, 
+  Text,
+  NameTitle,
+  TextDetails, 
+  SwatchList, 
+  SwatchEl, 
+  ChangeCart, 
+  AddSpan, 
+  RemoveSpan, 
+  AmountSpan,
+} from './styles';
 
 import { connect } from 'react-redux';
 import { ACTION_CHANGE_PRODUCT } from '../../ducks/product';
@@ -18,6 +31,7 @@ class MinicartEl extends React.Component {
     changeProduct(name);
   };
 
+  /*functions below listen for click event and send new data to store*/
   listenAddClick = () => {
     const { showAdding, data } = this.props;
     showAdding({ isOpen: true, product: data})
@@ -42,7 +56,7 @@ class MinicartEl extends React.Component {
         <ProductImage url={link} />
         <Icon src={icon} alt="icon" />
         <Text>
-          <p>{name}</p>
+          <NameTitle>{name}</NameTitle>
           <TextDetails>
             <div>
               <p>{
