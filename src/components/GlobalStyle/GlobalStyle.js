@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import fontCSS from './fontsCSS';
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -7,9 +8,15 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   };
 
+  ${fontCSS}
+
   button {
     outline: none;
   };
+
+  body {
+    font-family: 'Raleway', sans-serif;
+  }
 `;
 
 export default GlobalStyles;
