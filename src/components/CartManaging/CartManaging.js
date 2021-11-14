@@ -22,7 +22,7 @@ class CartManaging extends React.Component {
   render() {
     const { cart } = this.props;     
     return (
-      <CartManagingCont >
+      <CartManagingCont>
         <ContentHolder visibility={cart.length}>
           <h3>Change the cart</h3>
           <div onClick={this.openOverlay}>

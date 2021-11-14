@@ -30,6 +30,10 @@ export const Currencies = styled.div`
   cursor: pointer;
   margin-right: 22px;
   height: 30px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
 
   span {
     text-align: right;
@@ -64,12 +68,14 @@ export const CartCount = styled.div`
   display:  ${props => props.cart.lenght === 0 ? 'none' : 'block'};
 
   p {
-    font-family: Roboto;
+    font-style: normal;
     font-weight: bold;
     font-size: 14px;
-    line-height: 20px;
+    line-height: 21px;
+    color: #FFFFFF;
     text-align: center;
-    color: white;
+    align-items: center;
+    height: 100%;
   }
 `;
 
@@ -82,6 +88,10 @@ export const CurrenciesList = styled.ul`
   font-size: 18px;
   z-index: 2999;
   background-color: white;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
 
   li {
     margin-bottom: 20px;

@@ -18,8 +18,13 @@ export const NavItem = styled.li`
   text-align: center;
   vertical-align: center;
   cursor: pointer;
-  border-bottom: 2px solid ${props => props.color === 'green' ? '#5ECE7B' : 'transparent'};
+  border-bottom: 2px solid ${props => props.color === '#5ECE7B' ? props.color : 'transparent'};
   color: ${props => props.color};
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  text-transform: uppercase;
 
   &:hover {
     border-bottom: 2px solid #5ECE7B;

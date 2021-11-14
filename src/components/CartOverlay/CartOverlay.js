@@ -21,6 +21,7 @@ import {
   CountSpan,
   DecreaseImg,
   GalleryItem,
+  TotalPriceCont,
   ButtonsContainer,
   ViewBagButton,
   CheckOutButton,
@@ -34,9 +35,9 @@ class CartOverlay extends React.Component {
       <ListItem data-tag={product.cartItemId}>
         <ProductInfoCont>
           <div>
-            <p>{product.name}</p>
+            <h3>{product.name}</h3>
             <p>{
-              product.productData.prices.forEach((i) => {
+              product.productData.prices.map((i) => {
                 if (String(i.currency).toUpperCase() === String(currency).toUpperCase()) {
                   return `${i.amount} ${currency}`
                 }
@@ -142,9 +143,9 @@ class CartOverlay extends React.Component {
           </CartTitle>
           { cart.length === 1 && <OverlayListEl>{this.renderListItem(cart[0])}</OverlayListEl> }
           { cart.length >= 2 && <OverlayListEl>{this.renderListItem(cart[0])} {this.renderListItem(cart[1])}</OverlayListEl> }
-          <div>
+          <TotalPriceCont>
             <span> { this.totalPriceCount() }</span>
-          </div>
+          </TotalPriceCont>
           <ButtonsContainer>
             <ViewBagButton onClick={this.viewBagClick}>VIEW BAG</ViewBagButton>
             <CheckOutButton id="close_overlay">CHECK OUT</CheckOutButton> 

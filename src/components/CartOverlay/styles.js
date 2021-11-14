@@ -27,6 +27,12 @@ export const CartTitle = styled.div`
   line-height: 26.5px;
   margin-bottom: 23px;
 
+  p {
+    font-style: normal;
+    font-size: 16px;
+    line-height: 160%;
+  }
+
   span {
     font-weight: bold;
   }
@@ -52,12 +58,28 @@ export const ProductInfoCont = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 160%;
+
+  h3 {
+    font-weight: 300;
+  }
+
+  p {
+    font-weight: bold;
+  }
 `;
 
 export const OptionsList = styled.ul`
   list-style: none;
   margin-top: 15px;
   padding-left: 5px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 160%;
+  font-family: 'Source Sans Pro', sans-serif;
 
   li {
     margin-bottom: 5px;
@@ -89,9 +111,12 @@ export const CountCont = styled.div`
 export const CountSpan = styled.span`
   width: 100%;
   text-align: center;
-  font-size: 16px;
   margin: 30px 0;
   height: 26px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 160%;
 `;
 
 export const DecreaseImg = styled.img`
@@ -107,6 +132,13 @@ export const GalleryItem = styled.div`
   position: relative;
 `;
 
+export const TotalPriceCont = styled.div`
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 160%;
+`;
+
 export const ButtonsContainer = styled.div`
   margin-top: 35px;
   display: flex;
@@ -114,6 +146,10 @@ export const ButtonsContainer = styled.div`
   
   button {
     cursor: pointer;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 120%;
   }
 `;
 
