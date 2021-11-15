@@ -22,7 +22,8 @@ class Navigation extends React.Component {
     } else {
       history.push(`/${newCategory}`);
       changeCategory(newCategory);
-    }
+    } 
+    document.title = `${newCategory[0].toUpperCase() + newCategory.slice(1)}`;
   }
 
   render() {

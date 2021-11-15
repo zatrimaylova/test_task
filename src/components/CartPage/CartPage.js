@@ -37,6 +37,10 @@ class CartPage extends React.Component {
     toDelete: null,
   }
 
+  componentDidMount() {
+    document.title = 'Cart';  
+  }
+
   handleCountClick = (e) => {
     /* listens for click event and changes amount of product in the cart,
     uses action ACTION_USE_WARNING to show WarningOverlay if the customer tries to decrease 1*/

@@ -40,6 +40,11 @@ const getListQuery = gql`
 `;
 
 class PLPEl extends React.Component {
+  componentDidMount() {
+    const { category } = this.props;
+    document.title = `${category[0].toUpperCase() + category.slice(1)}`; 
+  }
+
   render() {
     const category = this.props;
     const products = this.props?.data?.category?.products;

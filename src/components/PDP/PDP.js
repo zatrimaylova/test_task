@@ -33,7 +33,12 @@ const getProductQuery = gql`
   }
 `;
 
-class PDPEl extends React.Component { 
+class PDPEl extends React.Component {
+  componentDidMount() {
+    const { product } = this.props;
+    document.title = product;    
+  }
+
   render() {
     const products = this.props?.data?.category?.products;
     const { product, removing, amount } = this.props;
