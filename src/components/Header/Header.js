@@ -9,10 +9,10 @@ import brandIcon from '../../img/Header/brand_icon.png';
 import cartIcon from '../../img/Header/cart_icon.png';
 import currencyIcon from '../../img/Header/currency_icon.png';
 
-import { Container, BrandIcon, NavOptions, Currencies, CurrencyImg, CurrenciesList, Cart, CartCount } from './styles';
+import { Container, BrandIcon, HeaderOptions, Currencies, CurrencyImg, Cart, CartCount, CurrenciesList, } from './styles';
 
 import { ACTION_CHANGE_CURRENCY } from '../../ducks/currency';
-import { ACTION_CHANGE_CATEGORY, ACTION_CREATE_CATEGORY_LIST } from '../../ducks/category';
+import { ACTION_CREATE_CATEGORY_LIST } from '../../ducks/category';
 import { ACTION_CHANGE_OVERLAY_STATE } from '../../ducks/overlay';
 
 import CartOverlay from '../CartOverlay/CartOverlay.js';
@@ -35,12 +35,14 @@ class HeaderComponent extends React.Component {
   };
 
   componentDidMount() {
+    // gets list of currencies from props and sets active currency using action ACTION_CHANGE_CURRENCY
     const { currencies, changeCurrency } = this.props;
-
     changeCurrency(currencies[0]);
   };
 
   createCategories = () => {
+    /* gets products data from props, creates array of product categories,
+    sends it to redux using ACTION_CREATE_CATEGORY_LIST*/
     const { createCategoryList } = this.props;
     const category = this.props?.data?.category;
     const categoriesArr = [];
@@ -54,6 +56,8 @@ class HeaderComponent extends React.Component {
   }
 
   showCurrencyClick = () => {
+    /* listens for click event, renders currency list in case CartOverlay is not opend,
+    hides currency list in case it's already opend */
     const { isCurrencyClicked } = this.state;
     const { isOverlayOpen } = this.props;
     
@@ -73,6 +77,7 @@ class HeaderComponent extends React.Component {
   };
 
   chooseCurrencyClick = (e) => {
+    /* listens for click event, sets new active app currency using ACTION_CHANGE_CURRENCY*/
     const { changeCurrency } = this.props;
 
     this.setState(prevState => ({
@@ -85,6 +90,8 @@ class HeaderComponent extends React.Component {
   };
 
   handleCartClick = () => {
+    /* listens for click event, renders or hides CartOverlay, 
+    updates it's status in redux using ACTION_CHANGE_OVERLAY_STATE */
     const { isOverlayOpen, changeOverlayState } = this.props;
 
     isOverlayOpen ? changeOverlayState(false) : changeOverlayState(true);
@@ -105,10 +112,10 @@ class HeaderComponent extends React.Component {
     return(
       <header>
         <Container>
-            { !loading && category.name && !categories && this.createCategories() }
-            <Navigation />
-            <BrandIcon src={brandIcon}></BrandIcon>
-            <NavOptions>
+          { !loading && category.name && !categories && this.createCategories() }
+          <Navigation />
+          <BrandIcon src={brandIcon}></BrandIcon>
+          <HeaderOptions>
             <Currencies onClick={this.showCurrencyClick} >
               <span>{currencies && (currentCurrency ?  currentCurrency : currencies[0])}</span>
               <CurrencyImg src={currencyIcon} alt="^" condition={isCurrencyClicked}/>
@@ -117,14 +124,14 @@ class HeaderComponent extends React.Component {
               <img src={cartIcon} alt="Cart" />
               {cart.length > 0 && <CartCount cart={cart}><p>{cart.length >= 1 ? cart.length : ''}</p></CartCount>}
             </Cart>
-            { isCurrencyClicked && <CurrenciesList onClick={this.chooseCurrencyClick}> 
-              {currencies && currencies.map(item => {
-                return <li key={item} id={item}>{item}</li> 
-              })}
-            </CurrenciesList>}
-          </NavOptions>
+            { isCurrencyClicked && 
+              <CurrenciesList onClick={this.chooseCurrencyClick}> 
+                {currencies && currencies.map((item) => <li key={item} id={item}>{item}</li> )}
+              </CurrenciesList>
+            }
+          </HeaderOptions>
         </Container>
-         { isOverlayOpen && <CartOverlay /> } 
+        { isOverlayOpen && <CartOverlay /> } 
       </header>
     )
   };
@@ -138,7 +145,6 @@ const mapStateToProps = ({ cart, isOverlayOpen, category }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   changeCurrency: (value) => dispatch(ACTION_CHANGE_CURRENCY(value)),
-  changeCategory: (value) => dispatch(ACTION_CHANGE_CATEGORY(value)),
   changeOverlayState: (value) => dispatch(ACTION_CHANGE_OVERLAY_STATE(value)),
   createCategoryList: (value) => dispatch(ACTION_CREATE_CATEGORY_LIST(value)),
 });

@@ -20,7 +20,7 @@ export const BrandIcon = styled.img`
   height: 30px;
 `;
 
-export const NavOptions = styled.div`
+export const HeaderOptions = styled.div`
   display: flex;
   position: relative;
   width: 150px;

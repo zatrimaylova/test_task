@@ -14,6 +14,8 @@ import {
 
 class WarningOverlay extends React.Component {
   confirmDeleting = (e) => {
+    /* listens for click event, closes WarningOverlay in case user clics "Cancel" button or OverlayContainer, 
+    deletes clicked product from the cart in case user clics "Confirm" button */
     const { deleteProduct, toDelete, showWarning } = this.props;
     if (e.target.id === 'overlay_container') {
       showWarning(false);
