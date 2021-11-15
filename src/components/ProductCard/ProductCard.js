@@ -23,7 +23,7 @@ import { ACTION_USE_ADDING } from '../../ducks/cartListStatus';
 import { ACTION_USE_REMOVING } from '../../ducks/cartListStatus';
 import { ACTION_USE_AMOUNT } from '../../ducks/cartListStatus';
 
-class MinicartEl extends React.Component { 
+class CardEl extends React.Component { 
   handleCartClick = (e) => {
     if (e.target.tagName.toLowerCase() === 'span') return;
     const { history, name, changeProduct } = this.props;
@@ -101,4 +101,4 @@ const mapDispatchToProps = (dispatch) => ({
   showAmount: (value) => dispatch(ACTION_USE_AMOUNT(value)),
 });
 
-export const Minicart = withRouter(connect(mapStateToProps, mapDispatchToProps)(MinicartEl));
+export const ProductCard = withRouter(connect(mapStateToProps, mapDispatchToProps)(CardEl));

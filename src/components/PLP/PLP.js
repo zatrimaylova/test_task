@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
  
-import { Minicart } from '../Minicart/Minicart.js';
-import { OutOfStockCart } from '../OutOfStockCart/OutOfStockCart.js';
+import { ProductCard } from '../ProductCard/ProductCard.js';
+import { OutOfStockCard } from '../OutOfStockCard/OutOfStockCard.js';
 import Loader from '../Loader/Loader.js';
 import ShortAddingForm from '../ShortAddingForm/ShortAddingForm.js';
 import OverlayBackground from '../OverlayBackground/OverlayBackground.js';
@@ -61,16 +61,16 @@ class PLPEl extends React.Component {
         <ProductList>
           { products && category.category === 'all' && products.map((item) => {
             const renderItem = item.inStock 
-              ? <Minicart data={item} prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} /> 
-                : <OutOfStockCart prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} />
+              ? <ProductCard data={item} prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} /> 
+                : <OutOfStockCard prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} />
             return renderItem;
           })}
           { products && category.category !== 'all' && products.map((item) => {
             let renderItem;
             if (item.category === category.category) {
               renderItem = item.inStock 
-              ? <Minicart data={item} prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} /> 
-                : <OutOfStockCart prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} />
+              ? <ProductCard data={item} prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} /> 
+                : <OutOfStockCard prices={item.prices} name={item.name} link={item.gallery[0]} key={item.name} />
             }
             return renderItem;
           })}

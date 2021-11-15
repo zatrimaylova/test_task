@@ -34,4 +34,4 @@ const mapStateToProps = ({ currency }) => ({
   currency: currency.currency,
 });
 
-export const OutOfStockCart = connect(mapStateToProps)(OutOfStockEl);
+export const OutOfStockCard = connect(mapStateToProps)(OutOfStockEl);
