@@ -79,13 +79,11 @@ class ProductGallery extends React.Component {
                 return <Preview key={index} id={index} url={item} />
               })}
               { imgArr.length === 1 && imgArr.map((item, index) => {
-                return (
-                  <>
-                    <Preview key={0} id={index} url={item} />
-                    <Preview key={1} id={index} url={item} />
-                    <Preview key={2} id={index} url={item} />
-                  </>
-                )
+                let listEl;
+                for (let i = 0; i < 3; i++) {
+                  listEl = <Preview key={i} id={index} url={item} />
+                }
+                return listEl;
               })}
             </PreviewContainer>
           </ImageSlider>

@@ -36,7 +36,7 @@ const getProductQuery = gql`
 class PDPEl extends React.Component {
   componentDidMount() {
     const { product } = this.props;
-    document.title = product;    
+    document.title = product;   
   }
 
   render() {
