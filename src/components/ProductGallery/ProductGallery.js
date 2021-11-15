@@ -25,7 +25,7 @@ class ProductGallery extends React.Component {
           if (data.ok) {
             this.setState(prevState => ({
               ...prevState,
-              imgArr: [...prevState.imgArr, item],
+              imgArr: gallery.length === 1 ? [item, item, item] : [...prevState.imgArr, item],
             }));
           }
         })
@@ -37,12 +37,15 @@ class ProductGallery extends React.Component {
 
   handleGalleryClick = (e) => {
     // listens for click event, changes style of PreviewContainer, sets active image in state
+    const { imgArr } = this.state;
+    
+    if (imgArr.length === 3) return;
+
     this.setState(prevState => ({
       ...prevState,
       activeImg: e.target.id,
     }));
 
-    const { imgArr } = this.state;
     const maxTop = `${(imgArr.length - 3) * -112}px`;
     const sliderEl = e.target.closest('ul');
     const coordToSlide = `${Number(e.target.closest('li').id) * -112}px`;
@@ -77,13 +80,6 @@ class ProductGallery extends React.Component {
             <PreviewContainer  onClick={this.handleGalleryClick}>
               { imgArr.length > 1 && imgArr.map((item, index) =>{
                 return <Preview key={index} id={index} url={item} />
-              })}
-              { imgArr.length === 1 && imgArr.map((item, index) => {
-                let listEl;
-                for (let i = 0; i < 3; i++) {
-                  listEl = <Preview key={i} id={index} url={item} />
-                }
-                return listEl;
               })}
             </PreviewContainer>
           </ImageSlider>
