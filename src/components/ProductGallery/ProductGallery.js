@@ -15,6 +15,7 @@ class ProductGallery extends React.Component {
   };
 
   getImageFetch = () => {
+    /* fetches images and adds it's links to arr in state if response status is 200 */
     const { gallery } = this.props;
 
     gallery.map((item) => {
@@ -35,6 +36,7 @@ class ProductGallery extends React.Component {
   } 
 
   handleGalleryClick = (e) => {
+    // listens for click event, changes style of PreviewContainer, sets active image in state
     this.setState(prevState => ({
       ...prevState,
       activeImg: e.target.id,
@@ -49,10 +51,12 @@ class ProductGallery extends React.Component {
   }
 
   createMarkup(data) {
+    // parses data and returns html format
     return {__html: data};
   }
 
   getDescription = (data) => {
+    // checks description, parse if its needed, returns elements to render
     const isTag = new RegExp("(?:</[^<]+>)|(?:<[^<]+/>)");
     const checkingResult = isTag.exec(data);
     if (checkingResult) {
