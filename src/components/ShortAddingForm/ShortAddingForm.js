@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Container, HeaderForm, Button, VarietyList, ListEl, ValidationTitle, OneSize, ProductName, OptionTitle, PriceContainer, CloseImg, Counter, DecreaseImg, CountSpan } from './styles.js';
+import { Container, HeaderForm, ProductName, Counter, DecreaseImg, CountSpan, CloseImg, ValidationTitle, OptionTitle, VarietyList, OneSize, ListEl, PriceContainer, Button, } from './styles.js';
 import { ACTION_ADD_PRODUCT } from '../../ducks/cart';
 import { ACTION_USE_ADDING } from '../../ducks/adding';
 
@@ -26,6 +26,7 @@ class ShortAddingForm extends React.Component {
   };
 
   componentDidMount() {
+    /* adds default product options to state */
     const { adding } = this.props;
     const productToAdd = adding.product;
     this.setState(prevState => ({
@@ -50,6 +51,7 @@ class ShortAddingForm extends React.Component {
   };
 
   getImageFetch = () => {
+    /* fetches images and adds it's links to arr in state if response status is 200 */
     const { gallery } = this.props.adding.product;
     gallery.map((item) => {
       try {
@@ -72,6 +74,7 @@ class ShortAddingForm extends React.Component {
   }
 
   handleAttributeClick = (e) => {
+    /* listens for click event and adds selected options to state */
     if (e.target.tagName.toLowerCase() !== 'li') {
       return;
     };
@@ -106,11 +109,15 @@ class ShortAddingForm extends React.Component {
   };
 
   getCartElementId = () => {
+    //creates and returns a unique ID
     const date = new Date();
     return date.getTime();
   };
 
   handleAddToCartClick = () => {
+    /* listens for click event and uses action ACTION_ADD_PRODUCT to sent the product to the cart;
+    checks form validation and and changes the validation status if options are not selected;
+    sends the product to the cart and chandes a product info in state to default state*/
     const { currentProduct, toCart } = this.state;
     const { addToCart } = this.props;
 
@@ -153,11 +160,14 @@ class ShortAddingForm extends React.Component {
   };
 
   closeOverlay = () => {
+    /* listens for click event and hides overlay by changing it's status in redux,
+    doesn't delete products */
     const { showWarning } = this.props;
     showWarning({ isOpen: false, product: ''});
   }
 
   changeCount = (e) => {
+    /* listens for click event and changes amount in state */
     const currentClick = e.target.tagName;
     if (currentClick.toLowerCase() !== 'img') return;
     let currentCount = this.state.toCart.count;
@@ -177,6 +187,8 @@ class ShortAddingForm extends React.Component {
   }
 
   createAttributes = (data) => {
+    /* gets product data and returns items with the option name and
+    a list of available options to add to the cart*/
     if (data.length === 0) {
       return (
         <>
