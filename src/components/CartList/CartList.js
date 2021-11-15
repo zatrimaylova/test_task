@@ -161,8 +161,8 @@ class CartListComponent extends React.Component {
       <Container>
         <div>
           <CartTitle> 
-            { removing.isOpen && 'Choose products to remove from the cart' }
-            { amount.isOpen && 'Сhange the amount of products below' }
+            { removing.isOpen && toRender.length > 0 && 'Choose products to remove from the cart' }
+            { amount.isOpen && toRender.length > 0 && 'Сhange the amount of products below' }
           </CartTitle>
           { toRender.length === 0 && <h3>There is no selected product in the cart</h3>}
           { toRender.length > 0 && 
