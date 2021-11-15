@@ -29,8 +29,6 @@ class WarningOverlay extends React.Component {
   }
 
   render() {
-    const { toDelete } = this.props;
-    
     return (
       <OverlayContainer id='overlay_container' onClick={this.confirmDeleting}>
         <Overlay>

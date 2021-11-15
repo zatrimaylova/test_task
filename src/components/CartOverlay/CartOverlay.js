@@ -39,9 +39,11 @@ class CartOverlay extends React.Component {
             <h3>{product.name}</h3>
             <p>{
               product.productData.prices.map((i) => {
+                let str ='';
                 if (String(i.currency).toUpperCase() === String(currency).toUpperCase()) {
-                  return `${i.amount} ${currency}`
+                  str = `${i.amount} ${currency}`;
                 }
+                return str;
               })
             }</p>
           </div>

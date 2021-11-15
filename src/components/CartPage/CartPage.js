@@ -89,7 +89,9 @@ class CartPage extends React.Component {
     if (currentTargetName !== 'img') return;
 
     const imgData = cart.map((item) => {
-      if (Number(item.cartItemId) === Number(productId)) return item.toRender;
+      let itemElement;
+      if (Number(item.cartItemId) === Number(productId)) itemElement = item.toRender;
+      return itemElement;
     }).filter((item) => item)[0];
 
     if (clickedImg.id === 'right') {
@@ -150,7 +152,9 @@ class CartPage extends React.Component {
                     </CartTitleCont>  
                     <span>{
                       item.productData.prices.map((i) => {
-                        if (String(i.currency).toUpperCase() === String(currency).toUpperCase()) return `${i.amount} ${currency}`;
+                        let str = '';
+                        if (String(i.currency).toUpperCase() === String(currency).toUpperCase()) str = `${i.amount} ${currency}`;
+                        return str;
                       })
                     }</span>
                   </div>
