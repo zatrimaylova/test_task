@@ -185,9 +185,9 @@ class CartListComponent extends React.Component {
                       </div>
                       <div>
                         <AttributesList>
-                          {item.attributes.map((element) => {
+                          {item.attributes.map((element, index) => {
                             return (
-                            <div>
+                            <div key={index}>
                               {this.renderOptions(element)}
                             </div> 
                             )
@@ -199,11 +199,11 @@ class CartListComponent extends React.Component {
                     <ChangingInfo>
                       {amount.isOpen && <CountCont onClick={this.handleCountClick}>
                         <div>
-                          <img visibility={item.count} src={plus_square} alt="+" id="increase" info={item.name} />
+                          <img src={plus_square} alt="+" id="increase" info={item.name} />
                         </div>
                         <CountSpan>{item.count}</CountSpan>
                         <div>
-                          <DecreaseImg src={minus_square} alt="-" id="decrease" info={item.name} />
+                          <DecreaseImg visibility={item.count} src={minus_square} alt="-" id="decrease" info={item.name} />
                         </div>
                       </CountCont>}
                       <GalleryItem url={item.productData.gallery[0]} /> 

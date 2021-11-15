@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  height: 90vh;
+  height: 560px;
   background-color: white;
   padding: 20px 20px 80px;
   margin-top: 20px;
@@ -14,7 +14,7 @@ export const Container = styled.div`
 `;
 
 export const CartList = styled.ul`
-  max-height: 430px;
+  height: 400px;
   overflow-y: scroll;
 `;
 

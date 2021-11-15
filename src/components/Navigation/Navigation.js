@@ -35,7 +35,7 @@ class Navigation extends React.Component {
         <NavList onClick={this.handleCategoryClick}>
           {categories && categories.map((item) => {
             return (
-              <NavItem key={item} color={category && category === item ? '#5ECE7B' : '#1D1F22' } id={item}>
+              <NavItem key={item} color={(category && category === item) ? '#5ECE7B' : '#1D1F22' } id={item}>
                 {item[0].toUpperCase() + item.slice(1)}
               </NavItem>
               )

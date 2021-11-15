@@ -114,7 +114,7 @@ export const CountSpan = styled.span`
 `;
 
 export const DecreaseImg = styled.img`
-  opacity: ${props => props.color ? 0.33 : 1};
+  opacity: ${props => props.color > 1 ? 1 : 0.33};
 `;
 
 export const GalleryItem = styled.div`

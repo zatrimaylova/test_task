@@ -33,7 +33,7 @@ class CartOverlay extends React.Component {
     //gets product info and returns li with all information needed to render
     const { currency } = this.props; 
     return (
-      <ListItem data-tag={product.cartItemId}>
+      <ListItem data-tag={product.cartItemId} key={product.cartItemId}>
         <ProductInfoCont>
           <div>
             <h3>{product.name}</h3>
@@ -47,7 +47,7 @@ class CartOverlay extends React.Component {
               })
             }</p>
           </div>
-          <OptionsList>{ product.attributes.map((el) => this.renderOptions(el)) }</OptionsList>
+          <OptionsList>{ product.attributes.map((el, index) => this.renderOptions(el, index)) }</OptionsList>
         </ProductInfoCont>
         <ChangingInfo>
           <CountCont onClick={this.handleCountClick}>
@@ -56,7 +56,7 @@ class CartOverlay extends React.Component {
             </div>
             <CountSpan>{product.count}</CountSpan>
             <div>
-              <DecreaseImg src={minus_image} alt="-" id="decrease" info={product.name} color={product.count > 1 ? false : true}/>
+              <DecreaseImg src={minus_image} alt="-" id="decrease" info={product.name} color={product.count}/>
             </div>
           </CountCont>
           <GalleryItem url={product.productData.gallery[0]} /> 
@@ -65,11 +65,11 @@ class CartOverlay extends React.Component {
     )
   }
 
-  renderOptions = data => { 
+  renderOptions = (data, index) => { 
     //returns string for every choosed option; is used in renderListItem
     return data.option === 'One size' 
-      ? <li>One size</li> 
-      : <li>{data.option}: {data.value}</li>
+      ? <li key={index}>One size</li> 
+      : <li key={index}>{data.option}: {data.value}</li>
   }
 
   totalPriceCount = () => {

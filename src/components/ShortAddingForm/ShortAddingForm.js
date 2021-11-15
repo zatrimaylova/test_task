@@ -164,6 +164,7 @@ class ShortAddingForm extends React.Component {
     doesn't delete products */
     const { showWarning } = this.props;
     showWarning({ isOpen: false, product: ''});
+    document.body.style.overflow = 'auto';
   }
 
   changeCount = (e) => {
@@ -271,11 +272,11 @@ class ShortAddingForm extends React.Component {
             <ProductName>{productToAdd && productToAdd.name}</ProductName>
             <Counter onClick={this.changeCount}>
               <div>
-                <DecreaseImg src={minus_image} alt="-" id="decrease" />
+                <DecreaseImg src={minus_image} alt="-" id="decrease" visibility={toCart.count}/>
               </div>
-              <CountSpan>{this.state.toCart.count}</CountSpan>
+              <CountSpan>{toCart.count}</CountSpan>
               <div>
-                <img visibility={toCart.count} src={plus_image} alt="+" id="increase" />
+                <img src={plus_image} alt="+" id="increase" />
               </div>
             </Counter>
           </HeaderForm>

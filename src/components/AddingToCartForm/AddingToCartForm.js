@@ -238,7 +238,7 @@ class AddingToCartForm extends React.Component {
           <ProductName>{currentProduct && currentProduct.name}</ProductName>
           <Counter onClick={this.changeCount}>
             <div>
-              <DecreaseImg src={minus_image} alt="-" id="decrease" color={toCart.count > 1 ? 1 : 0} />
+              <DecreaseImg src={minus_image} alt="-" id="decrease" color={toCart.count} />
             </div>
             <CountSpan>{this.state.toCart.count}</CountSpan>
             <div>

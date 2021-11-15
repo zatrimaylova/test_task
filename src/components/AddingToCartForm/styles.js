@@ -32,7 +32,7 @@ export const Counter = styled.div`
 `;
 
 export const DecreaseImg = styled.img`
-  opacity: ${props => props.color ? 1 : 0.33};
+  opacity: ${props => props.color > 1 ? 1 : 0.33};
 `;
 
 export const CountSpan = styled.span`
