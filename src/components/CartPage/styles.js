@@ -54,6 +54,11 @@ export const CartTitleCont = styled.div`
     background-color: transparent;
     padding: 5px 30px 10px;
     cursor: pointer;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 18px;
   }
 `;
 
@@ -65,12 +70,12 @@ export const ButtonsHolder = styled.div`
 export const AttributesList = styled.ul`
   list-style: none;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 export const ChoosedAttribute = styled.li`
   font-family: 'Source Sans Pro', sans-serif;
-  margin-top: 25px;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;

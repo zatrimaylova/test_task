@@ -71,11 +71,11 @@ class CartPage extends React.Component {
     }
   }
 
-  renderOptions = (data) => {
+  renderOptions = (data, index) => {
     //gets the selected options and returns string for rendering in li
     return data.option === 'One size' 
-      ? <ChoosedAttribute>One size</ChoosedAttribute> 
-      : <ChoosedAttribute>{data.option}: {data.value}</ChoosedAttribute>
+      ? <ChoosedAttribute key={index}>One size</ChoosedAttribute> 
+      : <ChoosedAttribute key={index}>{data.option}: {data.value}</ChoosedAttribute>
   } 
 
   changeGalleryImgClick = (e) => {
@@ -159,13 +159,9 @@ class CartPage extends React.Component {
                     }</span>
                   </div>
                   <div>
-                    {item.attributes.map((element, index) => {
-                      return (
-                        <AttributesList key={index}>
-                          { this.renderOptions(element) }
-                        </AttributesList>
-                      )
-                    })}
+                    <AttributesList key={index}>
+                      {item.attributes.map((element, index) => this.renderOptions(element, index))}
+                    </AttributesList>
                   </div>
                 </LiContent>
                 <ChangingInfo>
