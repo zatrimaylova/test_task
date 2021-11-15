@@ -14,7 +14,7 @@ import CartManaging from '../CartManaging/CartManaging.js';
 import { Container, Title, ProductList } from './styles';
 
 import { ACTION_CHANGE_CATEGORY } from '../../ducks/category';
-import { ACTION_USE_ADDING } from '../../ducks/adding';
+import { ACTION_USE_ADDING } from '../../ducks/cartListStatus';
 
 const getListQuery = gql`
   query {
@@ -83,12 +83,12 @@ class PLPEl extends React.Component {
   }
 };
 
-const mapStateToProps = ({ category, isOverlayOpen, adding, removing, amount }) => ({
+const mapStateToProps = ({ category, isOverlayOpen, cartListStatus }) => ({
   category: category.category,
   isOverlayOpen: isOverlayOpen.isOverlayOpen,
-  adding: adding.adding,
-  removing: removing.removing,
-  amount: amount.amount,
+  adding: cartListStatus.adding,
+  removing: cartListStatus.removing,
+  amount: cartListStatus.amount,
   categories: category.categories,
 });
 

@@ -8,7 +8,7 @@ import chevron_right from '../../img/CartPage/chevron_right.png';
 
 import { ACTION_CHANGE_COUNT } from '../../ducks/cart';
 import { ACTION_USE_WARNING } from '../../ducks/warning';
-import { ACTION_USE_ADDING } from '../../ducks/adding';
+import { ACTION_USE_ADDING } from '../../ducks/cartListStatus';
 
 import WarningOverlay from '../WarningOverlay/WarningOverlay.js';
 import ShortAddingForm from '../ShortAddingForm/ShortAddingForm.js';
@@ -199,11 +199,11 @@ class CartPage extends React.Component {
   }
 }
 
-const mapStateToProps = ({ cart, currency, warning, adding }) => ({
+const mapStateToProps = ({ cart, currency, warning, cartListStatus }) => ({
   cart: cart.cart,
   currency: currency.currency,
   warning: warning.warning,
-  adding: adding.adding,
+  adding: cartListStatus.adding,
 });
 
 const mapDispatchToProps = (dispatch) => ({

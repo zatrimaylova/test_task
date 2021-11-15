@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Container, HeaderForm, ProductName, Counter, DecreaseImg, CountSpan, CloseImg, ValidationTitle, OptionTitle, VarietyList, OneSize, ListEl, PriceContainer, Button, } from './styles.js';
 import { ACTION_ADD_PRODUCT } from '../../ducks/cart';
-import { ACTION_USE_ADDING } from '../../ducks/adding';
+import { ACTION_USE_ADDING } from '../../ducks/cartListStatus';
 
 import close_icon from '../../img/ShortAddingForm/close.png';
 import minus_image from '../../img/ShortAddingForm/minus_image.png';
@@ -302,9 +302,9 @@ class ShortAddingForm extends React.Component {
   };
 };
 
-const mapStateToProps = ({ currency, adding }) => ({
+const mapStateToProps = ({ currency, cartListStatus }) => ({
   currency: currency.currency,
-  adding: adding.adding,
+  adding: cartListStatus.adding,
 });
 
 const mapDispatchToProps = (dispatch) => ({

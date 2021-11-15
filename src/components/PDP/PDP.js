@@ -2,6 +2,7 @@ import React from 'react';
 import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import { connect } from 'react-redux';
+import { withRouter } from "react-router";
 
 import ProductGallery from '../ProductGallery/ProductGallery';
 import Loader from '../Loader/Loader.js';
@@ -35,8 +36,9 @@ const getProductQuery = gql`
 
 class PDPEl extends React.Component {
   componentDidMount() {
-    const { product } = this.props;
-    document.title = product;   
+    const { product, history } = this.props;
+    document.title = product;
+    if (!product) history.goBack()
   }
 
   render() {
@@ -66,12 +68,12 @@ class PDPEl extends React.Component {
   }
 }
 
-const mapStateToProps = ({ product, removing, amount }) => ({
+const mapStateToProps = ({ product, cartListStatus }) => ({
   product: product.product,
-  removing: removing.removing,
-  amount: amount.amount,
+  removing: cartListStatus.removing,
+  amount: cartListStatus.amount,
 });
 
 const PDP = graphql(getProductQuery)(PDPEl);
 
-export const PDPComponent = connect(mapStateToProps)(PDP);
+export const PDPComponent = withRouter(connect(mapStateToProps)(PDP));

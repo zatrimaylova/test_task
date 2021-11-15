@@ -19,9 +19,9 @@ import {
 
 import { connect } from 'react-redux';
 import { ACTION_CHANGE_PRODUCT } from '../../ducks/product';
-import { ACTION_USE_ADDING } from '../../ducks/adding';
-import { ACTION_USE_REMOVING } from '../../ducks/removing';
-import { ACTION_USE_AMOUNT } from '../../ducks/amount';
+import { ACTION_USE_ADDING } from '../../ducks/cartListStatus';
+import { ACTION_USE_REMOVING } from '../../ducks/cartListStatus';
+import { ACTION_USE_AMOUNT } from '../../ducks/cartListStatus';
 
 class MinicartEl extends React.Component { 
   handleCartClick = (e) => {

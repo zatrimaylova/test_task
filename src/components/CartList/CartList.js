@@ -6,8 +6,8 @@ import plus_square from '../../img/CartList/plus_image.png';
 
 import { ACTION_CHANGE_OVERLAY_STATE } from '../../ducks/overlay';
 import { ACTION_CHANGE_COUNT, ACTION_DELETE_PRODUCT } from '../../ducks/cart';
-import { ACTION_USE_REMOVING } from '../../ducks/removing';
-import { ACTION_USE_AMOUNT } from '../../ducks/amount';
+import { ACTION_USE_REMOVING } from '../../ducks/cartListStatus';
+import { ACTION_USE_AMOUNT } from '../../ducks/cartListStatus';
 
 import {
   Container, 
@@ -223,12 +223,12 @@ class CartListComponent extends React.Component {
   }
 }
 
-const mapStateToProps = ({ cart, currency, isOverlayOpen, removing, amount }) => ({
+const mapStateToProps = ({ cart, currency, isOverlayOpen, cartListStatus }) => ({
   cart: cart.cart,
   currency: currency.currency,
   isOverlayOpen: isOverlayOpen.isOverlayOpen,
-  removing: removing.removing,
-  amount: amount.amount,
+  removing: cartListStatus.removing,
+  amount: cartListStatus.amount,
 });
 
 const mapDispatchToProps = (dispatch) => ({

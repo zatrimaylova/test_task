@@ -2,9 +2,9 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 
-import { ACTION_USE_ADDING } from '../../ducks/adding';
-import { ACTION_USE_REMOVING } from '../../ducks/removing';
-import { ACTION_USE_AMOUNT } from '../../ducks/amount';
+import { ACTION_USE_ADDING } from '../../ducks/cartListStatus';
+import { ACTION_USE_REMOVING } from '../../ducks/cartListStatus';
+import { ACTION_USE_AMOUNT } from '../../ducks/cartListStatus';
 
 import {
   Overlay,
@@ -40,10 +40,10 @@ class OverlayBackground extends React.Component {
   }
 }
 
-const mapStateToProps = ({ adding, removing, amount }) => ({
-  adding: adding.adding.isOpen,
-  removing: removing.removing.isOpen,
-  amount: amount.amount.isOpen,
+const mapStateToProps = ({ cartListStatus }) => ({
+  adding: cartListStatus.adding.isOpen,
+  removing: cartListStatus.removing.isOpen,
+  amount: cartListStatus.amount.isOpen,
 });
 
 const mapDispatchToProps = (dispatch) => ({

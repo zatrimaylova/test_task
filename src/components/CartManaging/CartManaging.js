@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { ACTION_USE_REMOVING } from '../../ducks/removing';
-import { ACTION_USE_AMOUNT } from '../../ducks/amount';
+import { ACTION_USE_REMOVING } from '../../ducks/cartListStatus';
+import { ACTION_USE_AMOUNT } from '../../ducks/cartListStatus';
 
 import { CartManagingCont, ContentHolder, CartButton } from './styles';        
         
