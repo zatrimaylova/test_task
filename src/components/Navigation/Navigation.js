@@ -8,6 +8,7 @@ import { ACTION_CHANGE_CATEGORY } from '../../ducks/category';
 
 class Navigation extends React.Component { 
   handleCategoryClick = (e) => {
+    /* listens for click event and change PLP category using ACTION_CHANGE_CATEGORY */
     const { history, changeCategory, isOverlayOpen } = this.props;
     const targetName = e.target.tagName.toLowerCase();
     const newCategory = e.target.id;
