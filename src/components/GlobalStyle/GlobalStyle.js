@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import fontCSS from './fontsCSS';
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -7,8 +6,6 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   };
-
-  ${fontCSS}
 
   button {
     outline: none;
