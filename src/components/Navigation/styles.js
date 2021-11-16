@@ -5,10 +5,11 @@ export const Nav = styled.nav`
 `;
 
 export const NavList = styled.ul`
-  width: 202px;
+  width: 250px;
   height: 100%;
   list-style: none;
   display: flex;
+  justify-content: space-between;
 `;
 
 export const NavItem = styled.li`
@@ -21,7 +22,7 @@ export const NavItem = styled.li`
   border-bottom: 2px solid ${props => props.color === '#5ECE7B' ? props.color : 'transparent'};
   color: ${props => props.color};
   font-style: normal;
-  font-weight: normal;
+  font-weight: ${props => props.color === '#5ECE7B' ? 600 : 'normal'};;
   font-size: 16px;
   line-height: 120%;
   text-transform: uppercase;
